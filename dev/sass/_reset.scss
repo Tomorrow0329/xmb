@@ -1,0 +1,53 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, dl, dt, dd, ul, ol, li, pre, form, button, input, textarea, th, td, div { 
+  margin: 0;
+  padding: 0;
+}
+
+body, button, input, select, textarea {
+  font: 12px "Roboto","sans-serif","Helvetica","Hiragino Sans GB","STHeiti Light","Microsoft YaHei", arial, serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%; 
+  font-weight: normal;
+}
+
+address, cite, em, var {
+  font-style: normal;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  border: 0
+}
+a{
+  text-decoration: none;
+  color: #000;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input, button, textarea, select, option {
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 100%;
+}
+
+/**H5 reset**/
+abbr, article, aside, audio, canvas, datalist, details, figure, footer, header, hgroup, menu, nav, output, progress, section, video {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+i, u, b, em, span, small { 
+  font-weight: normal; 
+  font-style: normal;
+}
