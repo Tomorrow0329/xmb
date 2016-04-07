@@ -56,16 +56,19 @@ exports.initLoad = function (req, res, next) {
 
     d.run(function () {
         db.connect(function () {
+          db.initLoad(function (data) {
             db.disconnect();
+            console.log(data);
+            res.send({rows: data, username: req.session.username});
+          });
         })
     });
 };
 
 exports.upload = function (req, res, next) {
-    console.log('into upload');
     var form = new formidable.IncomingForm();
     form.encoding = 'utf-8';
-    form.uploadDir = 'public/images';
+    form.uploadDir = 'public/uploadData/';
     form.keepExtensions = true;
     form.maxFieldsSize = 2 * 1024 * 1024;
     form.parse(req, function(err, fields, files,res) {
@@ -116,7 +119,7 @@ exports.upload = function (req, res, next) {
                 order.grade = fields.grade;
                 order.tel=fields.tel;
                 order.email = fields.email;
-                order.date=new Date(fields.date);
+                order.date=new Date().getTime();
                 order.goodsCode = fields.goodsCode;
                 order.classes = fields.classes;
                 order.describe = fields.describe;
@@ -124,13 +127,10 @@ exports.upload = function (req, res, next) {
                 order.imagePath = avatarName;
                 db.uploadOrder(order,function(){
                     db.disconnect();
-                    /*
                      req.session.userName =fields.personName;
-                     */
                 });
             });
         });
     });
-    console.log(req.body.personName);
-    res.render('uploadOrder', {username:req.body.personName,errMsg:"商品发布成功！ "});
+    res.render('uploadOrder', {username:req.session.username,errMsg:"商品发布成功！ "});
 };

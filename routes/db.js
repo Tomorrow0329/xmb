@@ -29,7 +29,7 @@ var orderSchema = new Schema({
 });
 
 var Users = mongoose.model('users', userSchema);
-var Orders = mongoose.model('orders', userSchema);
+var Orders = mongoose.model('orders', orderSchema);
 
 exports.connect=function(callback){
     mongoose.connect('mongodb://localhost:27017/bsDatabase',function(err){//xmbDatabase
@@ -62,7 +62,7 @@ exports.signUp = function(user,callback){
                     else{
                         console.log('email:'+ res);
                         if(res.length > 0){
-                            errMsg = "email";//¸ÃÓÊÏäÒÑ±»×¢²á£¡
+                            errMsg = "email";//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½×¢ï¿½á£¡
                             callback(errMsg);
                         }else{
                             console.log('create');
@@ -104,8 +104,14 @@ exports.signIn = function (user, callback) {
     })
 };
 
-exports.initLoad = function (req, callback) {
-
+exports.initLoad = function (callback) {
+  console.log('db init');
+  Orders.find({}, function (err, res) {
+    if (err) throw err;
+    else {
+      callback(res);
+    }
+  });
 };
 
 exports.uploadOrder = function (order,callback) {

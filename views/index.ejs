@@ -14,7 +14,7 @@
         校卖部
       </div>
       <div class="h-right">
-        <p id="personName" class="h-r-userName"><%= username%></p><span class="exit fr">退出登录</span>
+        <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
         <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
           <input type="button" value="我的关注" class="h-r-input"/>
         </p>
@@ -63,19 +63,8 @@
       <div class="c-part2-inner">
         <p class="part-title">新单速递<span>.&nbsp;.&nbsp;.</span></p>
         <div class="c-part2-new">
-          <ul class="c-part2-new-ul" id="c-part2-new-ul">
-            <% rows.forEach(function(row){%>
-            <li onclick="order_show('<%= row.id%>')">
-              <img src="/images/show1.png" class="c-part2-new-ul-img">
-              <div class="c-part2-new-ul-img-price fr">￥<%= row.price%></div>
-              <div class="c-part2-detail">
-                <p class="c-part2-detail-goodsName"><%= row.goodsName%></p>
-                <p class="c-part2-detail-describe">
-                  <%= row.describe%>
-                </p>
-              </div>
-            </li>
-            <%})%>
+          <ul class="c-part2-new-ul" id="orderList">
+
           </ul>
         </div>
       </div>

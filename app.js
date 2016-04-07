@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('123'));
 app.use(session({
   secret: '123',
-  name: 'xmb',   //ÕâÀïµÄnameÖµµÃÊÇcookieµÄname£¬Ä¬ÈÏcookieµÄnameÊÇ£ºconnect.sid
-  cookie: {maxAge: 36000000 },  //ÉèÖÃmaxAgeÊÇ36000000ms£¬¼´10hºósessionºÍÏàÓ¦µÄcookieÊ§Ğ§¹ıÆÚ
+  name: 'xmb',   //ï¿½ï¿½ï¿½ï¿½ï¿½nameÖµï¿½ï¿½ï¿½ï¿½cookieï¿½ï¿½nameï¿½ï¿½Ä¬ï¿½ï¿½cookieï¿½ï¿½nameï¿½Ç£ï¿½connect.sid
+  cookie: {maxAge: 36000000 },  //ï¿½ï¿½ï¿½ï¿½maxAgeï¿½ï¿½36000000msï¿½ï¿½ï¿½ï¿½10hï¿½ï¿½sessionï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½cookieÊ§Ğ§ï¿½ï¿½ï¿½ï¿½
   resave: false,
   saveUninitialized: true
 }));
@@ -35,7 +35,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.post('/signUp', orders.signUp);
 app.post('/signIn', orders.signIn);
-app.post('/initLoad', orders.initLoad);
+app.get('/initLoad', orders.initLoad);
 app.post('/upload', orders.upload);
 
 // catch 404 and forward to error handler
