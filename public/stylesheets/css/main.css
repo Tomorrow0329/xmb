@@ -44,6 +44,9 @@ i, u, b, em, span, small {
   font-weight: normal;
   font-style: normal; }
 
+body, html {
+  font-size: 12px; }
+
 .index {
   margin: 0;
   padding: 0;
@@ -129,14 +132,17 @@ i, u, b, em, span, small {
     color: #ef735f;
     cursor: pointer; }
   .index .h-r-input {
+    display: inline-block;
+    position: relative;
     width: 45%;
     height: 28px;
-    position: relative;
+    line-height: 28px;
     background: #00b188;
     color: white;
     font-size: 1em;
     font-weight: 600;
     margin-top: 5px;
+    text-align: center;
     cursor: pointer; }
   .index .h-r-input:hover {
     background: #ef735f; }
@@ -707,3 +713,398 @@ i, u, b, em, span, small {
   .sign .Code {
     width: 40%;
     height: 100%; }
+
+.upload-order {
+  /*order_search  order_search  order_search  order_search  order_search  order_search  */
+  /*correct  correct  correct  correct  correct  correct  correct  correct  correct  */
+  /*correctClass correctClass correctClass correctClass correctClass*/
+  /*classList  classList  classList  classList  classList  classList  */
+  /*Care  Care Care Care Care Care Care Care Care Care Care Care Care */ }
+  .upload-order input {
+    outline: none; }
+  .upload-order select {
+    outline: none; }
+  .upload-order .hidden {
+    display: none; }
+  .upload-order .bg {
+    background: white; }
+  .upload-order #box {
+    width: 100%;
+    height: auto;
+    position: relative;
+    background: #f8f8f8; }
+  .upload-order .fl {
+    float: left; }
+  .upload-order .fr {
+    float: right; }
+  .upload-order .head {
+    height: 100px;
+    position: relative;
+    background: white; }
+  .upload-order .head-inner {
+    width: 1024px;
+    height: 100%;
+    position: relative;
+    margin: 0 auto; }
+  .upload-order .h-r-left {
+    width: 20%;
+    height: 95px;
+    line-height: 95px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    color: #00b188;
+    font-size: 3em;
+    font-weight: 800; }
+  .upload-order .h-r-left img {
+    width: 100%;
+    height: 100%;
+    position: relative; }
+  .upload-order .h-right {
+    width: 280px;
+    height: 50px;
+    position: relative;
+    float: right;
+    margin-top: 45px;
+    overflow: hidden; }
+  .upload-order .h-r-userName {
+    width: 73%;
+    height: 16px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    font-size: 1em;
+    color: grey;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center; }
+  .upload-order .exit {
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 23px;
+    color: lightgray; }
+  .upload-order .exit:hover {
+    color: #ef735f;
+    cursor: pointer; }
+  .upload-order .h-r-input {
+    width: 45%;
+    height: 28px;
+    position: relative;
+    background: #00b188;
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    margin-top: 5px;
+    cursor: pointer;
+    border: none; }
+  .upload-order .h-r-input:hover {
+    background: #ef735f; }
+  .upload-order .lin {
+    width: 100%;
+    min-width: 1024px;
+    height: 15px;
+    position: relative;
+    background: #00b188; }
+  .upload-order .content {
+    width: 1024px;
+    height: auto;
+    margin: 0 auto;
+    position: relative; }
+  .upload-order .c-left {
+    width: 150px;
+    height: 100%;
+    position: relative;
+    float: left;
+    border-right: 1px solid #f8f8f8;
+    border-left: 1px solid #f8f8f8;
+    background: #f8f8f8; }
+  .upload-order .c-l-ul li {
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    border: 1px solid white;
+    font-weight: 600; }
+    .upload-order .c-l-ul li a {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      line-height: 35px;
+      color: #00b188; }
+  .upload-order .c-l-ul li:hover {
+    background: #00b188;
+    cursor: pointer; }
+    .upload-order .c-l-ul li:hover a {
+      color: white;
+      cursor: pointer; }
+  .upload-order .c-right {
+    width: 850px;
+    height: 500px;
+    border: 1px solid #e8edf1;
+    float: right;
+    text-align: center;
+    color: #545652; }
+  .upload-order .c-right form {
+    text-align: left;
+    margin: 15px; }
+  .upload-order .c-r-from-p {
+    margin-top: 15px; }
+  .upload-order .c-r-select {
+    width: 160px;
+    height: 23px; }
+  .upload-order .c-r-txt {
+    width: 770px;
+    height: 150px;
+    position: relative;
+    margin: 20px 0 0 10px;
+    padding: 15px;
+    resize: none;
+    font-size: 16px;
+    text-indent: 2em;
+    letter-spacing: 3px; }
+  .upload-order .c-r-img {
+    width: 800px;
+    height: 100px;
+    border: 1px solid darkgray;
+    margin: 10px 0 0 10px;
+    overflow: scroll; }
+  .upload-order .c-r-img img {
+    height: 94px;
+    display: inline-block;
+    float: left;
+    margin: 3px 0 0 3px; }
+  .upload-order .btn {
+    width: 120px;
+    height: 35px;
+    position: relative;
+    background: #00b188;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border: none;
+    margin-top: 20px;
+    float: right;
+    margin-right: 50px; }
+  .upload-order .btn:hover {
+    background: #ef735f;
+    cursor: pointer; }
+  .upload-order .textRight {
+    text-align: right; }
+  .upload-order .c-r-h1 {
+    margin: 10px 0 10px 0; }
+  .upload-order td {
+    width: 70px;
+    height: 30px;
+    border-right: 1px solid #e8edf1;
+    cursor: pointer;
+    overflow: hidden; }
+  .upload-order .c-r-table th {
+    background: #00b188;
+    color: white;
+    height: 30px;
+    width: 80px; }
+  .upload-order .c-r-td-addLength {
+    width: 150px; }
+  .upload-order .edit {
+    font-weight: 600; }
+  .upload-order .edit:hover {
+    background: #ef735f;
+    color: white; }
+  .upload-order .footer {
+    width: 100%;
+    height: 100px;
+    background: white; }
+  .upload-order .c-r-correct {
+    position: relative;
+    right: 90px; }
+  .upload-order .c-right form {
+    text-align: left;
+    margin: 15px; }
+  .upload-order .c-r-from-p {
+    margin-top: 15px; }
+  .upload-order .c-r-select {
+    width: 160px;
+    height: 23px; }
+  .upload-order .correct_id {
+    display: none; }
+  .upload-order .only {
+    background: #e8edf1; }
+  .upload-order .hidLayer {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(245, 245, 245, 0.7);
+    display: none; }
+  .upload-order .layer {
+    width: 600px;
+    height: 400px;
+    position: relative;
+    left: 50%;
+    top: 20%;
+    margin-left: -300px;
+    background-color: white;
+    border: 2px solid #00b188;
+    text-align: center; }
+  .upload-order .layer-inner {
+    margin-top: 50px; }
+  .upload-order .layerInput {
+    width: 180px;
+    height: 15px;
+    position: relative;
+    padding: 5px 10px;
+    border: 1px solid lightgray; }
+  .upload-order .layer-inner-Pselect {
+    position: relative;
+    left: -60px;
+    top: 15px; }
+  .upload-order .layerSelect {
+    text-align: center;
+    height: 25px;
+    line-height: 25px; }
+  .upload-order .layerTextp {
+    position: relative;
+    top: 20px; }
+  .upload-order .layerTextspan {
+    position: relative;
+    left: -105px; }
+  .upload-order .layerTextarea {
+    width: 300px;
+    height: 150px;
+    max-width: 300px;
+    max-height: 150px;
+    position: relative;
+    margin-top: 10px;
+    border: 1px solid lightgray; }
+  .upload-order .layerBtn {
+    position: relative;
+    top: 50px;
+    right: 150px; }
+  .upload-order .layerBtn-input {
+    width: 50px;
+    border: none;
+    background: #00b188;
+    color: white;
+    font-size: 14px;
+    padding: 2px;
+    margin-left: 5px; }
+  .upload-order .layerBtn-input:hover {
+    background: #ef735f;
+    cursor: pointer; }
+  .upload-order .errMsg {
+    margin-right: 30px; }
+  .upload-order .crtClassBtn {
+    width: 100px;
+    height: 30px;
+    position: relative;
+    background: #00b188;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border: none;
+    margin-top: 20px;
+    float: right;
+    margin-right: 50px; }
+  .upload-order .crtClassBtn:hover {
+    background: #ef735f;
+    cursor: pointer; }
+  .upload-order .c-r-clsList-table-th {
+    background: #00b188;
+    color: white;
+    height: 30px;
+    width: 70px; }
+  .upload-order .c-r-clsList-table td {
+    width: 70px;
+    height: 30px;
+    border-right: 1px solid #e8edf1;
+    font-size: 14px;
+    cursor: pointer;
+    overflow: hidden; }
+  .upload-order .c-right-care-ul {
+    width: 100%;
+    height: 98%;
+    position: relative;
+    text-align: left; }
+  .upload-order .c-right-care-ul li {
+    width: 99.5%;
+    height: 120px;
+    position: relative;
+    border: 1px solid #00b188;
+    margin-top: 20px;
+    padding: 7px 13px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden; }
+  .upload-order .c-right-care-liImg {
+    width: 105px;
+    height: 105px; }
+  .upload-order .c-right-care-liMsg {
+    width: 350px;
+    height: 100%;
+    position: relative;
+    margin-left: 15px; }
+  .upload-order .c-right-care-orderName {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    position: relative;
+    font-weight: 600;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .upload-order .c-right-orderDescribe {
+    width: 100%;
+    height: 55px;
+    font-size: 12px;
+    color: lightslategray;
+    letter-spacing: 1px;
+    margin-top: 7px;
+    text-indent: 1em;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .upload-order .c-right-care-liPrice {
+    width: 150px;
+    height: 100%;
+    position: relative;
+    margin-left: 15px;
+    overflow: hidden; }
+  .upload-order .c-right-care-liPrice-p {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 40px;
+    color: #ef735f;
+    text-align: center; }
+  .upload-order .c-right-care-liDo {
+    width: 160px;
+    height: 100%;
+    position: relative;
+    margin-left: 15px; }
+  .upload-order .c-right-care-liDo-input {
+    width: 120px;
+    height: 30px;
+    margin-top: 25px;
+    margin-left: 20px;
+    position: relative;
+    border: none;
+    background: #00b188;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 1px; }
+  .upload-order .c-right-care-liDo-input:hover {
+    background: #ef735f;
+    cursor: pointer; }
+  .upload-order .c-right-care-liDo-cancelCare {
+    font-size: 14px;
+    position: relative;
+    left: 50px;
+    top: 10px;
+    color: #545652; }
+  .upload-order .c-right-care-liDo-cancelCare:hover {
+    color: #ef735f; }

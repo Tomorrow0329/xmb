@@ -10,19 +10,19 @@ var gulp = require('gulp'),
 plugins.runSequence = require('run-sequence');
 
 gulp.task('sass', function () {
-    gulp.src('dev/sass/*.scss')
+    gulp.src('public/stylesheets/sass/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest('dev/css'));
+        .pipe(gulp.dest('public/stylesheets/css'));
 });
 
 /*gulp.task('js', function () {
-    gulp.src('dev/js/!*.js')
-        .pipe(gulp.dest('dev/js'))
+    gulp.src('public/js/!*.js')
+        .pipe(gulp.dest('public/js'))
 });*/
 
 gulp.task('watch', function () {
-    gulp.watch('dev/sass/*.scss', ['sass']);
-    //gulp.watch('dev/js/*.js', ['js']);
+    gulp.watch('public/stylesheets/sass/*.scss', ['sass']);
+    //gulp.watch('public/js/*.js', ['js']);
 });
 
 gulp.task('default', function () {

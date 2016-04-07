@@ -1,3 +1,4 @@
+body,html {font-size: 12px;}
 .index {
   margin: 0;
   padding: 0;
@@ -75,14 +76,17 @@
     cursor: pointer;
   }
   .h-r-input{
+    display: inline-block;
+    position: relative;
     width: 45%;
     height: 28px;
-    position: relative;
+    line-height: 28px;
     background: #00b188;
     color:white;
     font-size: 1em;
     font-weight: 600;
     margin-top: 5px;
+    text-align: center;
     cursor: pointer;
   }
   .h-r-input:hover{

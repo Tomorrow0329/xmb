@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>发布商品</title>
+    <link rel='stylesheet' href='/stylesheets/css/main.css' />
+</head>
+<body>
+    <div class="upload-order">
+        <div id="box">
+            <div class="head">
+                <div class="head-inner">
+                    <div class="h-r-left">
+                        校卖部
+                    </div>
+                    <div class="h-right">
+                        <p id="personName" class="h-r-userName"><%= username %></p>
+                        <span class="exit fr">退出登录</span>
+                        <p><input type="button" value="发布商品" class="h-r-input" onclick="getOrder()"/>
+                            <input type="button" value="我的关注" class="h-r-input"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <p class="lin"></p>
+            <div class="content">
+                <div class="c-left">
+                    <ul class="c-l-ul">
+                        <li><a href="/index">首&nbsp;页</a></li>
+                        <li><a href="#">发布商品</a></li>
+                        <li><a href="#">在线商品</a></li>
+                        <li><a href="#">我的关注</a></li>
+                        <!--<li id="addClass">添加分类</li>
+                        <li>编辑分类</li>
+                        <li>分类列表</li>-->
+                    </ul>
+                </div>
+                <div class="c-right">
+                    <h1>商品信息表</h1>
+
+                    <form id="orderForm" action="/upload" method="post" enctype='multipart/form-data'>
+                        <input class="nav hidden" id="personName" name="username" value="<%= username%>" onclick="" />
+                        <p class="c-r-from-p">
+                            商品名称：<input type="text" name="goodsName" id="goodsName">&nbsp;
+                            商品数量：<input type="text" name="num" id="num" class="textRight">&nbsp;
+                            商品单价：<input type="text" name="price" id="price" class="textRight"><br/>
+                        </p>
+                        <p class="c-r-from-p">
+                            商品分类：
+                            <select class="c-r-select" id="goodsCode" name="goodsCode">
+                                <option>书籍</option>
+                                <option>女装</option>
+                                <option>男装</option>
+                                <option>鞋</option>
+                                <option>配饰礼物</option>
+                                <option>学习用品</option>
+                                <option>生活用品</option>
+                                <option>运动娱乐</option>
+                                <!--<option class="autoClass">自定义分类...</option>-->
+                            </select>&nbsp;
+                        </p>
+                        <p class="c-r-from-p">
+                            上传图片：
+                            <input id="fulAvatar" name="fulAvatar" type="file" class="form-control"/><br/>
+                        </p>
+                        <p class="c-r-from-p">商品描述：</p>
+                        <textarea class="c-r-txt" name="describe"></textarea>
+                        <span id="warning"><%= errMsg%></span>
+                        <input type="submit" value="发布商品" class="btn uploadOrder">
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="hidLayer">
+                <div class="layer">
+                    <div class="layer-inner">
+                        <form onsubmit="sbm();return false;">
+                            <p>分类名称：<input type="text" class="layerInput" name="className" ></p>
+                            <p class="layer-inner-Pselect">
+                                上级分类：
+                                <select class="layerSelect" name="selectName">
+                                    <option>顶级目录</option>
+                                    <option value="">男士正装</option>
+                                    <option value="">西装</option>
+                                    <option value="">衬衫</option>
+                                    <option value="">女士正装</option>
+                                    <option value="">套装</option>
+                                    <option value="">衬衫</option>
+                                </select>
+                            </p>
+                            <p class="layerTextp">
+                                <span class="layerTextspan">分类描述：</span><br/>
+                                <textarea class="layerTextarea" name="" ></textarea>
+                            </p>
+                            <p class="layerBtn">
+                                <input type="button" id="exit" class="fr layerBtn-input" value="退出">
+                                <input type="button" class="fr layerBtn-input reset" value="重置">
+                                <input type="submit" class="fr layerBtn-input submit" value="确定">
+                                <span class="errMsg fr"></span>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="/vendor/jquery.js"></script>
+<script src="/javascripts/upload.js"></script>
+</body>
+</html>
