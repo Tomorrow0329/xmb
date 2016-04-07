@@ -106,7 +106,7 @@ exports.signIn = function (user, callback) {
 
 exports.initLoad = function (callback) {
   console.log('db init');
-  Orders.find({}, function (err, res) {
+  Orders.find({}).sort({'date': -1}).exec(function (err, res) {
     if (err) throw err;
     else {
       callback(res);
