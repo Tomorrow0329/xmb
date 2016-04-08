@@ -37,6 +37,7 @@ app.post('/signUp', orders.signUp);
 app.post('/signIn', orders.signIn);
 app.get('/initLoad', orders.initLoad);
 app.post('/upload', orders.upload);
+app.get('/orderDetail:id', orders.orderDetail);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

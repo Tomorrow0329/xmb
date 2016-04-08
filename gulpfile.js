@@ -15,17 +15,17 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('public/stylesheets/css'));
 });
 
-/*gulp.task('js', function () {
-    gulp.src('public/js/!*.js')
-        .pipe(gulp.dest('public/js'))
-});*/
+gulp.task('js', function () {
+    gulp.src('public/js/*.js');
+        /*.pipe(gulp.dest('public/js'))*/
+});
 
 gulp.task('watch', function () {
     gulp.watch('public/stylesheets/sass/*.scss', ['sass']);
-    //gulp.watch('public/js/*.js', ['js']);
+    gulp.watch('public/js/*.js', ['js']);
 });
 
 gulp.task('default', function () {
-    gulp.start('sass', 'watch');
+    gulp.start('sass', 'watch', 'js');
 });
 

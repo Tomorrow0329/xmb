@@ -124,3 +124,13 @@ exports.uploadOrder = function (order,callback) {
         }
     });
 };
+
+exports.getOrder = function (req, callback) {
+  console.log(req.orderId);
+  Orders.find({_id: req.orderId}, function (err, res) {
+    if (err) throw err;
+    else {
+      callback(res);
+    }
+  })
+};

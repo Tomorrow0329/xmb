@@ -134,3 +134,23 @@ exports.upload = function (req, res, next) {
     });
     res.render('uploadOrder', {username:req.session.username,errMsg:"商品发布成功！ "});
 };
+
+exports.orderDetail = function (req, res, next) {
+  var d = domain.create();
+
+  d.on('err', function (err) {
+    next(err);
+  });
+
+  d.run(function () {
+    db.connect(function () {
+      console.log(req.params);
+      db.getOrder({orderId: req.params.id}, function (order) {
+
+        db.disconnect();
+
+        res.render('orderDetail', {username: req.session.username, goods: order});
+      });
+    });
+  });
+};
