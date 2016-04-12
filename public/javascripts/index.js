@@ -95,6 +95,8 @@ $(document).ready(function () {
 
       window.location.href = "/orderDetail" + orderId;
     });
+
+
   };
 
   init();

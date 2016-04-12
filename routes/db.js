@@ -156,6 +156,7 @@ exports.cancelFocus = function (req, callback) {
     focusOrder.splice(orderIndex, 1);
 
     Users.update({username: req.username}, {$set:{focusOrder: focusOrder}}, function (err, res) {
+
       if (err) throw err;
       else {
         callback('success');
@@ -177,19 +178,43 @@ exports.getFocus = function (req, callback) {
 exports.getFocusList = function (req, callback) {
   req = req.split(',');
   var orderList = [], reqIndex = 0;
-  (function getFocus(req) {
+  (function getFocusOrder(req) {
+
     if (reqIndex === req.length) {
       console.log('orderList:'+ orderList);
       callback(orderList);
     }
+
     Orders.find({_id: req[reqIndex]}, function (err, res) {
+
       if (err) throw err;
       else {
         orderList.push(res[0]);
         reqIndex += 1;
-        getFocus(req);
+        getFocusOrder(req);
       }
     })
   })(req);
+};
+
+exports.orderOnlineDB = function (req, callback) {
+
+  Orders.find({username: req.username}, function (err, res) {
+
+    if (err) throw err;
+    else {
+      callback(res);
+    }
+  });
+};
+
+exports.deleteOrderDB = function (req, callback) {
+
+  Orders.remove({username: req.username, _id: req.orderId}, function (err, res) {
+    if (err) throw  err;
+    else {
+      callback('success');
+    }
+  });
 };
 

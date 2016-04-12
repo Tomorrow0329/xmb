@@ -4,7 +4,8 @@
 $(document).ready(function () {
 
   var orderId = $('.orderId').html(),
-    focusStatus = false;
+    focusStatus = false,
+    $goodsFocus = $('.c-goods-focus');
 
   var ajaxList = {
       getFocus: function () {
@@ -16,9 +17,9 @@ $(document).ready(function () {
           success: function (status) {
             focusStatus = status.focusStatus;
             if (focusStatus === true) {
-              $('.c-goods-focus').addClass('on-focus').val('取消关注');
+              $goodsFocus.addClass('on-focus').val('取消关注');
             } else {
-              $('.c-goods-focus').removeClass('on-focus').val('关注一下');
+              $goodsFocus.removeClass('on-focus').val('关注一下');
             }
           },
           error: function () {}
@@ -33,9 +34,9 @@ $(document).ready(function () {
           success: function (res) {
             focusStatus = res.focusStatus;
             if (res.focusStatus === true) {
-              $('.c-goods-focus').addClass('on-focus').val('取消关注');
+              $goodsFocus.addClass('on-focus').val('取消关注');
             } else {
-              $('.c-goods-focus').removeClass('on-focus').val('关注一下');
+              $goodsFocus.removeClass('on-focus').val('关注一下');
             }
           }
           ,
@@ -50,9 +51,9 @@ $(document).ready(function () {
           dataType: 'json',
           success: function (res) {
             if (res.focusStatus === true) {
-              $('.c-goods-focus').addClass('on-focus').val('取消关注');
+              $goodsFocus.addClass('on-focus').val('取消关注');
             } else {
-              $('.c-goods-focus').removeClass('on-focus').val('关注一下');
+              $goodsFocus.removeClass('on-focus').val('关注一下');
             }
           }
           ,
@@ -62,9 +63,10 @@ $(document).ready(function () {
   };
 
   var init = function () {
+    $goodsFocus.val('关注一下');
     ajaxList.getFocus();
 
-    $('.c-goods-focus').on('click', function () {
+    $goodsFocus.on('click', function () {
 
       if (!focusStatus) {
         ajaxList.setFocus();

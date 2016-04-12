@@ -6,7 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/css/main.css' />
 </head>
 <body>
-<div id="box" class="index upload-order">
+<div id="box" class="index upload-order order-online">
     <div class="head">
         <div class="head-inner">
             <div class="h-r-left">
@@ -31,10 +31,9 @@
             </ul>
         </div>
         <div class="c-right">
-            <!--<h1 class="c-r-h1">在线商品信息表</h1>-->
-            <h1 class="c-r-h1">我的关注</h1>
-            <table id="c-r-tb"><span class="orderData" style="display: none;"><%= data%></span>
-                <thead>
+            <h1 class="c-r-h1">在线商品信息表</h1>
+            <table id="c-r-tb">
+
                 <tr class="c-r-table">
                     <th class="c-r-td-addLength">商品名称</th>
                     <th>数量</th>
@@ -44,19 +43,43 @@
                     <th class="c-r-td-addLength">联系方式</th>
                     <th class="c-r-td-addLength">Email</th>
                     <th class="c-r-td-addLength">发布时间</th>
-                    <th>加入购物车</th>
+                    <th>修改</th>
                     <th>删除</th>
                 </tr>
-                </thead>
-                <tbody>
 
-                </tbody>
+                <% orders.forEach(function (order) {%>
+                <tr>
+                    <td style="display: none" class="order-id"><%= order._id%></td>
+                    <td class="c-r-td-addLength"><%= order.goodsName%></td>
+                    <td><%= order.num%></td>
+                    <td><%= order.price%></td>
+                    <td><%= order.grade%></td>
+                    <td><%= order.personName%></td>
+                    <td><%= order.tel%></td>
+                    <td><%= order.email%></td>
+                    <td class="c-r-td-addLength"><%= order.date.toJSON().slice(0,10)%></td>
+                    <td class="edit" id="correct">修改</td>
+                    <td class="edit delete">删除</td>
+                </tr>
+                <%})%>
             </table>
         </div>
     </div>
 </div>
 <script src="/vendor/jquery.js"></script>
 <script src="/javascripts/index.js"></script>
-<script src="/javascripts/orderFocus.js"></script>
+<script src="/javascripts/orderOnline.js"></script>
+<script>
+    //隔行变色
+    var $table=$('#c-r-tb'),
+            orderLength = $table.find('tr');
+    for(var i=0;i<= orderLength.length -1;i++){
+        if( i%2 === 0) {
+            $table.find('tr')[i].style.backgroundColor = "#e8edf1"
+        }else{
+            $table.find('tr')[i].style.backgroundColor = ""
+        }
+    }
+</script>
 </body>
 </html>

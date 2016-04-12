@@ -515,7 +515,8 @@ body, html {
     background: #ef735f;
     cursor: pointer; }
   .index .on-focus {
-    background: #ef735f; }
+    background: #ef735f;
+    color: white; }
   .index .errContent {
     text-align: center;
     background: white;

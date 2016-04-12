@@ -268,3 +268,46 @@ exports.orderOrderFocus = function (req, res, next) {
     });
   });
 };
+
+exports.orderOnline = function (req,res, next) {
+  var d = domain.create();
+
+  d.on('err', function (err) {
+    next(err);
+  });
+
+  d.run(function () {
+    db.connect(function () {
+      var data = {
+        username: req.session.username
+      };
+      db.orderOnlineDB(data, function (orders) {
+
+        db.disconnect();
+        res.render('orderOnline', {username: req.session.username, orders: orders});
+      });
+    });
+  });
+};
+
+exports.deleteOrder = function (req, res, next) {
+  var d = domain.create();
+
+  d.on('err', function (err) {
+    next(err);
+  });
+
+  d.run(function () {
+    db.connect(function () {
+      var data = {
+        username: req.session.username,
+        orderId: req.body.orderId
+      };
+      db.deleteOrderDB(data, function (resMsg) {
+
+        db.disconnect();
+        res.send({resMsg: resMsg});
+      });
+    });
+  });
+};

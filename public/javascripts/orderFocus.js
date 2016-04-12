@@ -23,7 +23,7 @@ $(document).ready(function () {
           +"</td><td>"+ order.tel
           +"</td><td>"+ order.email
           +"<td class='c-r-td-addLength'>" + order.date.split('T')[0]+"</td></td>"
-          +"<td class='edit' id='correct'>修改</td><td class='edit' id='delete'>删除</td></tr>"
+          +"<td class='edit' id='correct'>加入购物车</td><td class='edit' id='delete'>删除</td></tr>"
       });
       $('#c-r-tb > tbody').html(focusList);
 
