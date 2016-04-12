@@ -238,6 +238,7 @@ exports.getFocusList = function (req, res, next) {
 
   d.run(function () {
     db.connect(function () {
+      console.log(req.query.data);
       db.getFocusList(req.query.data, function (orderFocusArray) {
 
         db.disconnect();

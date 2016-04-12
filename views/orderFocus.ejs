@@ -15,7 +15,7 @@
             <div class="h-right">
                 <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
                 <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
-                    <input type="button" value="我的关注" class="h-r-input"/>
+                    <input type="button" value="我的关注" class="h-r-input order-focus"/>
                 </p>
             </div>
         </div>
@@ -25,9 +25,9 @@
         <div class="c-left">
             <ul class="c-l-ul">
                 <li><a href="/index">首&nbsp;页</a></li>
-                <li><a href="#">发布商品</a></li>
+                <li><a href="/uploadOrder">发布商品</a></li>
                 <li><a href="#">在线商品</a></li>
-                <li><a href="#">我的关注</a></li>
+                <li><a href="#" class="order-focus">我的关注</a></li>
             </ul>
         </div>
         <div class="c-right">
@@ -58,16 +58,5 @@
 <script src="/vendor/jquery.js"></script>
 <script src="/javascripts/index.js"></script>
 <script src="/javascripts/orderFocus.js"></script>
-<script>
-    /*//隔行变色
-    var tabbg=document.getElementById('c-r-tb');
-    for(var i=0;i<=tabbg.rows.length;i++){
-        if(tabbg.rows[i].rowIndex%2==0) {
-            tabbg.rows[i].style.backgroundColor = "#e8edf1"
-        }else{
-            tabbg.rows[i].style.backgroundColor = ""
-        }
-    }*/
-</script>
 </body>
 </html>

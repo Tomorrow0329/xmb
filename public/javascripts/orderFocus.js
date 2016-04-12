@@ -26,6 +26,16 @@ $(document).ready(function () {
           +"<td class='edit' id='correct'>修改</td><td class='edit' id='delete'>删除</td></tr>"
       });
       $('#c-r-tb > tbody').html(focusList);
+
+      //隔行变色
+      var $table=$('#c-r-tb');
+      for(var i=0;i<= orders.length;i++){
+        if( i%2 === 0) {
+          $table.find('tr')[i].style.backgroundColor = "#e8edf1"
+        }else{
+          $table.find('tr')[i].style.backgroundColor = ""
+        }
+      }
     },
     error: function () {}
   });

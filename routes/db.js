@@ -176,26 +176,20 @@ exports.getFocus = function (req, callback) {
 
 exports.getFocusList = function (req, callback) {
   req = req.split(',');
-  var orderList = [];
-  Orders.find({_id: req[0]}, function (err, res) {
-    if (err) throw err;
-    else {
-      orderList.push(res[0]);
-      Orders.find({_id: req[1]}, function (err, res) {
-        if (err) throw err;
-        else {
-          orderList.push(res[0]);
-          Orders.find({_id: req[2]}, function (err, res) {
-            if (err) throw err;
-            else {
-              orderList.push(res[0]);
-              console.log(orderList);
-              callback(orderList);
-            }
-          })
-        }
-      });
+  var orderList = [], reqIndex = 0;
+  (function getFocus(req) {
+    if (reqIndex === req.length) {
+      console.log('orderList:'+ orderList);
+      callback(orderList);
     }
-  })
+    Orders.find({_id: req[reqIndex]}, function (err, res) {
+      if (err) throw err;
+      else {
+        orderList.push(res[0]);
+        reqIndex += 1;
+        getFocus(req);
+      }
+    })
+  })(req);
 };
 

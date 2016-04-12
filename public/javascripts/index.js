@@ -80,7 +80,7 @@ $(document).ready(function () {
 
     ajaxList.loadNewOrder();
 
-    $('.h-r-input').on('click', function () {
+    $('.order-focus').on('click', function () {
       window.location.href = "/orderOrderFocus";
     });
 

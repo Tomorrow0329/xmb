@@ -18,7 +18,7 @@
                         <p id="personName" class="h-r-userName"><%= username %></p>
                         <a class="exit fr" href="/signIn">退出登录</a>
                         <p><input type="button" value="发布商品" class="h-r-input" onclick="getOrder()"/>
-                            <input type="button" value="我的关注" class="h-r-input"/>
+                            <input type="button" value="我的关注" class="h-r-input order-focus"/>
                         </p>
                     </div>
                 </div>
@@ -28,9 +28,9 @@
                 <div class="c-left">
                     <ul class="c-l-ul">
                         <li><a href="/index">首&nbsp;页</a></li>
-                        <li><a href="#">发布商品</a></li>
+                        <li><a href="/uploadOrder">发布商品</a></li>
                         <li><a href="#">在线商品</a></li>
-                        <li><a href="#">我的关注</a></li>
+                        <li><a href="#" class="order-focus">我的关注</a></li>
                         <!--<li id="addClass">添加分类</li>
                         <li>编辑分类</li>
                         <li>分类列表</li>-->
@@ -105,7 +105,9 @@
             </div>
         </div>
     </div>
-<script src="/vendor/jquery.js"></script>
-<script src="/javascripts/upload.js"></script>
+
+    <script src="/vendor/jquery.js"></script>
+    <script src="/javascripts/index.js"></script>
+    <script src="/javascripts/upload.js"></script>
 </body>
 </html>
