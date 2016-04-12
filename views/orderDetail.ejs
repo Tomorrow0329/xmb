@@ -14,7 +14,7 @@
                 校卖部
             </div>
             <div class="h-right">
-                <p id="personName" class="h-r-userName"><%= username%></p>
+                <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
                 <p><input type="button" value="发布商品" class="h-r-input" onclick="getOrder()"/>
                     <input type="button" value="我的关注" class="h-r-input"/>
                 </p>
@@ -45,6 +45,7 @@
 
                     <div class="c-part1-main">
                         <form>
+                            <span class="orderId" style="display: none;"><%= goods._id %></span>
                             <p class="c-goods-username">&nbsp;<%= goods.username%>&nbsp;<span class="c-goods-username-span">发布</span></p>
                             <p class="c-goods-price">￥<%= goods.price%><span class="c-goods-price-span">元</span></p>
                             <p class="c-goods-goodsName"><%= goods.goodsName%></p>
@@ -56,7 +57,7 @@
                                 <span><%= goods.tel %></span>&nbsp;
                                 <span><%= goods.email%></span>
                             </p>
-                            <input type="button" value="关注一下" class="c-goods-focus fl" onclick="careOrder()">
+                            <input type="button" value="" class="c-goods-focus fl">
                         </form>
                         <%})%>
                     </div>
@@ -70,7 +71,8 @@
 </div>
 <script src="/vendor/jquery.js"></script>
 <script src="/javascripts/index.js"></script>
-<script>
+<script src="/javascripts/orderDetail.js"></script>
+<!--<script>
     //分类查询
     function book_search(x){
         window.location = '/book_search' + x;
@@ -80,6 +82,6 @@
         var personName = document.getElementById('personName').innerText;
         window.location = "/rt_index" + personName;
     }
-</script>
+</script>-->
 </body>
 </html>

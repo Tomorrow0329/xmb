@@ -3,7 +3,7 @@
  */
 $(document).ready(function () {
 
-    var handleNewOrderList = function (rows) {
+  var handleNewOrderList = function (rows) {
 
       var list = '';
 
@@ -57,31 +57,45 @@ $(document).ready(function () {
     $('.recommend').html(recommendList);
   };
 
-    $(window).load(function () {
+  var ajaxList = {
+      loadNewOrder: function () {
         $.ajax({
-            url: '/initLoad',
-            type: 'get',
-            dataType: 'json',
-            timeout: 30000,
-            success: function (res) {
-              var rows = res.rows,
-                dataLength = rows.length - 1;
-              handleNewOrderList(rows);
-              handleRecommendOrderList(dataLength, rows);
-            },
-            error: function () {}
+          url: '/initLoad',
+          type: 'get',
+          dataType: 'json',
+          timeout: 30000,
+          success: function (res) {
+            var rows = res.rows,
+              dataLength = rows.length - 1;
+
+            handleNewOrderList(rows);
+            handleRecommendOrderList(dataLength, rows);
+          },
+          error: function () {}
         });
+      }
+  };
+
+  var init = function () {
+
+    ajaxList.loadNewOrder();
+
+    $('.h-r-input').on('click', function () {
+      window.location.href = "/orderOrderFocus";
     });
 
-  $('#orderList').on('click', 'li', function () {
-    var orderId = $(this).find('.orderId').text();
+    $('#orderList').on('click', 'li', function () {
+      var orderId = $(this).find('.orderId').html();
 
-    window.location.href = "/orderDetail" + orderId;
-  });
+      window.location.href = "/orderDetail" + orderId;
+    });
 
-  $('.recommend').on('click', '.recommend-link', function () {
-    var orderId = $(this).find('.orderId').text();
+    $('.recommend').on('click', '.recommend-link', function () {
+      var orderId = $(this).find('.orderId').html();
 
-    window.location.href = "/orderDetail" + orderId;
-  });
+      window.location.href = "/orderDetail" + orderId;
+    });
+  };
+
+  init();
 });

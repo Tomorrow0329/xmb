@@ -5414,7 +5414,7 @@ jQuery.fn.extend( {
 		return remove( this, selector );
 	},
 
-	text: function( value ) {
+  valtext: function( value ) {
 		return access( this, function( value ) {
 			return value === undefined ?
 				jQuery.text( this ) :

@@ -88,3 +88,22 @@
   position: relative;
   margin: 0 auto;
 }
+
+/*order_search  order_search  order_search  order_search  order_search  order_search  */
+.c-r-h1{margin:10px 0 10px 0;}
+td{
+  width: 70px;
+  height: 30px;
+  border-right: 1px solid #e8edf1;
+  cursor: pointer;
+  overflow: hidden;
+}
+.c-r-table th{
+  background: #00b188;
+  color: white;
+  height: 30px;
+  width: 80px;
+}
+.c-r-td-addLength{width: 150px;}
+.edit{font-weight: 600;}
+.edit:hover{background:#ef735f;color: white;}

@@ -8,7 +8,8 @@ var errMsg = '';
 var userSchema = new Schema ({
     username:String,
     password:String,
-    email:String
+    email:String,
+    focusOrder: Array
 });
 
 var orderSchema = new Schema({
@@ -57,15 +58,12 @@ exports.signUp = function(user,callback){
                 callback(errMsg);
             }else{
                 Users.find({email:user.email},function(err,res){
-                    console.log(user.email);
                     if(err) throw err;
                     else{
-                        console.log('email:'+ res);
                         if(res.length > 0){
                             errMsg = "email";//�������ѱ�ע�ᣡ
                             callback(errMsg);
                         }else{
-                            console.log('create');
                             Users.create(user,function(err){
                                 if(err) throw err;
                                 else{
@@ -82,13 +80,10 @@ exports.signUp = function(user,callback){
 };
 
 exports.signIn = function (user, callback) {
-    console.log(user);
     Users.find({username: user.username}, function (err, res) {
         if (err) throw err;
         else {
             if (res.length > 0) {
-                console.log(res);
-                console.log(res[0].password);
                 if (user.password === res[0].password) {
                     errMsg = null;
                     callback(errMsg);
@@ -105,7 +100,6 @@ exports.signIn = function (user, callback) {
 };
 
 exports.initLoad = function (callback) {
-  console.log('db init');
   Orders.find({}).sort({'date': -1}).exec(function (err, res) {
     if (err) throw err;
     else {
@@ -115,7 +109,6 @@ exports.initLoad = function (callback) {
 };
 
 exports.uploadOrder = function (order,callback) {
-    console.log('uploadOrder:' + order);
     Orders.create(order, function (err) {
         if (err) throw err;
         else{
@@ -126,7 +119,6 @@ exports.uploadOrder = function (order,callback) {
 };
 
 exports.getOrder = function (req, callback) {
-  console.log(req.orderId);
   Orders.find({_id: req.orderId}, function (err, res) {
     if (err) throw err;
     else {
@@ -134,3 +126,76 @@ exports.getOrder = function (req, callback) {
     }
   })
 };
+
+exports.setFocus = function (req, callback) {
+  Users.find({username: req.username}, function (err, res) {
+    var focusOrder = res[0].focusOrder;
+    focusOrder.push(req.orderId);
+
+    Users.update({username: req.username}, {$set:{focusOrder: focusOrder}}, function (err, res) {
+      if (err) throw err;
+      else {
+        callback('success');
+      }
+    });
+  });
+};
+
+exports.cancelFocus = function (req, callback) {
+
+  Users.find({username: req.username}, function (err, res) {
+    var focusOrder = res[0].focusOrder,index = 0, orderIndex = 0;
+
+    focusOrder.forEach(function (order) {
+      if (order === req.orderId) {
+        orderIndex = index;
+      }
+      index += 1;
+    });
+
+    focusOrder.splice(orderIndex, 1);
+
+    Users.update({username: req.username}, {$set:{focusOrder: focusOrder}}, function (err, res) {
+      if (err) throw err;
+      else {
+        callback('success');
+      }
+    });
+  });
+};
+
+exports.getFocus = function (req, callback) {
+  Users.find({username: req.username}, function (err, res) {
+
+    if (err) throw err;
+    else {
+      callback(res[0]);
+    }
+  });
+};
+
+exports.getFocusList = function (req, callback) {
+  req = req.split(',');
+  var orderList = [];
+  Orders.find({_id: req[0]}, function (err, res) {
+    if (err) throw err;
+    else {
+      orderList.push(res[0]);
+      Orders.find({_id: req[1]}, function (err, res) {
+        if (err) throw err;
+        else {
+          orderList.push(res[0]);
+          Orders.find({_id: req[2]}, function (err, res) {
+            if (err) throw err;
+            else {
+              orderList.push(res[0]);
+              console.log(orderList);
+              callback(orderList);
+            }
+          })
+        }
+      });
+    }
+  })
+};
+

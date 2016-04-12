@@ -63,7 +63,7 @@ $(document).ready(function () {
                                 break;
                         }
                     } else {
-                        $('#warning').text('');
+                        $('#warning').html('');
                         window.location.href = jumpPages.index;
                     }
                     $('#warning').text(errorWarn);

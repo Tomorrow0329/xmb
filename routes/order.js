@@ -58,7 +58,6 @@ exports.initLoad = function (req, res, next) {
         db.connect(function () {
           db.initLoad(function (data) {
             db.disconnect();
-            console.log(data);
             res.send({rows: data, username: req.session.username});
           });
         })
@@ -72,7 +71,6 @@ exports.upload = function (req, res, next) {
     form.keepExtensions = true;
     form.maxFieldsSize = 2 * 1024 * 1024;
     form.parse(req, function(err, fields, files,res) {
-        console.log('into parse of form');
         if (err) {
             res.locals.error = err;
             res.render('index', { title: TITLE });
@@ -104,7 +102,6 @@ exports.upload = function (req, res, next) {
         var avatarName = Math.random() + '.' + extName;
         var newPath = form.uploadDir + avatarName;
         fs.renameSync(files.fulAvatar.path, newPath);  //������
-        console.log('into upload:' + files);
         var d=domain.create();
         d.on('err',function(err){
             next(err);
@@ -144,12 +141,128 @@ exports.orderDetail = function (req, res, next) {
 
   d.run(function () {
     db.connect(function () {
-      console.log(req.params);
       db.getOrder({orderId: req.params.id}, function (order) {
 
         db.disconnect();
 
         res.render('orderDetail', {username: req.session.username, goods: order});
+      });
+    });
+  });
+};
+
+exports.orderFocus = function (req, res, next) {
+  var d = domain.create();
+
+  d.on('err', function (err) {
+    next(err);
+  });
+
+  d.run(function () {
+    db.connect(function () {
+      var focusData = {
+        username: req.session.username,
+        orderId: req.body.orderId
+      };
+      db.setFocus(focusData, function (resMsg) {
+        db.disconnect();
+        if (resMsg === 'success') {
+          res.send({focusStatus: true});
+        } else {
+          res.send({focusStatus: false});
+        }
+      });
+    })
+  });
+};
+
+exports.getFocus = function (req, res, next) {
+  var d = domain.create();
+
+  d.on('err', function (err) {
+    next(err);
+  });
+
+  d.run(function () {
+    db.connect(function () {
+      var focusData = {
+        username: req.session.username,
+        orderId: req.body.orderId
+      };
+      db.getFocus(focusData, function (orderFocusArray) {
+        db.disconnect();
+        var focusStatus = false;
+        orderFocusArray.focusOrder.forEach(function (orderId) {
+          if (orderId === req.body.orderId) {
+            focusStatus = true;
+          }
+        });
+
+        res.send({focusStatus : focusStatus});
+      });
+    })
+  });
+};
+
+exports.orderCancelFocus = function (req, res, next) {
+  var d = domain.create();
+
+  d.on('err', function (err) {
+    next(err);
+  });
+
+  d.run(function () {
+    db.connect(function () {
+      var focusData = {
+        username: req.session.username,
+        orderId: req.body.orderId
+      };
+      db.cancelFocus(focusData, function (resMsg) {
+        db.disconnect();
+        var focusStatus = false;
+        if (resMsg === 'success') {
+          focusStatus = false
+        }
+
+        res.send({focusStatus : focusStatus});
+      });
+    })
+  });
+};
+
+exports.getFocusList = function (req, res, next) {
+  var d = domain.create();
+  d.on('err', function(err) {
+    next(err);
+  });
+
+  d.run(function () {
+    db.connect(function () {
+      db.getFocusList(req.query.data, function (orderFocusArray) {
+
+        db.disconnect();
+        res.send({orderFocusArray: orderFocusArray});
+      });
+    });
+  });
+};
+
+exports.orderOrderFocus = function (req, res, next) {
+  var d = domain.create();
+
+  d.on('err', function (err) {
+    next(err);
+  });
+
+  d.run(function () {
+    db.connect(function () {
+      var data = {
+        username: req.session.username
+      };
+      db.getFocus(data, function (data) {
+
+        db.disconnect();
+        res.render('orderFocus', {username: req.session.username, orders: [], data: data.focusOrder});
       });
     });
   });

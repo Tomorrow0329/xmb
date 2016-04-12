@@ -38,6 +38,11 @@ app.post('/signIn', orders.signIn);
 app.get('/initLoad', orders.initLoad);
 app.post('/upload', orders.upload);
 app.get('/orderDetail:id', orders.orderDetail);
+app.post('/orderFocus', orders.orderFocus);
+app.post('/getFocus', orders.getFocus);
+app.post('/orderCancelFocus', orders.orderCancelFocus);
+app.get('/orderOrderFocus', orders.orderOrderFocus);
+app.get('/getFocusList', orders.getFocusList);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
