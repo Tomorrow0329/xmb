@@ -210,7 +210,7 @@ exports.orderOnlineDB = function (req, callback) {
 
 exports.deleteOrderDB = function (req, callback) {
 
-  Orders.remove({username: req.username, _id: req.orderId}, function (err, res) {
+  Orders.remove({_id: req.orderId}, function (err, res) {
     if (err) throw  err;
     else {
       callback('success');

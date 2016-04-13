@@ -3,6 +3,7 @@
  */
 $(document).ready(function () {
   $('.delete').on('click', function () {
+    var $tr = $(this).parents('tr');
     var orderId = $(this).parents('tr').find('.order-id').html();
 
     $.ajax({
@@ -10,8 +11,11 @@ $(document).ready(function () {
       type: 'post',
       data: {'orderId' : orderId},
       dataType: 'json',
-      success: function (resMsg) {
-        var res = resMsg;
+      success: function (res) {
+
+        if (res.resMsg === 'success') {
+          $tr.remove();
+        }
       }
       ,
       error: function () {}
