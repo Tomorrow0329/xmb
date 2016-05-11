@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>校卖部</title>
+    <link rel='stylesheet' href='/stylesheets/css/main.css' />
+    <link rel='stylesheet' href='/stylesheets/css/shopping.css' />
+</head>
+<body>
+<div class="index">
+    <div class="head">
+        <div class="head-inner">
+            <div class="h-r-left">
+                校卖部
+            </div>
+            <div class="h-right">
+                <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+                <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+                    <input type="button" value="我的关注" class="h-r-input order-focus"/>
+                </p>
+            </div>
+        </div>
+    </div>
+<p class="lin"></p>
+<div class="content">
+    <div class="spC-right spC-r-correct">
+        <p class="spC-title">我的购物车</p>
+        <div class="spC-list">
+            <div class="spC-list-th">
+                <span class="spC-list-th-span" style="width: 440px;">商品</span>
+                <span class="spC-list-th-span" style="width: 90px;">单价（元）</span>
+                <span class="spC-list-th-span" style="width: 140px;">数量</span>
+                <span class="spC-list-th-span" style="width: 100px;">小计（元）</span>
+                <span class="spC-list-th-span" style="width: 130px;">操作</span>
+            </div>
+            <ul class="spC-list-ul">
+                <% orders.forEach(function (order) { %>
+                <li><span class="goodsn"></span>
+                    <div class="spC-list-goods fl">
+                        <input type="checkbox" class="spC-list-goodsCheckbox fl">
+                        <a href=""><img src="/uploadData/<%= order.imagePath%>" class="spC-list-goodsImg fl"></a>
+                        <div class="spC-list-goodsName fr">
+                            <%= order.goodsName%>
+                        </div>
+                    </div>
+                    <div class="spC-list-price fl">
+                        <p class="spC-list-subtotal-p"><%= order.price%></p>
+                    </div>
+                    <div class="spC-list-number fl">
+                        <div class="spC-number-box">
+                            <span class="spC-number-span cursor subtract">-</span><p class="spC-number-span spcNumber" style="width: 34px;"><%= order.num%></p><span class="spC-number-span cursor add">+</span>
+                        </div>
+                    </div>
+                    <div class="spC-list-subtotal fl">
+                        <p class="spC-list-subtotal-p fontWeight600 money"></p>
+                    </div>
+                    <div class="spC-list-doMore fl">
+                        <p class="doMore-delete doMore-p doMore-p-top">删 除</p>
+                        <!--<p class="doMore-move doMore-p">
+                            {if $info.flag == 0}
+                            <span class="myfocus" sn="{$info.goods_sn}">移动到我的关注</span>
+                            {else}
+                            已关注
+                            {/if}
+                        </p>-->
+                    </div>
+                </li>
+                <% })%>
+            </ul>
+        </div>
+        <div class="spC-finally">
+            <input type="checkbox" class="spC-finally-checkAll fl"><span class="fl" style="margin-top: 15px;">全选</span>
+            <span class="spC-finally-delete fl"><a href="#" id="deledgoods">删除选中商品</a></span>
+            <div class="spC-finally-right fr">
+                <div class="spC-finally-right-sp1 fl">已选择
+                    <span class="spC-finally-right-count"></span>
+                    件商品
+                </div>
+                <div class="allPrice fl">总价
+                    <span class="fontSize12">(不含运费)</span>
+                        <span class="Price">￥
+                            <strong><span class="PriceNum"></span></strong>
+                        </span>
+                </div>
+                <a href="index.php?m=home&c=cart&a=pay"><div class="toPay fl cursor">去结算</div></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer fl"></div>
+</div>
+
+<script src="/vendor/jquery.js"></script>
+<script src="/javascripts/shopping.js"></script>
+</body>
+</html>

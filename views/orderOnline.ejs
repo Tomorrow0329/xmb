@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" CONTENT="TEXT/HTML">
+    <title>订单查询页</title>
+    <link rel='stylesheet' href='/stylesheets/css/main.css' />
+</head>
+<body>
+<div id="box" class="index upload-order order-online">
+    <div class="head">
+        <div class="head-inner">
+            <div class="h-r-left">
+                校卖部
+            </div>
+            <div class="h-right">
+                <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+                <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+                    <input type="button" value="我的关注" class="h-r-input order-focus"/>
+                </p>
+            </div>
+        </div>
+    </div>
+    <p class="lin"></p>
+    <div class="content">
+        <div class="c-left">
+            <ul class="c-l-ul">
+                <li><a href="/index">首&nbsp;页</a></li>
+                <li><a href="/uploadOrder">发布商品</a></li>
+                <li><a href="/orderOnline">在线商品</a></li>
+                <li><a href="#" class="order-focus">我的关注</a></li>
+            </ul>
+        </div>
+        <div class="c-right">
+            <h1 class="c-r-h1">在线商品信息表</h1>
+            <table id="c-r-tb">
+
+                <tr class="c-r-table">
+                    <th class="c-r-td-addLength">商品名称</th>
+                    <th>数量</th>
+                    <th>单价</th>
+                    <th class="c-r-td-addLength">联系方式</th>
+                    <th class="c-r-td-addLength">Email</th>
+                    <th class="c-r-td-addLength">发布时间</th>
+                    <th>修改</th>
+                    <th>删除</th>
+                </tr>
+
+                <% orders.forEach(function (order) {%>
+                <tr>
+                    <td style="display: none" class="order-id"><%= order._id%></td>
+                    <td class="c-r-td-addLength"><%= order.goodsName%></td>
+                    <td><%= order.num%></td>
+                    <td><%= order.price%></td>
+                    <td><%= order.tel%></td>
+                    <td><%= order.email%></td>
+                    <td class="c-r-td-addLength"><%= order.date.toJSON().slice(0,10)%></td>
+                    <td class="edit correct"><a href="/correctOrder/<%= order._id %>">修改</a></td>
+                    <td class="edit delete">删除</td>
+                </tr>
+                <%})%>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="/vendor/jquery.js"></script>
+<script src="/javascripts/index.js"></script>
+<script src="/javascripts/orderOnline.js"></script>
+<script>
+    //隔行变色
+    var $table=$('#c-r-tb'),
+            orderLength = $table.find('tr');
+    for(var i=0;i<= orderLength.length -1;i++){
+        if( i%2 === 0) {
+            $table.find('tr')[i].style.backgroundColor = "#e8edf1"
+        }else{
+            $table.find('tr')[i].style.backgroundColor = ""
+        }
+    }
+</script>
+</body>
+</html>

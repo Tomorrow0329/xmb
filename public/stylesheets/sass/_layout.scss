@@ -1,0 +1,109 @@
+*{margin: 0;padding: 0;list-style-type: none;text-decoration: none;}
+.head{
+  height: 100px;
+  position: relative;
+  background: white;
+}
+.head-inner{
+  width: 1024px;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+.h-r-left{
+  width: 20%;
+  height: 95px;
+  line-height: 95px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  color: #00b188;
+  font-size: 3em;
+  font-weight: 800;
+}
+.h-r-left img{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.h-right{
+  width:280px;
+  height: 50px;
+  position: relative;
+  float: right;
+  margin-top: 45px;
+  overflow: hidden;
+}
+.h-r-userName{
+  width: 73%;
+  height: 16px;
+  line-height: 16px;
+  position: relative;
+  display: inline-block;
+  font-size: 1em;
+  color: grey;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+.exit{
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 23px;
+  color: lightgray;
+}
+.exit:hover{
+  color: #ef735f;
+  cursor: pointer;
+}
+.h-r-input{
+  display: inline-block;
+  position: relative;
+  width: 45%;
+  height: 28px;
+  line-height: 28px;
+  background: #00b188;
+  color:white;
+  font-size: 1em;
+  font-weight: 600;
+  margin-top: 5px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+.h-r-input:hover{
+  background: #ef735f;
+}
+
+.content{
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: white;
+}
+.nav-inner{
+  width: 1024px;
+  height: 40px;
+  position: relative;
+  margin: 0 auto;
+}
+
+/*order_search  order_search  order_search  order_search  order_search  order_search  */
+.c-r-h1{margin:10px 0 10px 0;}
+td{
+  width: 70px;
+  height: 30px;
+  border-right: 1px solid #e8edf1;
+  cursor: pointer;
+  overflow: hidden;
+}
+.c-r-table th{
+  background: #00b188;
+  color: white;
+  height: 30px;
+  width: 80px;
+}
+.c-r-td-addLength{width: 150px;}
+.edit{font-weight: 600;}
+.edit:hover{background:#ef735f;color: white;}

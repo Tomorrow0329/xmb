@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>校卖部</title>
+  <link rel='stylesheet' href='/stylesheets/css/main.css' />
+</head>
+<body>
+<div class="index">
+  <div class="head">
+    <div class="head-inner">
+      <div class="h-r-left">
+        校卖部
+      </div>
+      <div class="h-right">
+        <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+        <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+          <input type="button" value="我的关注" class="h-r-input order-focus"/>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p class="lin"></p>
+  <div class="content">
+    <div class="content-part1">
+      <div class="c-part1-inner">
+        <div class="c-part1-left">
+          <ul class="c-part1-list order-class-nav"  id="c-part1-list">
+            <li><a href="/classSearch0">图书</a></li>
+            <li><a href="/classSearch1">服装</a></li>
+            <li><a href="/classSearch2">美食</a></li>
+            <li><a href="/classSearch3">生活学习</a></li>
+            <li><a href="/classSearch4">礼物饰品</a></li>
+            <li><a href="/classSearch5">运动娱乐</a></li>
+            <li><a href="/classSearch6">其他</a></li>
+          </ul>
+        </div>
+
+        <div class="c-part1-right recommend"></div>
+
+        <div class="c-part1-main-index">
+          <div id="slider">
+            <ul class="list">
+              <li class="current"><img src="/images/slider2.jpg"/></li>
+              <li><img src="/images/slider2.jpg"/></li>
+              <li><img src="/images/slider2.jpg"/></li>
+              <li><img src="/images/slider2.jpg"/></li>
+              <li><img src="/images/slider2.jpg"/></li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-part2">
+      <div class="c-part2-inner">
+        <p class="part-title">新单速递<span>.&nbsp;.&nbsp;.</span></p>
+        <div class="c-part2-new">
+          <ul class="c-part2-new-ul" id="orderList">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer"></div>
+</div>
+<script src="/vendor/jquery.js"></script>
+<script src="/javascripts/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/css/main.css' />
+</head>
+<body>
+<div id="box" class="index">
+    <div class="head">
+        <div class="head-inner">
+            <div class="h-r-left">
+                校卖部
+            </div>
+            <div class="h-right">
+                <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+                <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+                    <input type="button" value="我的关注" class="h-r-input order-focus"/>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="nav-inner">
+            <ul class="nav-inner-ul order-class-nav">
+                <li><a href="/index">首页</a></li>
+                <li><a href="/classSearch0">图书</a></li>
+                <li><a href="/classSearch1">服装</a></li>
+                <li><a href="/classSearch2">美食</a></li>
+                <li><a href="/classSearch3">生活学习</a></li>
+                <li><a href="/classSearch4">礼物饰品</a></li>
+                <li><a href="/classSearch5">运动娱乐</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-inner">
+            <div class="c-goods">
+                <div class="c-goods-img">
+                    <% goods.forEach(function(goods){%>
+                    <img src="/uploadData/<%= goods.imagePath%>">
+
+                    <div class="c-part1-main">
+                        <form>
+                            <span class="orderId" style="display: none;"><%= goods._id %></span>
+                            <p class="c-goods-username">&nbsp;<%= goods.username%>&nbsp;<span class="c-goods-username-span">发布</span></p>
+                            <p class="c-goods-price">￥<%= goods.price%><span class="c-goods-price-span">元</span></p>
+                            <p class="c-goods-goodsName"><%= goods.goodsName%></p>
+                            <div class="c-goods-describe">
+                                <%= goods.describe%>
+                            </div>
+                            <p class="c-goods-contact">
+                                联系：&nbsp;
+                                <span><%= goods.tel %></span>&nbsp;
+                                <span><%= goods.email%></span>
+                            </p>
+                            <input type="button" value="" class="c-goods-focus fl">
+                        </form>
+                        <%})%>
+                    </div>
+                </div>
+
+                <div class="c-part1-right recommend"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/vendor/jquery.js"></script>
+<script src="/javascripts/index.js"></script>
+<script src="/javascripts/orderDetail.js"></script>
+</body>
+</html>

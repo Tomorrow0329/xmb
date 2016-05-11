@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/css/main.css' />
+</head>
+<body>
+<div id="box" class="index">
+    <div class="head">
+        <div class="head-inner">
+            <div class="h-r-left">
+                校卖部
+            </div>
+            <div class="h-right">
+                <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+                <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+                    <input type="button" value="我的关注" class="h-r-input order-focus"/>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="nav-inner">
+            <ul class="nav-inner-ul order-class-nav">
+                <li><a href="/index">首页</a></li>
+                <li><a href="/classSearch0">图书</a></li>
+                <li><a href="/classSearch1">服装</a></li>
+                <li><a href="/classSearch2">美食</a></li>
+                <li><a href="/classSearch3">生活学习</a></li>
+                <li><a href="/classSearch4">礼物饰品</a></li>
+                <li><a href="/classSearch5">运动娱乐</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-inner">
+            <div class="content-part2">
+                <div class="c-part2-inner">
+                    <p class="search-tip">
+
+                    </p>
+                    <p class="tips-box">
+
+                    </p>
+                    <div class="c-part2-new">
+                        <ul class="c-part2-new-ul" id="orderClassList">
+                            <% orders.forEach(function (order) { %>
+                            <li>
+                            <span class='orderId' style='display: none'><%= order._id %></span><img src='/uploadData/<%= order.imagePath %>' class='c-part2-new-ul-img'>
+
+                            <div class='c-part2-new-ul-img-price fr'>￥<%= order.price %></div>
+
+                            <div class='c-part2-detail'>
+                                <p class='c-part2-detail-goodsName'><%= order.goodsName %></p>
+                                <p class='c-part2-detail-describe'><%= order.describe %></p>
+                            </div>
+                            </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/vendor/jquery.js"></script>
+<script src="/javascripts/index.js"></script>
+<script src="/javascripts/orderClasses.js"></script>
+</body>
+</html>
