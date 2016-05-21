@@ -3,16 +3,17 @@
  */
 var mongoose = require('mongoose');
 Schema = mongoose.Schema;
-
-var errMsg = '';
 var userSchema = new Schema ({
     username:String,
     password:String,
     email:String,
     focusOrder: Array,
-    cartOrder: Array
+    cartOrder: Array,
+    payOrders: Array,
+    thisPayOrders: Array,
+    receiptAddress: Array,
+    myOrders: Array
 });
-
 var orderSchema = new Schema({
     username:String,
     date:Date,
@@ -30,6 +31,7 @@ var orderSchema = new Schema({
     imagePath:String,
     nowName:String
 });
+var errMsg = '';
 
 var Users = mongoose.model('users', userSchema);
 var Orders = mongoose.model('orders', orderSchema);
@@ -178,7 +180,7 @@ exports.getFocus = function (req, callback) {
 };
 
 exports.getFocusList = function (req, callback) {
-  req = req.split(',');
+  /*req = req.split(',');
   var orderList = [], reqIndex = 0;
   (function getFocusOrder(req) {
 
@@ -195,7 +197,28 @@ exports.getFocusList = function (req, callback) {
         getFocusOrder(req);
       }
     })
-  })(req);
+  })(req);*/
+    Users.find({username: req.username}, function (err, res) {
+         if (err) throw err;
+        else {
+             var orders = res[0].focusOrder, orderList = [], reqIndex = 0;
+             orders.forEach(function (order) {
+                 Orders.find({_id: order}, function (err, res) {
+
+                     if (err) throw err;
+                     else {
+                         orderList.push(res[0]);
+
+                         reqIndex += 1;
+
+                         if (reqIndex == orders.length) {
+                             callback(orderList);
+                         }
+                     }
+                 });
+             });
+         }
+    });
 };
 
 exports.orderOnlineDB = function (req, callback) {
@@ -250,11 +273,11 @@ exports.updateOrderDB = function (req, callback) {
     Orders.update({_id: req._id}, req, function (err,res) {
         if (err) throw err;
         else {
-            console.log(res);
             callback(res);
         }
     });
 };
+
 exports.addCartOrderDB = function (req, callback) {
     var msg = false;
     Users.find({username: req.username}, function (err, res) {
@@ -286,9 +309,7 @@ exports.addCartOrderDB = function (req, callback) {
 
 exports.getCartDB = function (req, callback) {
     Users.find({username: req.username}, function (err, res) {
-        console.log(res[0].cartOrder);
         var orderListArray = [], cartLength = res[0].cartOrder.length;
-        console.log('cartLength' + cartLength);
         res[0].cartOrder.forEach(function (orderId) {
             Orders.find({_id: orderId}, function (err, res) {
                 if (err) throw err;
@@ -302,4 +323,186 @@ exports.getCartDB = function (req, callback) {
         });
 
     });
+};
+
+exports.cartDeleteDB = function (req, callback) {
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            var cartOrderArray = res[0].cartOrder, index = -1;
+            for (var i=0; i<cartOrderArray.length; i++) {
+                if (cartOrderArray[i] === req.orderId) {
+                    index = i;
+
+                    cartOrderArray.splice(index, 1);
+                    Users.update({username: req.username}, {$set: {cartOrder: cartOrderArray}}, function (err, res) {
+                        if (err) throw err;
+                        else {
+                            callback('ok');
+                        }
+                    });
+                }
+            }
+        }
+    });
+};
+
+exports.toPayDB = function (req, callback) {
+    Users.find({username: req.username},  function (err, res) {
+        if (err) throw err;
+        else {
+            var orderList = res[0].payOrders,
+                cartOrders = res[0].cartOrder,
+                totalLength = parseInt(res[0].payOrders.length) + parseInt(req.payOrder.length),
+                newCartOrder = [];
+            req.payOrder.forEach(function (order) {
+
+                orderList.push(order);
+                for (var i=0; i<cartOrders.length; i++) {
+                    if (order.goodsId === cartOrders[i]) {
+
+                    } else {
+                        newCartOrder.push(cartOrders[i]);
+                    }
+                }
+                if (parseInt(orderList.length) === totalLength) {
+
+                    Users.update({username: req.username}, {$set: {payOrders: orderList, thisPayOrders: req.payOrder}, cartOrder: newCartOrder}, function (err, res) {
+                        if (err) throw err;
+                        else {
+                            callback(res);
+                        }
+                    });
+                }
+            });
+        }
+    });
+};
+
+exports.getPayOrderDB = function (req, callback) {
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            callback(res[0]);
+        }
+    });
+};
+
+exports.getUnSureOrderDB = function (req, callback) {
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            callback(res[0].payOrders);
+        }
+    });
+};
+
+exports.searchKeyWorldDB = function (req, callback) {
+    Orders.find({"$or": [{'goodsName': new RegExp(req.searchData)},{describe: new RegExp(req.searchData)}]}, function (err, res) {
+        if (err) throw err;
+        else {
+            console.log(res);
+            callback(res);
+        }
+    });
+};
+
+exports.getReceiptAddressDB = function (req, callback) {
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            callback(res[0].receiptAddress);
+        }
+    });
+};
+
+exports.setReceiptAddressDB = function (req, callback) {
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            var addressList = res[0].receiptAddress;
+            addressList.push(req.address);
+
+            Users.update({username: req.username}, {$set: {receiptAddress: addressList}}, function (err, res) {
+                if (err) throw err;
+                else {
+                    callback(res[0]);
+                }
+            });
+        }
+    });
+};
+
+exports.toSureOrderDB = function (req, callback) {
+    //第一步：存入确认过的订单信息到 myOrders 字段
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            var orderList = res[0].myOrders, code = 0;
+            orderList.push(req.data);
+            console.log(orderList);
+
+            Users.update({username: req.username}, {$set: {myOrders: orderList}}, function (err, res) {
+                if (err) throw err;
+                else {
+
+                    //第二步：更新Orders集合中对应商品的数量
+                    req.data.payOrders.forEach(function (order) {
+                        Orders.find({_id: order.goodsId}, function (err, res) {
+                            if (err) throw err;
+                            else {
+                                var num = res[0].num;
+                                num = num - parseInt(order.selectNum);
+                                if (num < 0) {
+                                    num = 0;
+                                }
+                                console.log(num);
+
+                                Orders.update({_id: order.goodsId}, {$set: {num: num}}, function (err, res) {
+                                    if (err) throw err;
+                                    else {
+                                        code += 1;
+                                        if (code === parseInt(req.data.payOrders.length)) {
+                                            //第三步：删除Users集合中 payOrders 字段里对应的商品；
+                                            Users.find({username: req.username}, function (err, res) {
+                                                if (err) throw err;
+                                                else {
+                                                    console.log('into');
+                                                    var newPayOrders = [], m=0;
+                                                    /*console.log('oldPayOrders'+ res[0].payOrders);*/
+                                                    res[0].payOrders.forEach(function (obj) {
+                                                        req.data.payOrders.forEach(function (order) {
+                                                            console.log(obj.goodsId);
+                                                            console.log(order.goodsId);
+                                                            if (obj.goodsId !== order.goodsId) {
+                                                                newPayOrders.push(obj);
+                                                            }else {
+                                                                m +=1;
+                                                            }
+
+                                                            /*console.log(newPayOrders);*/
+                                                            console.log('m:'+m+', length:'+parseInt(req.data.payOrders.length));
+                                                            if (m ===  parseInt(req.data.payOrders.length)) {
+                                                                Users.update({username: req.username}, {$set: {payOrders: newPayOrders}},
+                                                                    function (err, res) {
+                                                                        if (err) throw err;
+                                                                        else {
+                                                                            callback();
+                                                                        }
+                                                                    });
+                                                            }
+                                                        });
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+        }
+    })
 };

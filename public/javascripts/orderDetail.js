@@ -74,6 +74,40 @@ $(document).ready(function () {
         ajaxList.cancelFocus();
       }
     });
+
+    $('.cmt').on('click',function(){
+      var write = $('.comment-write');
+      if( write.is(':visible')){
+        write.slideUp(900);
+        $('.cmt').html('写评论');
+      }else{
+        write.slideDown(900);
+        $('.cmt').html('收起');
+      }
+    });
+
+    $("#cmt-btn").on('click',  function(event) {
+      event.preventDefault();
+      var con = $('.cmt-write').val();
+      var gid = $('.orderId').html();
+      var orderUper = $('.goods-username').html();
+      if(con == '' || gid == '') return false;
+      $.ajax({
+        url: '/addCmt',
+        type: 'get',
+        data: {}
+      });
+      $.post('index.php?m=home&c=index&a=addcommet', {gid: gid,con:con}, function(msg) {
+        if(!msg.status){
+          alert(msg.info);
+        }else{
+          var data = msg.data;
+          var res = '<p class="comment-list"> <span class="cmt-list-content">'+data.con+'</span> <span class="cmt-list-time cmt-list-other">'+data.time+'</span><span class="cmt-list-neme cmt-list-other">'+data.name+'</span> </p>';
+          $(res).prependTo('.comment-content');
+          $('.cmt').trigger('click');
+        }
+      },'json');
+    });
   };
 
   init();

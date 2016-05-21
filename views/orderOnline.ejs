@@ -6,30 +6,61 @@
     <link rel='stylesheet' href='/stylesheets/css/main.css' />
 </head>
 <body>
-<div id="box" class="index upload-order order-online">
+<div class="index upload-order">
     <div class="head">
         <div class="head-inner">
             <div class="h-r-left">
                 校卖部
             </div>
+
+            <p class="search-box"><input class="search-input" type="search" placeholder="请输入关键字">
+                <span class="search-btn">搜 索</span></p>
+
             <div class="h-right">
-                <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
-                <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
-                    <input type="button" value="我的关注" class="h-r-input order-focus"/>
-                </p>
+                <div id="person_info" class="clearfix">
+                    <div class="avatar"></div>
+                    <div class="personal-center">
+                        <div class="center-nav">
+                            <p class="h-r-userName">欢迎，<%= username%></p>
+                            <p class="center-nav-list"><a href="/toCenter">个人中心</a></p>
+                            <p class="center-nav-list"><a href="/signIn">退出登录</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!--<p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+        <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+          <input type="button" value="我的关注" class="h-r-input order-focus"/>
+        </p>-->
             </div>
         </div>
     </div>
-    <p class="lin"></p>
-    <div class="content">
-        <div class="c-left">
-            <ul class="c-l-ul">
-                <li><a href="/index">首&nbsp;页</a></li>
-                <li><a href="/uploadOrder">发布商品</a></li>
-                <li><a href="/orderOnline">在线商品</a></li>
-                <li><a href="#" class="order-focus">我的关注</a></li>
+    <div class="nav">
+        <div class="nav-inner">
+            <ul class="nav-inner-ul order-class-nav">
+                <li class="all-class">个人中心</li>
+                <li><a href="/index">首页</a></li>
+                <li><a href="/classSearch1">服装</a></li>
+                <li><a href="/classSearch0">图书</a></li>
+                <li><a href="/classSearch2">美食</a></li>
+                <li><a href="/classSearch3">生活学习</a></li>
+                <li><a href="/classSearch4">礼物饰品</a></li>
+                <li><a href="/classSearch5">运动娱乐</a></li>
             </ul>
         </div>
+    </div>
+    <div class="content">
+        <div class="content-part1">
+            <div class="c-left">
+                <ul class="c-l-ul">
+                    <li><a href="/toCenter">账户详情</a></li>
+                    <li><a href="#" class="order-focus">我的关注</a></li>
+                    <li><a href="#" class="order-focus">我的订单</a></li>
+                    <li><a href="/getCart">我的购物车</a></li>
+                    <li><a href="/uploadOrder">发布商品</a></li>
+                    <li><a href="/orderOnline">在线商品</a></li>
+                    <li><a href="/orderOnline">已拍出商品</a></li>
+                </ul>
+            </div>
         <div class="c-right">
             <h1 class="c-r-h1">在线商品信息表</h1>
             <table id="c-r-tb">
@@ -46,17 +77,32 @@
                 </tr>
 
                 <% orders.forEach(function (order) {%>
+
+                <% if (order.num === 0) { %>
                 <tr>
                     <td style="display: none" class="order-id"><%= order._id%></td>
                     <td class="c-r-td-addLength"><%= order.goodsName%></td>
-                    <td><%= order.num%></td>
+                    <td style="color:#dd2727"><%= order.num%></td>
                     <td><%= order.price%></td>
                     <td><%= order.tel%></td>
                     <td><%= order.email%></td>
                     <td class="c-r-td-addLength"><%= order.date.toJSON().slice(0,10)%></td>
-                    <td class="edit correct"><a href="/correctOrder/<%= order._id %>">修改</a></td>
+                    <td class="edit correct"><a href="/correctOrder/<%= order._id %>" style="color:#dd2727">补货</a></td>
                     <td class="edit delete">删除</td>
                 </tr>
+                <% } else { %>
+                <tr>
+                    <td style="display: none" class="order-id"><%= order._id%></td>
+                <td class="c-r-td-addLength"><%= order.goodsName%></td>
+                <td><%= order.num%></td>
+                <td><%= order.price%></td>
+                <td><%= order.tel%></td>
+                <td><%= order.email%></td>
+                <td class="c-r-td-addLength"><%= order.date.toJSON().slice(0,10)%></td>
+                <td class="edit correct"><a href="/correctOrder/<%= order._id %>">修改</a></td>
+                <td class="edit delete">删除</td>
+                </tr>
+                <% } %>
                 <%})%>
             </table>
         </div>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>结算页——校卖部</title>
+    <link rel='stylesheet' href='/stylesheets/css/main.css' />
+    <link rel='stylesheet' href='/stylesheets/css/shopping.css' />
+<!--
+    <script type="text/javascript" src="{$path}js/linkage.js"></script>
+-->
+</head>
+<body>
+<div class="index upload-order">
+    <div class="head">
+        <div class="head-inner">
+            <div class="h-r-left">
+                校卖部
+            </div>
+
+            <p class="search-box"><input class="search-input" type="search" placeholder="请输入关键字">
+                <span class="search-btn">搜 索</span></p>
+
+            <div class="h-right">
+                <div id="person_info" class="clearfix">
+                    <div class="avatar"></div>
+                    <div class="personal-center">
+                        <div class="center-nav">
+                            <p class="h-r-userName">欢迎，<%= username%></p>
+                            <p class="center-nav-list"><a href="/toCenter">个人中心</a></p>
+                            <p class="center-nav-list"><a href="/getCart">我的购物车</a></p>
+                            <p class="center-nav-list"><a href="/signIn">退出登录</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!--<p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+        <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+          <input type="button" value="我的关注" class="h-r-input order-focus"/>
+        </p>-->
+            </div>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="nav-inner">
+            <ul class="nav-inner-ul order-class-nav" style="width: 1024px;">
+                <!--<li class="all-class">个人中心</li>-->
+                <li><a href="/index">首页</a></li>
+                <li><a href="/classSearch1">服装</a></li>
+                <li><a href="/classSearch0">图书</a></li>
+                <li><a href="/classSearch2">美食</a></li>
+                <li><a href="/classSearch3">生活学习</a></li>
+                <li><a href="/classSearch4">礼物饰品</a></li>
+                <li><a href="/classSearch5">运动娱乐</a></li>
+            </ul>
+        </div>
+    </div>
+<div class="content">
+    <div class="spC-right spC-r-correct">
+        <p class="spC-title">提示：请认真核对商品信息</p>
+        <div class="user">
+            <p class="fontSize12">
+                > 收货人信息
+                <span class="add-address fr">新增收货地址</span>
+            </p>
+            <div class="user-inner fontSize12" id="gaininfo">
+                <!--用户首次购物，需添加收货人信息-->
+                <form class="add-receipt" action="" method="post" onsubmit="return false;" style="display: none;">
+                    收 货 人：<input type="text" name="gname" id="gname" requried><br/><br>
+                    详细地址：<input type="text" class="user-address" name="" id="user-address" requried><br/>
+                    手机号码：<input type="number" name="" id="user-phone" requried><br/>
+                    <input type="submit" value="保存收货人信息" id="firstsubmit" class="submit">
+                </form>
+                <!--用户已经添加过收货信息-->
+                <div id="gain">
+
+                </div>
+            </div>
+        </div>
+        <div class="wey">
+            <p class="spC-title">支付方式</p>
+            <div class="wey-inner">
+                <span class="weys fontSize12">货到付款</span>
+                <span class="weys fontSize12">银行卡支付</span>
+                <span class="weys fontSize12">支 付 宝</span>
+            </div>
+        </div>
+        <div class="spC-list">
+            <div class="spC-list-th">
+                <span class="spC-list-th-span" style="width: 440px;">商品</span>
+                <span class="spC-list-th-span" style="width: 150px;">单价（元）</span>
+                <span class="spC-list-th-span" style="width: 180px;">数量</span>
+                <span class="spC-list-th-span" style="width: 150px;">小计（元）</span>
+            </div>
+            <ul class="spC-list-ul">
+
+            </ul>
+        </div>
+        <div class="spC-finally">
+            <div class="spC-finally-right fr">
+                <div class="allPrice fl">应付
+                        <span class="Price">￥
+                            <strong><span class="PriceNum"> </span>元</strong>
+                        </span>
+                </div>
+                <a href="#"><div class="toPay fr cursor">确认订单</div></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layer-box">
+    <div class="layer">
+        <span class="layer-close fr"></span>
+        <h3 class="layer-h3">添加新的收货人信息</h3>
+        <div class="user-inner fontSize12 " style="margin-top: 15px;">
+            <form action="" method="post" onsubmit="return false;">
+                收 货 人：<input type="text" name="gname" id="goodesName"><br/><br>
+                <!--所在地区：<select name="" id="provice" onchange="provices(this)">
+                    <option value="">请选择省</option>
+                </select>
+                <select name="" id="city" onchange="citys(this)">
+                    <option value="">请选择市</option>
+                </select>
+                <select name="" id="country">
+                    <option value="">请选择县</option>
+                </select><br/>-->
+                详细地址：<input type="text" class="user-address" name="" id="userAddress"><br/>
+                手机号码：<input type="number" name="" id="userPhone"><br/>
+                <input type="submit" value="保存收货人信息" id="addSubmit" style="position: absolute;left: 360px;" class="submit">
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<script src="/vendor/jquery.js"></script>
+<script src="/javascripts/index.js"></script>
+<script src="/javascripts/payFor.js"></script>
+</body>
+</html>

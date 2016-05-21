@@ -51,7 +51,13 @@ app.get('/correctOrder/:id', orders.correctOrder);
 app.post('/updateOrder', orders.updateOrder);
 app.get('/addCartOrder', orders.addCartOrder);
 app.get('/getCart', orders.getCart);
-
+app.post('/cartDelete', orders.cartDelete);
+app.post('/toPay', orders.toPay);
+app.get('/getPayOrder', orders.getPayOrder);
+app.get('/searchKeyWorld', orders.searchKeyWorld);
+app.get('/getUnSureOrder', orders.getUnSureOrder);
+app.post('/setReceiptAddress', orders.setReceiptAddress);
+app.post('/toSureOrder', orders.toSureOrder);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

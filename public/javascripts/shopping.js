@@ -6,10 +6,10 @@ $(document).ready(function(){
     var shopLi = $('.spC-list-ul').children('li');
     for(var i= 0;i<shopLi.length;i++){
         var n = $(shopLi[i]).find('.spcNumber').val();
-        var p = $(shopLi[i]).find('.spC-list-subtotal-p').val();
+        var p = $(shopLi[i]).find('.spC-list-subtotal-p').html();
         var price;
         price = parseInt(n)*parseFloat(p);
-        $(shopLi[i]).find('.money').val(price);
+        $(shopLi[i]).find('.money').html(price);
         $(shopLi[i]).find('input').prop('checked',true);
         $(shopLi[i]).css('background','#eeeeee');
         $('.spC-finally').find('input').prop('checked',true);
@@ -20,62 +20,78 @@ $(document).ready(function(){
     $('.subtract').delegate($(this),'click',function(e){
         var currli = $(this).parents('li');
         var n=$(this).parent().children('.spcNumber').val();
-        var p= $(this).parents('li').find('.spC-list-subtotal-p').html();
-        var m = $(this).parents('li').find('.money');
-        var sn = $(this).parents('li').find('.goodsn').attr('sn');
-        var spcNumber = $(this).parent().children('.spcNumber');
-        var num,price;
-        if(parseInt(n) == 0){
-            num=0;
-        }else{
-            num = parseInt(n)-1;
-        }
-        $.get('index.php?m=home&c=cart&a=decr',{sn:sn},function (msg){
-            if(!msg.status){
-                alert(msg.info);
+
+        if (n > $(this).parent().children('.spcNumber').attr('min')){
+            var p= $(this).parents('li').find('.spC-list-subtotal-p').html();
+            var m = $(this).parents('li').find('.money');
+            //var sn = $(this).parents('li').find('.goodsn').attr('sn');
+            var spcNumber = $(this).parent().children('.spcNumber');
+            var num,price;
+            if(parseInt(n) == 0){
+                num=0;
             }else{
-                spcNumber.val(num);
-                price = parseFloat(p)*num;
-                m.val(price);
-                if(num == 0) $(currli).remove();
-                check();
-                allPrice();
+                num = parseInt(n)-1;
             }
-        },'json');
+            //$.get('index.php?m=home&c=cart&a=decr',{sn:sn},function (msg){
+            //    if(!msg.status){
+            //        alert(msg.info);
+            //    }else{
+            spcNumber.val(num);
+            price = parseFloat(p)*num;
+            m.html(price);
+            //if(num == 0) $(currli).remove();
+            check();
+            allPrice();
+            //    }
+            //},'json');
+        }
+
         
     });
     //点击数量增加
     $('.add').delegate($(this),'click',function(){
+        /*var n =$(this).parent().children('.spcNumber').html();*/
         var n =$(this).parent().children('.spcNumber').val();
-        var p= $(this).parents('li').find('.spC-list-subtotal-p').html();
-        var m = $(this).parents('li').find('.money');
-        var sn = $(this).parents('li').find('.goodsn').attr('sn');
-        var spcNumber = $(this).parent().children('.spcNumber');
-        var num = parseInt(n)+1;
-        $.get('index.php?m=home&c=cart&a=incr',{sn:sn},function (msg){
-            if(!msg.status){
-                alert(msg.info);
-            }else{
-                spcNumber.val(num);
-                price = parseFloat(p)*num;
-                m.val(price);
-                allPrice();
-            }
-        },'json');
+
+        if (parseInt(n) < parseInt($(this).parent().children('.spcNumber').attr('max'))){
+            var p= $(this).parents('li').find('.spC-list-subtotal-p').html();
+            var m = $(this).parents('li').find('.money');
+            //var sn = $(this).parents('li').find('.goodsn').attr('sn');
+            var spcNumber = $(this).parent().children('.spcNumber');
+            var num = parseInt(n)+1;
+            //$.get('index.php?m=home&c=cart&a=incr',{sn:sn},function (msg){
+            //    if(!msg.status){
+            //        alert(msg.info);
+            //    }else{
+            /*spcNumber.html(num);*/
+            spcNumber.val(num);
+            price = parseFloat(p)*num;
+            m.html(price);
+            allPrice();
+            //    }
+            //},'json');
+        }
     });
     // 删除商品
     $('.doMore-delete').delegate($(this),'click',function(){
         var currli = $(this).parents('li');
-        var sn = $(this).parents('li').find('.goodsn').attr('sn');
+        var goodsId = $(this).parents('li').find('.goodsId').html();
         var num = 0;
-        $.get('index.php?m=home&c=cart&a=delitem',{sn:sn},function (msg){
-            if(!msg.status){
-                alert(msg.info);
-            }else{
-                $(currli).remove();
-                allPrice();
-            }
-        },'json');
+        $.ajax({
+            url: '/cartDelete',
+            type: 'post',
+            data: {'orderId' : goodsId},
+            dataType: 'json',
+            success: function (data) {
+                if (data) {
+                    $(currli).remove();
+                    allPrice();
+
+                    return true;
+                }
+            },
+            error: function () {}
+        });
     });
     //全选
     $('.spC-finally-checkAll').on('click',function(){
@@ -91,6 +107,42 @@ $(document).ready(function(){
             allPrice()
         }
     });
+    //跳转到订单页
+    $('.toPay').on('click', function () {
+        var goods = $(".spC-list-goods").find('input:checked'),
+            selectOrderList =[];
+        $(goods).each(function(index, el) {
+            var goodsId = $(el).parents('li').find('.goodsId').html();
+            var goodsImgPath = $(el).parents('li').find('.spC-list-goodsImg').attr('src');
+            var goodsName = $(el).parents('li').find('.spC-list-goodsName').html().trim();
+            var goodsPrice = $(el).parents('li').find('.goods-price').html();
+            var selectNum = $(el).parents('li').find('.spcNumber').val();
+            var money = $(el).parents('li').find('.money').html();
+            var selectOrder = {
+                'goodsId': goodsId,
+                'goodsImg': goodsImgPath,
+                'goodsName': goodsName,
+                'goodsPrice': goodsPrice,
+                'selectNum': selectNum,
+                'money': money
+            };
+
+            selectOrderList.push(selectOrder);
+        });
+
+        $.ajax({
+            url: '/toPay',
+            data: {orders: JSON.stringify(selectOrderList), totalMoney: parseFloat($('.PriceNum').html())},
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                if (data.errMsg) {
+                    window.location.href = '/payFor';
+                }
+            },
+            error: function () {}
+        });
+    });
 
     shopLi.find('input').on('click',function(){
         check();
@@ -102,14 +154,14 @@ $(document).ready(function(){
         var Total=0,money =[];
         for(var i=0; i<shopLi.length;i++){
             if($(shopLi[i]).find('input').prop('checked')){
-                var m = $(shopLi[i]).find('.money').val();
+                var m = $(shopLi[i]).find('.money').html();
                 money.push(parseFloat(m));
             }
         }
         for(var n=0 ;n<money.length;n++){
             Total += money[n]
         }
-        $('.spC-finally .PriceNum').val(Total);
+        $('.spC-finally .PriceNum').html(Total);
     }
     //判断被选商品的数量
     function check(){
@@ -127,7 +179,7 @@ $(document).ready(function(){
         }else{
             $('.spC-finally-checkAll').prop('checked',false);
         }
-        $('.spC-finally-right-count').val(n);
+        $('.spC-finally-right-count').html(n);
     }
     // 移动到我的关注
     $(".myfocus").click(function(){
@@ -143,23 +195,4 @@ $(document).ready(function(){
     });
     // 页面加载后触发
     $('.spC-finally-checkAll').trigger('click');
-    // 删除选中商品
-    $("#deledgoods").click(function(event) {
-        var goods = $(".spC-list-goods").find('input:checked');
-        var delgoods = new Array();
-        $(goods).each(function(index, el) {
-            delgoods[index] = $(el).attr('sn');
-        });
-        $.post('index.php?m=home&c=cart&a=delitems', {sn:delgoods}, function(msg) {
-            if(!msg.status){
-              alert(msg.info);
-            }else{
-              $(goods).each(function(index, el) {
-                    $(el).parents('li').remove();
-                    check();
-                    allPrice();
-                });
-            }
-        },'json');
-    });
 });

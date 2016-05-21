@@ -40,7 +40,7 @@ $(document).ready(function () {
         if (compare(newInt, oldIntArray)) {
           recommendList += "<div class='recommend-link'><span class='orderId' style='display: none'>"+ rows[newInt]._id
             +"</span><img src='/uploadData/"+ rows[newInt].imagePath
-            +"'><span class='recommend-detail'>"+ rows[newInt].goodsName +"</span></a></div>";
+            +"'><span class='recommend-detail' title='"+ rows[newInt].goodsName +"'>"+ rows[newInt].goodsName +"</span></a></div>";
           oldIntArray.push(newInt);
         }
         test(oldIntArray);
@@ -48,13 +48,24 @@ $(document).ready(function () {
       } else if (oldIntArray.length === 0) {
         recommendList += "<div class='recommend-link'><span class='orderId' style='display: none'>"+ rows[newInt]._id
           +"</span><img src='/uploadData/"+ rows[newInt].imagePath
-          +"'><span class='recommend-detail'>"+ rows[newInt].goodsName +"</span></a></div>";
+          +"'><span class='recommend-detail' title='"+ rows[newInt].goodsName +"'>"+ rows[newInt].goodsName +"</span></div>";
         oldIntArray.push(newInt);
         test(oldIntArray);
       }
     })(oldIntArray);
 
     $('.recommend').html(recommendList);
+  };
+
+  var wordLimit = function () {
+    var $describe = $("#orderList").find('.c-part2-detail-describe');
+      var maxWidth=50;
+    $describe.each(function () {
+      if($(this).html().length > maxWidth){
+        $(this).html($(this).html().substring(0, maxWidth));
+        $(this).html($(this).html()+'...');
+      }
+    });
   };
 
   var ajaxList = {
@@ -70,6 +81,7 @@ $(document).ready(function () {
 
             $('#orderList').html(handleNewOrderList(rows));
             handleRecommendOrderList(dataLength, rows);
+            wordLimit();
           },
           error: function () {}
         });
@@ -111,6 +123,21 @@ $(document).ready(function () {
       var codeId = $(this).index();
       //ajaxList.search(codeId);
     });
+
+    $('.avatar, .personal-center').hover(function () {
+      $('.center-nav').show();
+    },function () {
+      $('.center-nav').hide();
+    });
+
+    switch (window.location.pathname) {
+      case '':
+            break;
+      case '':
+        break;
+      case '':
+        break;
+    }
 
   };
 

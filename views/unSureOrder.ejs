@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>校卖部</title>
+    <link rel='stylesheet' href='/stylesheets/css/main.css' />
+    <link rel='stylesheet' href='/stylesheets/css/shopping.css'/>
+</head>
+<body>
+<div class="index upload-order">
+    <div class="head">
+        <div class="head-inner">
+            <div class="h-r-left">
+                校卖部
+            </div>
+
+            <p class="search-box"><input class="search-input" type="search" placeholder="请输入关键字">
+                <span class="search-btn">搜 索</span></p>
+
+            <div class="h-right">
+                <div id="person_info" class="clearfix">
+                    <div class="avatar"></div>
+                    <div class="personal-center">
+                        <div class="center-nav">
+                            <p class="h-r-userName">欢迎，<%= username%></p>
+                            <p class="center-nav-list"><a href="/toCenter">个人中心</a></p>
+                            <p class="center-nav-list"><a href="/getCart">我的购物车</a></p>
+                            <p class="center-nav-list"><a href="/signIn">退出登录</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!--<p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+        <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+          <input type="button" value="我的关注" class="h-r-input order-focus"/>
+        </p>-->
+            </div>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="nav-inner">
+            <ul class="nav-inner-ul order-class-nav">
+                <li class="all-class">个人中心</li>
+                <li><a href="/index">首页</a></li>
+                <li><a href="/classSearch1">服装</a></li>
+                <li><a href="/classSearch0">图书</a></li>
+                <li><a href="/classSearch2">美食</a></li>
+                <li><a href="/classSearch3">生活学习</a></li>
+                <li><a href="/classSearch4">礼物饰品</a></li>
+                <li><a href="/classSearch5">运动娱乐</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-part1">
+            <div class="c-left">
+                <ul class="c-l-ul">
+                    <li><a href="/toCenter">账户详情</a></li>
+                    <li><a href="#" class="order-focus">我的关注</a></li>
+                    <li><a href="#" class="order-focus">我的订单</a></li>
+                    <li><a href="/unSureOrder" class="order-focus">待确认订单</a></li>
+                    <li><a href="/getCart">我的购物车</a></li>
+                    <li><a href="/uploadOrder">发布商品</a></li>
+                    <li><a href="/orderOnline">在线商品</a></li>
+                    <li><a href="/orderOnline">已拍出商品</a></li>
+                </ul>
+            </div>
+            <div class="c-right">
+                <h1 class="c-r-h1">待确认订单</h1>
+                <div class="spC-list">
+                    <div class="spC-list-th">
+                        <span class="spC-list-th-span" style="width: 350px;">商品</span>
+                        <span class="spC-list-th-span" style="width: 150px;">单价（元）</span>
+                        <span class="spC-list-th-span" style="width: 180px;">数量</span>
+                        <span class="spC-list-th-span" style="width: 150px;">小计（元）</span>
+                    </div>
+                    <ul class="spC-list-ul">
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer"></div>
+</div>
+<script src="/vendor/jquery.js"></script>
+<script src="/javascripts/index.js"></script>
+<script src="/javascripts/unSureOrder.js"></script>
+</body>
+
+</html>

@@ -13,34 +13,64 @@
       <div class="h-r-left">
         校卖部
       </div>
+
+      <p class="search-box"><input class="search-input" type="search" placeholder="请输入关键字">
+        <span class="search-btn">搜 索</span></p>
+
       <div class="h-right">
-        <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+        <div id="person_info" class="clearfix">
+          <div class="avatar"></div>
+          <div class="personal-center">
+            <div class="center-nav">
+              <p class="h-r-userName">欢迎，<%= username%></p>
+              <p class="center-nav-list"><a href="/toCenter">个人中心</a></p>
+              <p class="center-nav-list"><a href="/getCart">我的购物车</a></p>
+              <p class="center-nav-list"><a href="/signIn">退出登录</a></p>
+            </div>
+          </div>
+        </div>
+        <!--<p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
         <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
           <input type="button" value="我的关注" class="h-r-input order-focus"/>
-        </p>
+        </p>-->
       </div>
     </div>
   </div>
-  <p class="lin"></p>
+  <div class="nav">
+    <div class="nav-inner">
+      <ul class="nav-inner-ul order-class-nav">
+        <li class="all-class">全部商品分类</li>
+        <li><a href="/index">首页</a></li>
+        <li><a href="/classSearch1">服装</a></li>
+        <li><a href="/classSearch0">图书</a></li>
+        <li><a href="/classSearch2">美食</a></li>
+        <li><a href="/classSearch3">生活学习</a></li>
+        <li><a href="/classSearch4">礼物饰品</a></li>
+        <li><a href="/classSearch5">运动娱乐</a></li>
+      </ul>
+    </div>
+  </div>
+  <!--<p class="lin"></p>-->
   <div class="content">
     <div class="content-part1">
       <div class="c-part1-inner">
         <div class="c-part1-left">
           <ul class="c-part1-list order-class-nav"  id="c-part1-list">
-            <li><a href="/classSearch0">图书</a></li>
-            <li><a href="/classSearch1">服装</a></li>
-            <li><a href="/classSearch2">美食</a></li>
-            <li><a href="/classSearch3">生活学习</a></li>
-            <li><a href="/classSearch4">礼物饰品</a></li>
-            <li><a href="/classSearch5">运动娱乐</a></li>
-            <li><a href="/classSearch6">其他</a></li>
+            <li><a href="/classSearch1">服装/女装/男装/鞋靴</a><span class="index-arrow"> > </span></li>
+            <li><a href="/classSearch0">图书/教材/文学名著/杂志快读</a><span class="index-arrow"> > </span></li>
+            <li><a href="/classSearch2">美食/周边/快餐/零食</a><span class="index-arrow"> > </span></li>
+            <li><a href="/classSearch3">生活学习</a><span class="index-arrow"> > </span></li>
+            <li><a href="/classSearch4">礼物饰品</a><span class="index-arrow"> > </span></li>
+            <li><a href="/classSearch5">运动娱乐</a><span class="index-arrow"> > </span></li>
+            <li><a href="/classSearch6">其他</a><span class="index-arrow"> > </span></li>
           </ul>
         </div>
 
-        <div class="c-part1-right recommend"></div>
+        <!--右侧随机推送-->
+        <!--<div class="c-part1-right recommend"></div>-->
 
         <div class="c-part1-main-index">
-          <div id="slider">
+          <!--<div id="slider">
             <ul class="list">
               <li class="current"><img src="/images/slider2.jpg"/></li>
               <li><img src="/images/slider2.jpg"/></li>
@@ -49,7 +79,87 @@
               <li><img src="/images/slider2.jpg"/></li>
             </ul>
 
-          </div>
+          </div>-->
+          <center>
+            <section id="rt-showcase-surround">
+              <div id="rt-showcase" class="slider-container rt-overlay-dark">
+                <div class="rt-container slider-container">
+                  <div class="rt-grid-12 rt-alpha rt-omega">
+
+                    <link rel="stylesheet" href="/stylesheets/css/style.css">
+                    <!--[if IE]><link rel="stylesheet" href="/stylesheets/css/ie.css"><![endif]-->
+                    <!--[if lte IE 9]><script type="text/javascript" src="/javascripts/ie.js"></script><![endif]-->
+
+                    <div class="csslider1 autoplay">
+                      <input name="cs_anchor1" autocomplete="off" id="cs_slide1_0" type="radio" class="cs_anchor slide" >
+                      <input name="cs_anchor1" autocomplete="off" id="cs_slide1_1" type="radio" class="cs_anchor slide" >
+                      <input name="cs_anchor1" autocomplete="off" id="cs_slide1_2" type="radio" class="cs_anchor slide" >
+                      <input name="cs_anchor1" autocomplete="off" id="cs_play1" type="radio" class="cs_anchor" checked>
+                      <input name="cs_anchor1" autocomplete="off" id="cs_pause1" type="radio" class="cs_anchor" >
+                      <ul>
+                        <div style="width: 100%;height: 100%; visibility: hidden; font-size: 0px; line-height: 0;">
+                          <img src="/images/index-banner.jpg" style="width: 100%;">
+                        </div>
+                        <li class="num0 img">
+                          <img src="/images/index-banner.jpg" alt="Clouds" title="Clouds" />
+                        </li>
+                        <li class="num1 img">
+                          <img src="/images/index-banner1.jpg" alt="Typewriter" title="Typewriter" />
+                        </li>
+                        <li class="num2 img">
+                          <img src="/images/index-banner3.jpg" alt="Bicycle" title="Bicycle" />
+                        </li>
+
+                      </ul>
+                      <!--<div class="cs_description">
+                        <label class="num0">
+                          <span class="cs_title"><span class="cs_wrapper">Clouds</span></span>
+
+                        </label>
+                        <label class="num1">
+                          <span class="cs_title"><span class="cs_wrapper">Typewriter</span></span>
+
+                        </label>
+                        <label class="num2">
+                          <span class="cs_title"><span class="cs_wrapper">Bicycle</span></span>
+
+                        </label>
+                      </div>-->
+
+                      <div class="cs_arrowprev">
+                        <label class="num0" for="cs_slide1_0"></label>
+                        <label class="num1" for="cs_slide1_1"></label>
+                        <label class="num2" for="cs_slide1_2"></label>
+                      </div>
+                      <div class="cs_arrownext">
+                        <label class="num0" for="cs_slide1_0"></label>
+                        <label class="num1" for="cs_slide1_1"></label>
+                        <label class="num2" for="cs_slide1_2"></label>
+                      </div>
+
+                      <div class="cs_bullets">
+                        <label class="num0" for="cs_slide1_0">
+                          <span class="cs_point"></span>
+                          <span class="cs_thumb"><img src="/images/index-banner.jpg" style="width: 50px;height: 50px;" /></span>
+                        </label>
+                        <label class="num1" for="cs_slide1_1">
+                          <span class="cs_point"></span>
+                          <span class="cs_thumb"><img src="/images/index-banner1.jpg" style="width: 50px;height: 50px;" /></span>
+                        </label>
+                        <label class="num2" for="cs_slide1_2">
+                          <span class="cs_point"></span>
+                          <span class="cs_thumb"><img src="/images/index-banner3.jpg" style="width: 50px;height: 50px;"/></span>
+                        </label>
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </section>        <!-- /slider -->
+          </center>
         </div>
       </div>
     </div>

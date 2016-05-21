@@ -8,23 +8,51 @@
     <link rel='stylesheet' href='/stylesheets/css/shopping.css' />
 </head>
 <body>
-<div class="index">
+<div class="index upload-order">
     <div class="head">
         <div class="head-inner">
             <div class="h-r-left">
                 校卖部
             </div>
+
+            <p class="search-box"><input class="search-input" type="search" placeholder="请输入关键字">
+                <span class="search-btn">搜 索</span></p>
+
             <div class="h-right">
-                <p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
-                <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
-                    <input type="button" value="我的关注" class="h-r-input order-focus"/>
-                </p>
+                <div id="person_info" class="clearfix">
+                    <div class="avatar"></div>
+                    <div class="personal-center">
+                        <div class="center-nav">
+                            <p class="h-r-userName">欢迎，<%= username%></p>
+                            <p class="center-nav-list"><a href="/toCenter">个人中心</a></p>
+                            <p class="center-nav-list"><a href="/getCart">我的购物车</a></p>
+                            <p class="center-nav-list"><a href="/signIn">退出登录</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!--<p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+        <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+          <input type="button" value="我的关注" class="h-r-input order-focus"/>
+        </p>-->
             </div>
         </div>
     </div>
-<p class="lin"></p>
+    <div class="nav">
+        <div class="nav-inner">
+            <ul class="nav-inner-ul order-class-nav" style="width: 1024px;">
+                <!--<li class="all-class">个人中心</li>-->
+                <li><a href="/index">首页</a></li>
+                <li><a href="/classSearch1">服装</a></li>
+                <li><a href="/classSearch0">图书</a></li>
+                <li><a href="/classSearch2">美食</a></li>
+                <li><a href="/classSearch3">生活学习</a></li>
+                <li><a href="/classSearch4">礼物饰品</a></li>
+                <li><a href="/classSearch5">运动娱乐</a></li>
+            </ul>
+        </div>
+    </div>
 <div class="content">
-    <div class="spC-right spC-r-correct">
+    <div class="spC-right">
         <p class="spC-title">我的购物车</p>
         <div class="spC-list">
             <div class="spC-list-th">
@@ -36,7 +64,8 @@
             </div>
             <ul class="spC-list-ul">
                 <% orders.forEach(function (order) { %>
-                <li><span class="goodsn"></span>
+
+                <li><span class="goodsId" style="display: none;"><%= order._id%></span>
                     <div class="spC-list-goods fl">
                         <input type="checkbox" class="spC-list-goodsCheckbox fl">
                         <a href=""><img src="/uploadData/<%= order.imagePath%>" class="spC-list-goodsImg fl"></a>
@@ -45,11 +74,11 @@
                         </div>
                     </div>
                     <div class="spC-list-price fl">
-                        <p class="spC-list-subtotal-p"><%= order.price%></p>
+                        <p class="spC-list-subtotal-p goods-price"><%= order.price%></p>
                     </div>
                     <div class="spC-list-number fl">
                         <div class="spC-number-box">
-                            <span class="spC-number-span cursor subtract">-</span><p class="spC-number-span spcNumber" style="width: 34px;"><%= order.num%></p><span class="spC-number-span cursor add">+</span>
+                            <span class="spC-number-span cursor subtract">-</span><input type="number" max="<%= order.num%>" min="1" class="spC-number-span spcNumber" style="width: 34px;" value="1"><span class="spC-number-span cursor add">+</span>
                         </div>
                     </div>
                     <div class="spC-list-subtotal fl">
@@ -71,7 +100,9 @@
         </div>
         <div class="spC-finally">
             <input type="checkbox" class="spC-finally-checkAll fl"><span class="fl" style="margin-top: 15px;">全选</span>
+<!--
             <span class="spC-finally-delete fl"><a href="#" id="deledgoods">删除选中商品</a></span>
+-->
             <div class="spC-finally-right fr">
                 <div class="spC-finally-right-sp1 fl">已选择
                     <span class="spC-finally-right-count"></span>
@@ -83,7 +114,7 @@
                             <strong><span class="PriceNum"></span></strong>
                         </span>
                 </div>
-                <a href="index.php?m=home&c=cart&a=pay"><div class="toPay fl cursor">去结算</div></a>
+                <div class="toPay fl cursor">下 单</div>
             </div>
         </div>
     </div>
@@ -92,6 +123,7 @@
 </div>
 
 <script src="/vendor/jquery.js"></script>
+<script src="/javascripts/index.js"></script>
 <script src="/javascripts/shopping.js"></script>
 </body>
 </html>

@@ -9,7 +9,19 @@ $(document).ready(function () {
     var focusList = '';
     orders.forEach(function (order) {
       if (order) {
-        focusList += "<tr><td class='order-id' style='display: none'>"+ order._id
+        if (order.num === 0) {
+          focusList += "<tr><td class='order-id' style='display: none'>"+ order._id
+          +"</td><td class='c-r-td-addLength'>"+ order.goodsName
+          +"</td><td>"+ order.num
+          +"</td><td>"+ order.price
+          +"</td><td>"+ order.username
+          +"</td><td>"+ order.tel
+          +"</td><td>"+ order.email
+          +"<td class='c-r-td-addLength'>" + order.date.split('T')[0]+"</td></td>"
+          +"<td class='edit' id='correct' style='color:#dd2727;'>售 罄</td><td class='edit delete'>取消关注</td></tr>"
+
+        } else {
+          focusList += "<tr><td class='order-id' style='display: none'>"+ order._id
           +"</td><td class='c-r-td-addLength'>"+ order.goodsName
           +"</td><td>"+ order.num
           +"</td><td>"+ order.price
@@ -18,9 +30,10 @@ $(document).ready(function () {
           +"</td><td>"+ order.email
           +"<td class='c-r-td-addLength'>" + order.date.split('T')[0]+"</td></td>"
           +"<td class='edit cart' id='correct'>加入购物车</td><td class='edit delete'>取消关注</td></tr>"
+
+        }
       } else {
         /*focusList += "<tr><td class='c-r-td-addLength'>商品已下架"
-          +"</td><td>－－"
           +"</td><td>－－"
           +"</td><td>－－"
           +"</td><td>－－"
@@ -50,10 +63,10 @@ $(document).ready(function () {
   $.ajax({
     url: '/getFocusList',
     type: 'get',
-    data: {data: data},
     dataType: 'json',
     timeout: 30000,
     success: function (res) {
+      /*data: {data: data},*/
       var orders = res.orderFocusArray;
 
       handleFocusList(orders);
@@ -91,7 +104,12 @@ $(document).ready(function () {
       data: {'orderId' : orderId},
       dataType: 'json',
       success: function (resMsg) {
-        var msg = resMsg;
+        if (resMsg) {
+          $('.focus-warning').html('已成功添加到购物车！');
+          setTimeout(function () {
+            $('.focus-warning').html('');
+          }, 3000)
+        }
       },
       error: function () {}
     });

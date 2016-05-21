@@ -38,17 +38,21 @@ $(document).ready(function () {
         searchStr = '<span>当前位置：</span>',
         orderClassCode = {},
         orderPosition,
+        olderPosition,
+        olderCode;
         codeIndex = 0;
 
     var codeId = window.location.pathname.split('h')[1];
     var setSearchStr = function (orderClass) {
         searchStr += '<span class="search-tips">'
-        + orderClass.name +'  ×<span style="display: none" class="tipsCode">'
+        + orderClass.name +'<span style="display: none" class="tipsCode">'
         + orderClass.value +'</span></span>';
 
-        $('.search-tip').html(searchStr);
+        $('.search-tip').html(searchStr + '<span class="reset">清除</span>');//×
     };
     var setTip = function (classes, code) {
+        olderPosition = classes;
+        olderCode = code;
         classes.forEach(function (orderClass) {
             if (orderClass.value === parseInt(code)) {
                 var tipsStr = '';
@@ -64,6 +68,17 @@ $(document).ready(function () {
             }
         });
     };
+    var wordLimit = function () {
+        var $describe = $("#orderClassList").find('.c-part2-detail-describe');
+        var maxWidth=50;
+        $describe.each(function () {
+            if($(this).html().length > maxWidth){
+                $(this).html($(this).html().substring(0, maxWidth));
+                $(this).html($(this).html()+'...');
+            }
+        });
+    };
+
     var getSearchRes = function ()  {
         /*var searchCodeId = {},
             orderCodeName = ['goodsCode', 'goodsChildCode', 'optionGardCode'];
@@ -84,8 +99,9 @@ $(document).ready(function () {
                     "</div><div class='c-part2-detail'> <p class='c-part2-detail-goodsName'>" + row.goodsName +
                     "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> </li>";
                 });
-
                 $('#orderClassList').html(list);
+                // wordLimit
+                wordLimit();
             },
             error: function () {}
         })
@@ -106,51 +122,87 @@ $(document).ready(function () {
 
         codeIndex += 1;
     };
+    var init = function () {
+        //orderClassCode.push(codeId);
+        updateCodeList(codeId);
 
-    //orderClassCode.push(codeId);
-    updateCodeList(codeId);
-    switch (codeId) {
-        case "0":
-            setTip(orderClasses, '0');
-            break;
-        case "1":
-            setTip(orderClasses, '1');
-            break;
-        case "2":
-            setTip(orderClasses, '2');
-            break;
-        case "3":
-            setTip(orderClasses, '3');
-            break;
-        case "4":
-            setTip(orderClasses, '4');
-            break;
-        case "5":
-            setTip(orderClasses, '5');
-            break;
-        case "6":
-            setTip(orderClasses, '6');
-            break;
-    }
+        // wordLimit
+        wordLimit();
 
-    $('.tips-box').on('click', '.tips', function () {
-        var goodsChildCode = $($(this).find('.tipsCode')[0]).html();
-        setTip(orderPosition.child, goodsChildCode);
-        //orderClassCode.push(goodsChildCode);
-        updateCodeList(goodsChildCode);
+        switch (codeId) {
+            case "0":
+                setTip(orderClasses, '0');
+                break;
+            case "1":
+                setTip(orderClasses, '1');
+                break;
+            case "2":
+                setTip(orderClasses, '2');
+                break;
+            case "3":
+                setTip(orderClasses, '3');
+                break;
+            case "4":
+                setTip(orderClasses, '4');
+                break;
+            case "5":
+                setTip(orderClasses, '5');
+                break;
+            case "6":
+                setTip(orderClasses, '6');
+                break;
+        }
 
-        getSearchRes();
-    });
+        $('.tips-box').on('click', '.tips', function () {
+            var goodsChildCode = $($(this).find('.tipsCode')[0]).html();
+            setTip(orderPosition.child, goodsChildCode);
+            //orderClassCode.push(goodsChildCode);
+            updateCodeList(goodsChildCode);
 
-    $('#orderClassList').on('click', 'li', function () {
-        var orderId = $(this).find('.orderId').html();
+            getSearchRes();
+        });
 
-        window.location.href = "/orderDetail" + orderId;
-    });
+        $('#orderClassList').on('click', 'li', function () {
+            var orderId = $(this).find('.orderId').html();
 
-    $('.search-tip').on('click', '.search-tips', function () {
-        codeIndex -= 1;
-        var goodsChildCode = $(this);
-        console.log(orderClassCode);
-    });
+            window.location.href = "/orderDetail" + orderId;
+        });
+
+        $('.search-tip').on('click', '.reset', function () {
+            //codeIndex -= 1;
+            var parentVal = parseInt($($('.search-tips')[0]).find('.tipsCode').html());
+            window.location.href = 'http://localhost:10011/classSearch' + parentVal;
+
+        });
+
+        $('.search-btn').on('click', function () {
+            var searchKeyWorld = $('.search-input').val();
+            if (searchKeyWorld !== '') {
+                $.ajax({
+                    url: '/searchKeyWorld',
+                    data: {searchData: searchKeyWorld},
+                    type: 'get',
+                    success: function (result) {
+                        if (result.data) {
+                            var list = '';
+                            result.data.forEach(function (row) {
+                                list += "<li><span class='orderId' style='display: none'>"+ row._id +"</span><img src='/uploadData/"+ row.imagePath +"' class='c-part2-new-ul-img'>" +
+                                "<div class='c-part2-new-ul-img-price fr'>￥" + row.price +
+                                "</div><div class='c-part2-detail'> <p class='c-part2-detail-goodsName'>" + row.goodsName +
+                                "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> </li>";
+                            });
+                            $('#orderClassList').html(list);
+                            // wordLimit
+                            wordLimit();
+                            $('.search-tip').html('');
+                            $('.tips-box').html('相关<span style="color:#ef735f">  '+ searchKeyWorld +'  </span>的搜索结果如下：');
+                        }
+                    },
+                    error: function () {}
+                });
+            }
+        });
+    };
+
+    init();
 });

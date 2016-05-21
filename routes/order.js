@@ -14,7 +14,7 @@ exports.signUp = function (req, res, next) {
             var user = req.body;
             db.signUp(user, function (errMsg) {
                 db.disconnect();
-                //res.send({errMsg : 'ok'});
+
                 if(errMsg){
                     res.send({errMsg:errMsg});
                 }else{
@@ -230,19 +230,18 @@ exports.orderCancelFocus = function (req, res, next) {
     })
   });
 };
-
+//req.query.data
 exports.getFocusList = function (req, res, next) {
   var d = domain.create();
-  d.on('err', function(err) {
-    next(err);
-  });
+    d.on('err', function (err) {
+        next(err);
+    });
 
   d.run(function () {
     db.connect(function () {
-      console.log(req.query.data);
-      db.getFocusList(req.query.data, function (orderFocusArray) {
-
+      db.getFocusList({username: req.session.username}, function (orderFocusArray) {
         db.disconnect();
+
         res.send({orderFocusArray: orderFocusArray});
       });
     });
@@ -326,7 +325,6 @@ exports.classSearch = function (req, res, next) {
             };
             db.classSearchDB(data, function (data) {
                 db.disconnect();
-                console.log(data);
                 res.render('orderClasses', {username: req.session.username, orders: data});
             })
         })
@@ -341,7 +339,7 @@ exports.searchClass = function (req, res, next) {
 
     d.run(function () {
         db.connect(function () {
-            console.log(req);
+            console.log(req.body);
             db.searchClassDB(req.body, function (data) {
                 db.disconnect();
                 res.send({searchOrder: data})
@@ -388,6 +386,7 @@ exports.updateOrder = function (req, res, next) {
         });
     })
 };
+
 exports.addCartOrder = function (req, res, next) {
     var d = domain.create();
     d.on('err', function (err) {
@@ -403,7 +402,6 @@ exports.addCartOrder = function (req, res, next) {
 
             db.addCartOrderDB(orderId, function (data) {
                 db.disconnect();
-                console.log(data);
                 if (data) {
                     res.send({errMsg: true, username: req.session.username});
                 } else {
@@ -425,8 +423,155 @@ exports.getCart = function (req, res, next) {
         db.connect(function () {
             db.getCartDB({username: req.session.username}, function (orderListArray) {
                 db.disconnect();
-                console.log(orderListArray);
                 res.render('cart', {orders: orderListArray, username: req.session.username});
+            });
+        })
+    });
+};
+
+exports.cartDelete = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            var data = {
+                username: req.session.username,
+                orderId: req.body.orderId
+            };
+            db.cartDeleteDB(data, function (data) {
+                db.disconnect();
+                res.send({resMsg: data});
+            });
+        })
+    });
+};
+
+exports.toPay = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            var data = {
+                username: req.session.username,
+                payOrder: eval('(' + req.body.orders + ')'),
+                totalMoney: req.body.totalMoney
+            };
+            db.toPayDB(data, function (data) {
+                db.disconnect();
+                console.log(data);
+                if (data.ok) {
+                    res.send({username: req.session.username, errMsg: true});
+                } else {
+                    res.send({username: req.session.username, errMsg: false});
+                }
+            });
+        })
+    });
+};
+
+exports.getPayOrder = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            db.getPayOrderDB({username: req.session.username}, function (data) {
+                db.disconnect();
+                res.send({username: req.session.username, payOrder: data.thisPayOrders, address: data.receiptAddress});
+            });
+        })
+    });
+};
+
+exports.getUnSureOrder = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            db.getUnSureOrderDB({username: req.session.username}, function (data) {
+                db.disconnect();
+                res.send({username: req.session.username, unSureOrder: data});
+            });
+        })
+    });
+};
+
+exports.searchKeyWorld = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            db.searchKeyWorldDB(req.query, function (data) {
+                db.disconnect();
+                res.send({data: data});
+            });
+        })
+    });
+};
+
+exports.setReceiptAddress = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            console.log(req);
+            var data = {
+                username: req.session.username,
+                address: {
+                    name: req.body.name,
+                    address : req.body.address,
+                    tel: req.body.phone
+                }
+            };
+            db.setReceiptAddressDB(data, function () {
+                db.disconnect();
+                res.send({username: req.session.username, address: data.address});
+            });
+        })
+    });
+};
+
+exports.toSureOrder = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            var data = {
+                receipt: eval('(' + req.body.receipt + ')'),
+                payWay: req.body.payWay,
+                payOrders: eval('(' + req.body.payOrders + ')'),
+            };
+            console.log(data);
+            db.toSureOrderDB({username: req.session.username, data: data}, function (data) {
+                db.disconnect();
+                res.send({username: req.session.username});
             });
         })
     });
