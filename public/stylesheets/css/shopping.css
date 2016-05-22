@@ -68,9 +68,10 @@ body,div,ul,li,h1,h2,h3,h4,h5,h6,a,p,img{margin:0;padding:0;text-decoration: non
     text-align: right;
 }
 .spC-list-goods{
-    width: 347px;
+    width: 304px;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 .spC-list-price{
     width: 100px;
@@ -81,8 +82,8 @@ body,div,ul,li,h1,h2,h3,h4,h5,h6,a,p,img{margin:0;padding:0;text-decoration: non
     margin-top: 10px;
 }
 .spC-list-goodsImg{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     position: relative;
     margin-top: 10px;
     margin-left: 10px;
@@ -132,6 +133,10 @@ body,div,ul,li,h1,h2,h3,h4,h5,h6,a,p,img{margin:0;padding:0;text-decoration: non
     margin-top: 50px;
     text-align: center;
     color:#545652;
+}
+.sureBtn:hover {
+    color: #dd2727;
+    cursor: pointer;
 }
 .spC-list-doMore{
     width: 150px;

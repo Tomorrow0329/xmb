@@ -19,6 +19,7 @@ var orderSchema = new Schema({
     date:Date,
     goodsName:String,
     num:Number,
+    outNum: Number,
     price:Number,
     tel:Number,
     email:String,
@@ -452,14 +453,21 @@ exports.toSureOrderDB = function (req, callback) {
                         Orders.find({_id: order.goodsId}, function (err, res) {
                             if (err) throw err;
                             else {
-                                var num = res[0].num;
+                                var num = res[0].num, outNum = 0;
                                 num = num - parseInt(order.selectNum);
                                 if (num < 0) {
                                     num = 0;
                                 }
-                                console.log(num);
+                                console.log('outNum:'+res[0].outNum);
+                                if (res[0].outNum) {
+                                    outNum = res[0].outNum;
+                                    outNum += parseInt(order.selectNum);
+                                } else {
+                                    outNum = parseInt(order.selectNum);
+                                }
+                                console.log(outNum);
 
-                                Orders.update({_id: order.goodsId}, {$set: {num: num}}, function (err, res) {
+                                Orders.update({_id: order.goodsId}, {$set: {num: num, outNum: outNum}}, function (err, res) {
                                     if (err) throw err;
                                     else {
                                         code += 1;
@@ -546,6 +554,59 @@ exports.setOrderCommentDB = function (req, callback) {
                 }
             });
 
+        }
+    });
+};
+
+exports.removeSureOrderDB = function (req, callback) {
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            var newPayOrders = [], code = 0;
+            res[0].payOrders.forEach(function (order) {
+                if (order.goodsId === req.goodsId) {
+                    code += 1;
+                } else {
+                    newPayOrders.push(order);
+                    code += 1;
+                }
+
+                if (code === parseInt(res[0].payOrders.length)) {
+                    Users.update({username: req.username}, {$set: {payOrders: newPayOrders}}, function (err, res) {
+                        if (err) throw err;
+                        else {
+                            callback(res);
+                        }
+                    });
+                }
+            });
+        }
+    });
+};
+
+exports.toSurePayOrderDB = function (req, callback) {
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            var newPayOrders = [], code = 0, thisPayOrder;
+            res[0].payOrders.forEach(function (order) {
+                if (order.goodsId === req.goodsId) {
+                    code += 1;
+                    thisPayOrder = order;
+                } else {
+                    newPayOrders.push(order);
+                    code += 1;
+                }
+
+                if (code === parseInt(res[0].payOrders.length)) {
+                    Users.update({username: req.username}, {$set: {payOrders: newPayOrders, thisPayOrders: thisPayOrder}}, function (err, res) {
+                        if (err) throw err;
+                        else {
+                            callback(res);
+                        }
+                    });
+                }
+            });
         }
     });
 };

@@ -623,3 +623,35 @@ exports.setOrderComment = function (req,res, next) {
         })
     });
 };
+
+exports.removeSureOrder = function (req, res, next) {
+    var d = domain.create();
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            db.removeSureOrderDB({username: req.session.username, goodsId: req.query.goodsId}, function (data) {
+                db.disconnect();
+                res.send({username: req.session.username, errMsg: data});
+            });
+        })
+    });
+};
+
+exports.toSurePayOrder = function (req, res, next) {
+    var d = domain.create();
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            db.toSurePayOrderDB({username: req.session.username, goodsId: req.query.goodsId}, function (data) {
+                db.disconnect();
+                res.send({username: req.session.username, errMsg: data});
+            });
+        })
+    });
+};

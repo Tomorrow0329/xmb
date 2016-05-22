@@ -60,6 +60,8 @@ app.post('/setReceiptAddress', orders.setReceiptAddress);
 app.post('/toSureOrder', orders.toSureOrder);
 app.get('/getMyOrders', orders.getMyOrders);
 app.get('/setOrderComment', orders.setOrderComment);
+app.get('/removeSureOrder', orders.removeSureOrder);
+app.get('/toSurePayOrder', orders.toSurePayOrder);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
