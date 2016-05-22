@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>我的订单</title>
+    <link rel='stylesheet' href='/stylesheets/css/main.css' />
+    <link rel='stylesheet' href='/stylesheets/css/shopping.css' />
+</head>
+<body>
+<div class="index upload-order">
+    <div class="head">
+        <div class="head-inner">
+            <div class="h-r-left">
+                校卖部
+            </div>
+
+            <p class="search-box"><input class="search-input" type="search" placeholder="请输入关键字">
+                <span class="search-btn">搜 索</span></p>
+
+            <div class="h-right">
+                <div id="person_info" class="clearfix">
+                    <div class="avatar"></div>
+                    <div class="personal-center">
+                        <div class="center-nav">
+                            <p class="h-r-userName">欢迎，<%= username%></p>
+                            <p class="center-nav-list"><a href="/toCenter">个人中心</a></p>
+                            <p class="center-nav-list"><a href="/getCart">我的购物车</a></p>
+                            <p class="center-nav-list"><a href="/signIn">退出登录</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!--<p id="personName" class="h-r-userName"><%= username%></p><a class="exit fr" href="/signIn">退出登录</a>
+        <p><a href="/uploadOrder" class="h-r-input">发布商品</a>
+          <input type="button" value="我的关注" class="h-r-input order-focus"/>
+        </p>-->
+            </div>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="nav-inner">
+            <ul class="nav-inner-ul order-class-nav">
+                <li class="all-class">个人中心</li>
+                <li><a href="/index">首页</a></li>
+                <li><a href="/classSearch1">服装</a></li>
+                <li><a href="/classSearch0">图书</a></li>
+                <li><a href="/classSearch2">美食</a></li>
+                <li><a href="/classSearch3">生活学习</a></li>
+                <li><a href="/classSearch4">礼物饰品</a></li>
+                <li><a href="/classSearch5">运动娱乐</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-part1">
+            <div class="c-left">
+                <ul class="c-l-ul">
+                    <li><a href="/toCenter">账户详情</a></li>
+                    <li><a href="#" class="order-focus">我的关注</a></li>
+                    <li><a href="/myOrders" class="order-focus">我的订单</a></li>
+                    <li><a href="/getCart">我的购物车</a></li>
+                    <li><a href="/uploadOrder">发布商品</a></li>
+                    <li><a href="/orderOnline">在线商品</a></li>
+                    <li><a href="/orderOnline">已拍出商品</a></li>
+                </ul>
+            </div>
+            <div class="c-right">
+                <!--<h1 class="c-r-h1">在线商品信息表</h1>-->
+                <!--<h1 class="c-r-h1">我的订单</h1>
+                <table id="c-r-tb" class="my-order-table">
+                    <thead>
+                    <tr class="c-r-table">
+                        <th class="c-r-td-addLength">商品</th>
+                        <th>名称</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>总价</th>
+                        <th>付款方式</th>
+                        <th>收货信息</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="my-order-tr">
+                        <td>
+                            <img class="order-img" src="/images/cloth1.jpg">
+                        </td>
+                        <td><p class="order-name">日系衬衫</p></td>
+                        <td>99</td>
+                        <td>1</td>
+                        <td rowspan="4">99元</td>
+                        <td rowspan="4">支付宝</td>
+                        <td rowspan="4">石家庄学院</td>
+                    </tr>
+                    <tr class="my-order-tr">
+                        <td>
+                            <img class="order-img" src="/images/cloth1.jpg">
+                        </td>
+                        <td><p class="order-name">日系衬衫</p></td>
+                        <td>99</td>
+                        <td>1</td>
+                    </tr>
+                    <tr class="my-order-tr">
+                        <td>
+                            <img class="order-img" src="/images/cloth1.jpg">
+                        </td>
+                        <td><p class="order-name">日系衬衫</p></td>
+                        <td>99</td>
+                        <td>1</td>
+                    </tr>
+                    <tr class="my-order-tr">
+                        <td>
+                            <img class="order-img" src="/images/cloth1.jpg">
+                        </td>
+                        <td><p class="order-name">日系衬衫</p></td>
+                        <td>99</td>
+                        <td>1</td>
+                    </tr>
+
+                    </tbody>
+                </table>-->
+
+                <p class="focus-warning"></p>
+            </div>
+            </div>
+        </div>
+
+    <div class="layer-box">
+        <div class="layer">
+            <span class="layer-close fr"></span>
+            <div class="user-inner fontSize12 " style="margin-top: 15px;">
+                <p style="height: 20px;line-height: 20px;text-indent: 4px">请在文本框内输入评论内容：</p>
+                <div class="layer-order" style="display: none;"></div>
+                <textarea class="cmt-write"></textarea>
+                <input type="button" value="评 论" class="cmt-btn" id="cmt-btn" required="required">
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="/vendor/jquery.js"></script>
+    <script src="/javascripts/index.js"></script>
+    <script src="/javascripts/orderOfMe.js"></script>
+</body>
+</html>

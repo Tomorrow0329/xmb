@@ -565,8 +565,9 @@ exports.toSureOrder = function (req, res, next) {
         db.connect(function () {
             var data = {
                 receipt: eval('(' + req.body.receipt + ')'),
+                totalMoney: req.body.totalMoney,
                 payWay: req.body.payWay,
-                payOrders: eval('(' + req.body.payOrders + ')'),
+                payOrders: eval('(' + req.body.payOrders + ')')
             };
             console.log(data);
             db.toSureOrderDB({username: req.session.username, data: data}, function (data) {
@@ -575,4 +576,27 @@ exports.toSureOrder = function (req, res, next) {
             });
         })
     });
+};
+
+exports.getMyOrders = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            db.getMyOrdersDB({username: req.session.username}, function (data) {
+                db.disconnect();
+
+                if (data === 0) {
+                    res.send({username: req.session.username, rows: []});
+                } else {
+                    res.send({username: req.session.username, rows: data});
+                }
+            });
+        })
+    });
+
 };

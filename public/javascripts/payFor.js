@@ -183,11 +183,13 @@ $(document).ready(function(){
 
         var payWay = $('.chooseWay').html();
 
-        if (payOrders && receiptName && receiptAddress && receiptTel && payWay ) {
+        var totalMoney = $('.PriceNum').html();
+
+        if (payOrders && receiptName && receiptAddress && receiptTel && payWay && totalMoney) {
             $.ajax({
                 url: '/toSureOrder',
                 type: 'post',
-                data: {receipt: JSON.stringify(receipt), payWay: payWay, payOrders: JSON.stringify(payOrders)},
+                data: {receipt: JSON.stringify(receipt), totalMoney: totalMoney, payWay: payWay, payOrders: JSON.stringify(payOrders)},
                 dataType: 'json',
                 success: function (res) {
                     var data = res;

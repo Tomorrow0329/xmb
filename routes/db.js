@@ -506,3 +506,17 @@ exports.toSureOrderDB = function (req, callback) {
         }
     })
 };
+
+exports.getMyOrdersDB = function (req, callback) {
+  Users.find({username: req.username}, function (err, res) {
+      if (err) throw err;
+      else {
+          console.log(res[0].myOrders.length);
+          if (res[0].myOrders.length > 0) {
+              callback(res[0].myOrders);
+          }else {
+              callback(0);
+          }
+      }
+  });
+};

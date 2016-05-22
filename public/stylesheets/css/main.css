@@ -247,6 +247,42 @@ td {
   color: white;
   height: 30px;
   width: 80px; }
+.my-order-table .my-order-thead .my-order-thead-th{
+  background-color: #f8f8f8;color: rgba(0,0,0,0.8);margin-bottom: 45px;
+}
+
+.my-order-table .toComment:hover {
+  color: #dd2727;
+}
+.my-order-table {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.my-order-tr {
+  border-bottom: 1px solid lightgray;
+}
+
+.my-order-tr .order-detail {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  position: relative;
+}
+
+.my-order-tr .order-img {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.my-order-tr .order-name {
+  width: 100%;
+  font-size: 14px;
+  overflow: hidden;
+}
 
 .c-r-td-addLength {
   width: 150px; }

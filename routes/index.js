@@ -29,4 +29,8 @@ router.get('/toCenter', function (req, res, next) {
 router.get('/unSureOrder', function (req, res, next) {
   res.render('unSureOrder', {username: req.session});
 });
+
+router.get('/myOrders', function (req, res, next) {
+  res.render('orderOfMe', {username: req.session.username});
+});
 module.exports = router;
