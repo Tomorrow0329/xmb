@@ -747,7 +747,9 @@ body, html {
     height: auto;
     position: relative;
     top: 60px;
-    background: white; }
+    background: white;
+    margin-bottom: 50px;
+  }
   .index .comment-inner {
     width: 1024px;
     height: auto;

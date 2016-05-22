@@ -600,3 +600,26 @@ exports.getMyOrders = function (req, res, next) {
     });
 
 };
+
+exports.setOrderComment = function (req,res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            var data = {
+                name: req.session.username,
+                comment: req.query.commentTxt,
+                time: new Date().getTime()
+            };
+            db.setOrderCommentDB({id: req.query.goodsId, data: data}, function (data) {
+                db.disconnect();
+
+                res.send({username: req.session.username, errMsg: data});
+            });
+        })
+    });
+};

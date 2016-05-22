@@ -108,6 +108,7 @@ $(document).ready(function () {
         }
       },'json');
     });
+
   };
 
   init();

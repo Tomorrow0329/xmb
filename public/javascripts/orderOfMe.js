@@ -41,7 +41,8 @@ $(document).ready(function () {
                     '<td> <img class="order-img" src="'+payOrder[i].goodsImg+'"> </td> ' +
                     '<td><p class="order-name">'+payOrder[i].goodsName+'</p></td> ' +
                     '<td>'+payOrder[i].goodsPrice+'</td> <td>'+payOrder[i].selectNum+'</td>' +
-                    '<td><a href="#">去评价</a></td></tr> ';
+                    '<td class="toComment">去评价<span class="goodsId" style="display:none;">'+
+                    payOrder[i].goodsId+'</span></td> ';
                     /*'<tr class="my-order-tr"> ' +
                      '<td> <img class="order-img" src="/images/cloth1.jpg"> </td> <td><p class="order-name">日系衬衫</p></td> ' +
                      '<td>99</td> <td>1</td> </tr> <tr class="my-order-tr"> <td> <img class="order-img" src="/images/cloth1.jpg"> ' +
@@ -70,7 +71,9 @@ $(document).ready(function () {
     $('.layer-close').click(function(){
         $('.layer-box').fadeOut(200);
     });
+    var toCommentObj;
     $('.c-right').on('click', '.toComment', function () {
+        toCommentObj = $(this);
         var goodsId = $(this).find('.goodsId').html();
         $('.layer-order').html(goodsId);
         $('.layer-box').fadeIn(200);
@@ -85,13 +88,17 @@ $(document).ready(function () {
 
         $.ajax({
             url: '/setOrderComment',
-            data: {goodsId: goodsId, comment: comment},
+            data: {goodsId: goodsId, commentTxt: comment},
             dataType: 'json',
             type: 'get',
             success: function (res) {
                 var data = res;
+                toCommentObj.find('.goodsId').html('已评价');
+                $('.cmt-write').val('');
+                $('.layer-box').fadeOut(200);
+
             },
-            erroe: function () {}
+            error: function () {}
         });
     });
 });

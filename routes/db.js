@@ -29,7 +29,8 @@ var orderSchema = new Schema({
     describe:String,
     file:String,
     imagePath:String,
-    nowName:String
+    nowName:String,
+    comments: Array
 });
 var errMsg = '';
 
@@ -519,4 +520,32 @@ exports.getMyOrdersDB = function (req, callback) {
           }
       }
   });
+};
+
+exports.setOrderCommentDB = function (req, callback) {
+    Orders.find({_id: req.id}, function (err, res) {
+        if (err) throw err;
+        else {
+            var newComments = [];
+
+            if (res[0].comments) {
+                newComments = res[0].comments;
+                newComments.push(req.data);
+            } else {
+                newComments.push(req.data);
+            }
+
+            Orders.update({_id: req.id}, {$set: {comments: newComments}}, function (err, res) {
+                if (err) throw err;
+                else {
+                    if (res.ok) {
+                        callback(true);
+                    } else {
+                        callback(false);
+                    }
+                }
+            });
+
+        }
+    });
 };
