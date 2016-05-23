@@ -55,41 +55,6 @@ function edit_info(){
             display: "inline"
         })
     });
-    /*$("#save_info").bind('click',function(){
-        var nickname = $("#nickname").val(),
-            phone = $("#phone").val(),
-            mail = $("#mail").val();
-        $.post(
-            '/user/modify',
-            {
-                user_mail : mail,
-                user_phone_number : phone,
-                user_nickname : nickname
-            },
-            function(res) {
-                res = $.parseJSON(res);
-                if (res.code != 0) {
-                    alert(res.msg);
-                    return;
-                }
-                $("#qq_span").text(qq);
-                $("#phone_span").text(phone);
-                $("#nickname_span").text(nickname);
-                $("#save_info").css({
-                    display: "none"
-                });
-                $("#edit_info").css({
-                    display: "block"
-                });
-                $(".right_info input").css({
-                    display: "none"
-                });
-                $(".right_info span").css({
-                    display: "inline"
-                });
-            }
-        );
-    });*/
 }
 function change_photo(){
     $("#user_photo").bind('mouseenter',function(){
