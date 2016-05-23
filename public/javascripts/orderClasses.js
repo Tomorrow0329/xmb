@@ -43,6 +43,7 @@ $(document).ready(function () {
         codeIndex = 0;
 
     var codeId = window.location.pathname.split('h')[1];
+    var orderList = [], sortNewList = [];
     var setSearchStr = function (orderClass) {
         searchStr += '<span class="search-tips">'
         + orderClass.name +'<span style="display: none" class="tipsCode">'
@@ -78,6 +79,33 @@ $(document).ready(function () {
             }
         });
     };
+    var initSortBox = function () {
+        $('.sort-box').children('.sort-tip').removeClass('active');
+        $('.sort-box').children('.sort-tip:first').addClass('active');
+    };
+
+    var setOrderClassList = function (orders) {
+        var list = '';
+        orders.forEach(function (row) {
+            var focusStr = '', outNumStr = '';
+            if (row.focus) {
+                focusStr += '<p class="focus-box"> <img src="/images/icon-focus.jpg" class="icon-focus"> ' +
+                '<span>'+row.focus+'</span> </p>'
+            }
+
+            if (row.outNum) {
+                outNumStr += '<p class="outNum-box">已售出：<span class="out-num">'+
+                row.outNum+'</span> </p>'
+            }
+            list += "<li><span class='orderId' style='display: none'>"+ row._id +"</span><img src='/uploadData/"+ row.imagePath +"' class='c-part2-new-ul-img'>" +
+            "<div class='c-part2-new-ul-img-price fr'>￥" + row.price +
+            "</div><div class='c-part2-detail'> <p class='c-part2-detail-goodsName'>" + row.goodsName +
+            "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> "+
+            focusStr + outNumStr +"</li>";
+        });
+        $('#orderClassList').html(list);
+        wordLimit();
+    };
 
     var getSearchRes = function ()  {
         /*var searchCodeId = {},
@@ -91,15 +119,19 @@ $(document).ready(function () {
             type: 'post',
             data: orderClassCode,
             success: function (data) {
-                var orders = data.searchOrder, list = '';
+                var orders = data.searchOrder;
 
-                orders.forEach(function (row) {
+                orderList = orders;
+                setOrderClassList(orders);
+
+                initSortBox();
+                /*orders.forEach(function (row) {
                     list += "<li><span class='orderId' style='display: none'>"+ row._id +"</span><img src='/uploadData/"+ row.imagePath +"' class='c-part2-new-ul-img'>" +
                     "<div class='c-part2-new-ul-img-price fr'>￥" + row.price +
                     "</div><div class='c-part2-detail'> <p class='c-part2-detail-goodsName'>" + row.goodsName +
                     "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> </li>";
                 });
-                $('#orderClassList').html(list);
+                $('#orderClassList').html(list);*/
                 // wordLimit
                 wordLimit();
             },
@@ -122,6 +154,20 @@ $(document).ready(function () {
 
         codeIndex += 1;
     };
+
+    //冒泡排序（从大到小）
+    var sort = function(elements){
+        for(var i = 0; i < elements.length-1; i++){
+            for(var j = 0; j < elements.length-i-1; j++){
+                if(elements[j] > elements[j+1]){
+                    var swap=elements[j];
+                    elements[j]=elements[j+1];
+                    elements[j+1]=swap;
+                }
+            }
+        }
+    };
+
     var init = function () {
         //orderClassCode.push(codeId);
         updateCodeList(codeId);
@@ -152,6 +198,123 @@ $(document).ready(function () {
                 setTip(orderClasses, '6');
                 break;
         }
+
+        var parentVal = parseInt($($('.search-tips')[0]).find('.tipsCode').html());
+        /*window.location.href = 'http://localhost:10011/classSearch' + parentVal;*/
+        $.ajax({
+            async: false,
+            url: '/classSearch' +parentVal,
+            type: 'post',
+            success: function (res) {
+                orderList = res.orders;
+                sortNewList = res.orders;
+            },
+            error: function () {}
+        });
+
+        $('.sort-new').on('click', function () {
+            $(this).parents('.sort-box').children('.sort-tip').removeClass('active');
+            $(this).addClass('active');
+
+            setOrderClassList(sortNewList);
+        });
+
+        $('.sort-focusLevel').on('click', function () {
+
+                $(this).parents('.sort-box').children('.sort-tip').removeClass('active');
+                $(this).addClass('active');
+
+                var sortFocusList = orderList;
+                for(var i = 0; i < sortFocusList.length-1; i++){
+                    for(var j = 0; j < sortFocusList.length-i-1; j++){
+                        if (!sortFocusList[j].focus) {
+                            sortFocusList[j].focus = 0;
+                        }
+                        if (!sortFocusList[j+1].focus) {
+                            sortFocusList[j+1].focus = 0;
+                        }
+                        if(sortFocusList[j].focus < sortFocusList[j+1].focus){
+                            var swap = sortFocusList[j];
+                            sortFocusList[j] = sortFocusList[j+1];
+                            sortFocusList[j+1] = swap;
+                        }
+                    }
+                }
+
+            setOrderClassList(sortFocusList);
+        });
+
+        $('.sort-priceUp').on('click', function () {
+            $(this).parents('.sort-box').children('.sort-tip').removeClass('active');
+            $(this).addClass('active');
+
+            var sortPriceUpList = orderList;
+            for(var i = 0; i < sortPriceUpList.length-1; i++){
+                for(var j = 0; j < sortPriceUpList.length-i-1; j++){
+                    if (!sortPriceUpList[j].price) {
+                        sortPriceUpList[j].price = 0;
+                    }
+                    if (!sortPriceUpList[j+1].price) {
+                        sortPriceUpList[j+1].price = 0;
+                    }
+                    if(sortPriceUpList[j].price > sortPriceUpList[j+1].price){
+                        var swap = sortPriceUpList[j];
+                        sortPriceUpList[j] = sortPriceUpList[j+1];
+                        sortPriceUpList[j+1] = swap;
+                    }
+                }
+            }
+
+            setOrderClassList(sortPriceUpList);
+        });
+
+        $('.sort-priceDown').on('click', function () {
+            $(this).parents('.sort-box').children('.sort-tip').removeClass('active');
+            $(this).addClass('active');
+
+            var sortPriceDownList = orderList;
+            for(var i = 0; i < sortPriceDownList.length-1; i++){
+                for(var j = 0; j < sortPriceDownList.length-i-1; j++){
+                    if (!sortPriceDownList[j].price) {
+                        sortPriceDownList[j].price = 0;
+                    }
+                    if (!sortPriceDownList[j+1].price) {
+                        sortPriceDownList[j+1].price = 0;
+                    }
+                    if(sortPriceDownList[j].price < sortPriceDownList[j+1].price){
+                        var swap = sortPriceDownList[j];
+                        sortPriceDownList[j] = sortPriceDownList[j+1];
+                        sortPriceDownList[j+1] = swap;
+                    }
+                }
+            }
+
+            setOrderClassList(sortPriceDownList);
+        });
+
+        $('.sort-outNum').on('click', function () {
+            $(this).parents('.sort-box').children('.sort-tip').removeClass('active');
+            $(this).addClass('active');
+
+            var sortOutNumList = orderList;
+            for(var i = 0; i < sortOutNumList.length-1; i++){
+                for(var j = 0; j < sortOutNumList.length-i-1; j++){
+                    if (!sortOutNumList[j].outNum) {
+                        sortOutNumList[j].outNum = 0;
+                    }
+                    if (!sortOutNumList[j+1].outNum) {
+                        sortOutNumList[j+1].outNum = 0;
+                    }
+                    if(sortOutNumList[j].outNum < sortOutNumList[j+1].outNum){
+                        var swap = sortOutNumList[j];
+                        sortOutNumList[j] = sortOutNumList[j+1];
+                        sortOutNumList[j+1] = swap;
+                    }
+                }
+            }
+
+            setOrderClassList(sortOutNumList);
+        });
 
         $('.tips-box').on('click', '.tips', function () {
             var goodsChildCode = $($(this).find('.tipsCode')[0]).html();

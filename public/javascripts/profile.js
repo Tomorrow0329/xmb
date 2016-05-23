@@ -55,7 +55,7 @@ function edit_info(){
             display: "inline"
         })
     });
-    $("#save_info").bind('click',function(){
+    /*$("#save_info").bind('click',function(){
         var nickname = $("#nickname").val(),
             phone = $("#phone").val(),
             mail = $("#mail").val();
@@ -89,7 +89,7 @@ function edit_info(){
                 });
             }
         );
-    });
+    });*/
 }
 function change_photo(){
     $("#user_photo").bind('mouseenter',function(){
@@ -209,7 +209,7 @@ function wave_move(){
         });
     }
 }
-/**************** »Øµ½¶¥²¿ *********************/
+/**************** ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ *********************/
 function returnToTop(){
     $(window).scroll(function() {
         if ($(this).scrollTop() > 500) {
@@ -334,7 +334,7 @@ function scoreRotate() {
     }
 }
 
-/************ Ñ§ºÅÈÏÖ¤  *********************/
+/************ Ñ§ï¿½ï¿½ï¿½ï¿½Ö¤  *********************/
 function uploading(){
     $('.uploading').removeClass("hidden");
 }
@@ -349,7 +349,7 @@ function idtfSucceed(){
     },2500);
 }
 
-/***************** Ñ¡ÔñÑ§Ð£  ***************/
+/***************** Ñ¡ï¿½ï¿½Ñ§Ð£  ***************/
 function searchSchool(keyword)
 {
     $.post('/school/search', {keyword:keyword}, function(res){
@@ -364,8 +364,8 @@ function searchSchool(keyword)
     });
 }
 
-/*Ñ¡ÔñÑ§Ð£ÐÅÏ¢*/
-//Ñ¡ÔñÑ§Ð£
+/*Ñ¡ï¿½ï¿½Ñ§Ð£ï¿½ï¿½Ï¢*/
+//Ñ¡ï¿½ï¿½Ñ§Ð£
 $(document).ready(function(){
 
 }).on("click",".sel-content a",function(){
@@ -404,10 +404,10 @@ $(document).ready(function(){
     }
 }).on("click","#fd_footer",function(){
     if($("body").children(".fade_back").size()==0){
-        var feed_back = '<div class="fade_back"><h1><span class="fd_close">¹Ø±Õ</span>·´À¡¸ø¶þÊÖ½Ö</h1><div class="fade_area">'+
-            '<div class="not_good"><h2>¹ä½ÖÊ±ÓÐÊ²Ã´²»Ë¬µÄ£¬Çë¸æËßÎÒÃÇ</h2><textarea id="feedback" placeholder="ÎÒ¸øÄãÃÇ½²Å¶..."></textarea></div>'+
-            '<div class="leave_name"><h2>Ó¢ÐÛÁô¸öÁªÏµ·½Ê½°É</h2><textarea id="contact" placeholder="ÓÊÏä¡¢QQ¡¢ÊÖ»ú¶¼¿ÉÒÔ..."></textarea></div>' +
-            '<a class="fd_btn" id="commit_fd" href="javascript:void(0);"></a></div></div><div class="thanks_fd">¸ÐÐ»·´À¡£¬¶þÊÖ½ÖÍÅ¶ÓÒÑ¾­ÊÕµ½£¬ÏàÐÅÎÒÃÇ¿ÉÒÔ×öµÄ¸üºÃ¡£</div>';
+        var feed_back = '<div class="fade_back"><h1><span class="fd_close">ï¿½Ø±ï¿½</span>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½</h1><div class="fade_area">'+
+            '<div class="not_good"><h2>ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ê²Ã´ï¿½ï¿½Ë¬ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</h2><textarea id="feedback" placeholder="ï¿½Ò¸ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Å¶..."></textarea></div>'+
+            '<div class="leave_name"><h2>Ó¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ê½ï¿½ï¿½</h2><textarea id="contact" placeholder="ï¿½ï¿½ï¿½ä¡¢QQï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..."></textarea></div>' +
+            '<a class="fd_btn" id="commit_fd" href="javascript:void(0);"></a></div></div><div class="thanks_fd">ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½Å¶ï¿½ï¿½Ñ¾ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Ã¡ï¿½</div>';
         $("body").append($(feed_back));
     }
     $(".fade_back").fadeIn();
@@ -437,7 +437,7 @@ $(document).ready(function(){
             window.sidebar.addPanel(sTitle, sURL, "");
         }
         catch (e){
-            alert("¸Ãä¯ÀÀ²»Ö§³Ö×Ô¶¯Ìí¼Ó£¬ÇëÊ¹ÓÃCtrl+D½øÐÐÌí¼Ó");
+            alert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ctrl+Dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         }
     }
 }).on("click","#submit-link",function(){
@@ -466,7 +466,7 @@ function feedback()
     var contact  = $("#contact").val(),
         feedback = $("#feedback").val();
     if ($.trim(feedback).length == 0) {
-        alert('·´À¡²»ÄÜÎª¿ÕÅ¶£¬Ç×');
+        alert('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Å¶ï¿½ï¿½ï¿½ï¿½');
         return;
     }
     $.post('/feedback', {contact:contact,feedback:feedback}, function(res){
@@ -510,7 +510,7 @@ function selSchool(){
                 _slideDown($(this));
             }
         });
-        $(".optpk-btn a").bind("click",function(){  //±£´æ
+        $(".optpk-btn a").bind("click",function(){  //ï¿½ï¿½ï¿½ï¿½
             var school_id=$(".sel-d2 .sel-school").attr("pk");
             var department_id=$(".sel-d2 .sel-academy").attr("pk");
             var user_grade=$(".sel-d2 .sel-adyear").attr("pk");
@@ -583,7 +583,7 @@ function _aniDots(){
     }
 }
 
-/********** ¹Ø±Õµ¯´°  ************/
+/********** ï¿½Ø±Õµï¿½ï¿½ï¿½  ************/
 function closeContainer(){
     var closes = $(".close-ico");
     if(closes.length>0){
@@ -613,7 +613,7 @@ function detectFlash(tips){
 }
 
 if($(".upload-area").length){
-    detectFlash("Îª²»Ó°ÏìÍ¼Æ¬ÉÏ´«¹¦ÄÜ£¬ÇëÈ¡Ïûä¯ÀÀÆ÷¶ÔFlashµÄ½ûÓÃ~ ÀýÈçIEÏÂ£ºÉèÖÃ->°²È«->ActiveX");
+    detectFlash("Îªï¿½ï¿½Ó°ï¿½ï¿½Í¼Æ¬ï¿½Ï´ï¿½ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Flashï¿½Ä½ï¿½ï¿½ï¿½~ ï¿½ï¿½ï¿½ï¿½IEï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½È«->ActiveX");
 }
 
 /********* IE compatibility **********/
@@ -675,7 +675,7 @@ function getAcademy(id,fn){
         type:"get",
         success:function(data){
             var data = $.parseJSON(data);
-            if(data.code==0){  //Êý¾Ý·µ»Ø³É¹¦
+            if(data.code==0){  //ï¿½ï¿½ï¿½Ý·ï¿½ï¿½Ø³É¹ï¿½
                 adacadeFlag = false;
                 $(".sel-academy .sel-items").empty();
                 var arrs = data.data.department_list;

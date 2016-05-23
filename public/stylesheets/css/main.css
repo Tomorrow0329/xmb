@@ -551,7 +551,7 @@ body, html {
     cursor: pointer; }
   .index .c-part2-detail {
     width: 100%;
-    height: 110px;
+    height: 97px;
     position: relative;
     margin-top: 10px; }
   .index .c-part2-detail:hover {
@@ -578,6 +578,28 @@ body, html {
     text-indent: 2em; }
   .index .c-part2-detail-describe:hover {
     color: #ef735f; }
+
+  .index .focus-box {
+    width: auto;
+    padding-left: 5px;
+    display: inline-block;
+  }
+
+  .index .icon-focus {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    padding-right: 5px;
+  }
+  .index .outNum-box {
+    display: inline-block;
+    width: auto;
+    float: right;
+    margin-right: 10px;
+  }
+  .index .out-num {
+
+  }
   .index .c-addMore {
     width: 400px;
     height: 35px;
@@ -941,6 +963,12 @@ body, html {
   padding-top: 10px;
 }
 
+.index .sort-box .active {
+  cursor: pointer;
+  color: #dd2727;
+  border:1px solid #dd2727;
+}
+
 .index .sort-tip{
   display: inline-block;
   min-width: 50px;
@@ -955,7 +983,8 @@ body, html {
 
 .index .sort-tip:hover {
   cursor: pointer;
-  background-color: lightgrey;
+  background-color: rgba(0,0,0,0.1);
+  color: #dd2727;
 }
 
 .sign {

@@ -331,6 +331,24 @@ exports.classSearch = function (req, res, next) {
     });
 };
 
+exports.classSortSearch = function (req, res, next) {
+    var d = domain.create();
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            var data = {
+                goodsCode: req.params.codeId
+            };
+            db.classSearchDB(data, function (data) {
+                db.disconnect();
+                res.send({username: req.session.username, orders: data});
+            })
+        })
+    });
+};
 exports.searchClass = function (req, res, next) {
     var d = domain.create();
     d.on('err', function (err) {
@@ -650,6 +668,63 @@ exports.toSurePayOrder = function (req, res, next) {
         db.connect(function () {
             db.toSurePayOrderDB({username: req.session.username, goodsId: req.query.goodsId}, function (data) {
                 db.disconnect();
+                res.send({username: req.session.username, errMsg: data});
+            });
+        })
+    });
+};
+
+exports.getCenterMsg = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            console.log('into getCenterMsg');
+            db.getCenterMsgDB({username: req.session.username}, function (data) {
+                db.disconnect();
+                console.log(data);
+                res.send({username: req.session.username, users: data});
+            });
+        })
+    });
+};
+
+exports.setUserMsg = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+
+            db.setUserMsgDB({username: req.session.username, data: req.body}, function (data) {
+                db.disconnect();
+
+                res.send({username: req.session.username, data: data});
+            });
+        })
+    });
+};
+
+exports.updateReceipt = function (req, res, next) {
+    var d = domain.create();
+
+    d.on('err', function (err) {
+        next(err);
+    });
+
+    d.run(function () {
+        db.connect(function () {
+            var receipt = eval('(' + req.body.receipt + ')');
+            db.updateReceiptDB({username: req.session.username, receipt: receipt}, function (data) {
+                db.disconnect();
+
                 res.send({username: req.session.username, errMsg: data});
             });
         })

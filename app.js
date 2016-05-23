@@ -46,6 +46,7 @@ app.get('/getFocusList', orders.getFocusList);
 app.get('/orderOnline', orders.orderOnline);
 app.post('/deleteOrder', orders.deleteOrder);
 app.get('/classSearch:codeId', orders.classSearch);
+app.post('/classSearch:codeId', orders.classSortSearch);
 app.post('/searchClass', orders.searchClass);
 app.get('/correctOrder/:id', orders.correctOrder);
 app.post('/updateOrder', orders.updateOrder);
@@ -62,6 +63,9 @@ app.get('/getMyOrders', orders.getMyOrders);
 app.get('/setOrderComment', orders.setOrderComment);
 app.get('/removeSureOrder', orders.removeSureOrder);
 app.get('/toSurePayOrder', orders.toSurePayOrder);
+app.get('/getCenterMsg', orders.getCenterMsg);
+app.post('/setUserMsg', orders.setUserMsg);
+app.post('/updateReceipt', orders.updateReceipt);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

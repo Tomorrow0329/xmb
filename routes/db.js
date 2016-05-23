@@ -7,6 +7,7 @@ var userSchema = new Schema ({
     username:String,
     password:String,
     email:String,
+    tel: String,
     focusOrder: Array,
     cartOrder: Array,
     payOrders: Array,
@@ -31,7 +32,8 @@ var orderSchema = new Schema({
     file:String,
     imagePath:String,
     nowName:String,
-    comments: Array
+    comments: Array,
+    focus: Number
 });
 var errMsg = '';
 
@@ -141,7 +143,25 @@ exports.setFocus = function (req, callback) {
     Users.update({username: req.username}, {$set:{focusOrder: focusOrder}}, function (err, res) {
       if (err) throw err;
       else {
-        callback('success');
+          Orders.find({_id: req.orderId}, function (err, res) {
+              if (err) throw err;
+              else {
+                  var focusCode = 0;
+                  if (res[0].focus) {
+                      focusCode = res[0].focus;
+                      focusCode += 1;
+                  } else {
+                      focusCode = 1;
+                  }
+
+                  Orders.update({_id: req.orderId}, {$set: {focus: focusCode}}, function (err, res) {
+                      if (err) throw err;
+                      else {
+                          callback('success');
+                      }
+                  });
+              }
+          });
       }
     });
   });
@@ -165,7 +185,25 @@ exports.cancelFocus = function (req, callback) {
 
       if (err) throw err;
       else {
-        callback('success');
+          Orders.find({_id: req.orderId}, function (err, res) {
+              if (err) throw err;
+              else {
+                  var focusCode = 0;
+                  if (res[0].focus && res[0].focus > 0) {
+                      focusCode = res[0].focus;
+                      focusCode -= 1;
+                  } else {
+                      focusCode = 0;
+                  }
+
+                  Orders.update({_id: req.orderId}, {$set: {focus: focusCode}}, function (err, res) {
+                      if (err) throw err;
+                      else {
+                          callback('success');
+                      }
+                  });
+              }
+          });
       }
     });
   });
@@ -607,6 +645,37 @@ exports.toSurePayOrderDB = function (req, callback) {
                     });
                 }
             });
+        }
+    });
+};
+
+exports.getCenterMsgDB = function (req, callback) {
+    console.log('into DB');
+    Users.find({username: req.username}, function (err, res) {
+        if (err) throw err;
+        else {
+            callback(res[0]);
+        }
+    });
+};
+
+exports.setUserMsgDB = function (req,callback) {
+    console.log(req.data);
+    Users.update({username: req.username}, {$set: {email: req.data.email, password: req.data.password, tel: req.data.tel}},
+        function (err, res) {
+            if (err) throw err;
+            else {
+                callback(res[0]);
+            }
+        });
+};
+
+exports.updateReceiptDB = function (req, callback) {
+
+    Users.update({username: req.username}, {$set: {receiptAddress: req.receipt}}, function (err, res) {
+        if (err) throw err;
+        else {
+            callback(res[0]);
         }
     });
 };

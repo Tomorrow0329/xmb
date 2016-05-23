@@ -69,34 +69,46 @@
                     <div id="account_info">
                         <h2>账户信息</h2>
                         <ul class="infos">
-                            <li>账号</li>
+                            <li>昵称</li>
                             <li class="right_info">
-                                <span style="display: inline;">694986915@qq.com</span>
+                                <span id="nickname_span" style="display: inline;"></span>
+                                <!--<input type="text" value="石头软软软" id="nickname" style="display: none;">-->
                             </li>
                         </ul>
                     </div>
                     <div id="base_info">
                         <h2>基本信息 <span id="edit_info" style="display: block;">编辑</span><span id="save_info" style="display: none;">保存</span></h2>
+
                         <ul class="infos">
-                            <li>昵称</li>
+                            <li>邮箱</li>
                             <li class="right_info">
-                                <span id="nickname_span" style="display: inline;">石头软软软</span>
-                                <input type="text" value="石头软软软" id="nickname" style="display: none;">
+                                <span id="qq_span" style="display: inline;" class="user-email"></span>
+                                <input type="text" value="" id="mail" style="display: none;">
                             </li>
                         </ul>
+
+                        <ul class="infos">
+                            <li>密码</li>
+                            <li class="right_info">
+                                <span id="paw_span" style="display: inline;" class="user-password"></span>
+                                <input type="text" value="" id="password" style="display: none;">
+                            </li>
+                        </ul>
+
                         <ul class="infos">
                             <li>手机</li>
                             <li class="right_info">
-                                <span id="phone_span" style="display: inline;"></span>
+                                <span id="phone_span" class="tel" style="display: inline;"></span>
                                 <input type="text" value="" id="phone" style="display: none;">
                             </li>
                         </ul>
+
+                    </div>
+
+                    <div id="base_info">
+                        <h2>收货信息</h2>
                         <ul class="infos">
-                            <li>Email</li>
-                            <li class="right_info">
-                                <span id="qq_span" style="display: inline;"></span>
-                                <input type="text" value="" id="mail" style="display: none;">
-                            </li>
+                            <li class="receipt"></li>
                         </ul>
                     </div>
                 </div>
@@ -109,6 +121,7 @@
 <script src="/vendor/jquery.js"></script>
 <script src="/javascripts/index.js"></script>
 <script src="/javascripts/profile.js"></script>
+<script src="/javascripts/personCenter.js"></script>
 </body>
 
 </html>

@@ -302,10 +302,27 @@
     display: inline-block;
     zoom: 1;
     *display: inline;
-    width: 60px;
+    /*width: 60px;*/
+    width: auto;
     text-align:  left;
     line-height: 30px;
     vertical-align: middle;
+}
+.removeReceipt {
+    float: right;
+}
+.removeReceipt:hover {
+    color:#dd2727;
+    cursor: pointer;
+}
+#my_info .infos .receipt {
+    width: 100%;
+}
+#my_info .infos .receipt-box {
+    width: 100%;
+}
+#my_info .infos .receipt-box span{
+    margin-left: 15px;
 }
 #my_info .infos li.right_info{
     display: inline;

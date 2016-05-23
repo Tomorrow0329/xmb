@@ -59,11 +59,11 @@
                     </p>
                     <p class="sort-box">
                         <span>排 序：</span>
-                        <span class="sort-tip">默认</span>
-                        <span class="sort-tip">时间</span>
-                        <span class="sort-tip">价格从高到低</span>
-                        <span class="sort-tip">价格从低到高</span>
-                        <span class="sort-tip">关注度</span>
+                        <span class="sort-tip sort-new active">最新</span>
+                        <span class="sort-tip sort-focusLevel">关注度</span>
+                        <span class="sort-tip sort-priceDown">价格从高到低</span>
+                        <span class="sort-tip sort-priceUp">价格从低到高</span>
+                        <span class="sort-tip sort-outNum">销量</span>
                     </p>
                     <div class="c-part2-new">
                         <ul class="c-part2-new-ul" id="orderClassList">
@@ -77,6 +77,19 @@
                                 <p class='c-part2-detail-goodsName'><%= order.goodsName %></p>
                                 <p class='c-part2-detail-describe'><%= order.describe %></p>
                             </div>
+                                <% if (order.focus) { %>
+                                <p class="focus-box">
+                                    <img src="/images/icon-focus.jpg" class="icon-focus">
+                                    <span><%= order.focus%></span>
+                                </p>
+                                <% }%>
+
+                                <% if (order.outNum) { %>
+                                <p class="outNum-box">
+                                    已售出：<span class="out-num"><%= order.outNum%></span>
+                                </p>
+                                <% }%>
+
                             </li>
                             <% }) %>
                         </ul>
