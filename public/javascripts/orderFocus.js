@@ -51,7 +51,7 @@ $(document).ready(function () {
 
     //隔行变色
     var $table=$('#c-r-tb');
-    for(var i=0;i<= orders.length;i++){
+    for(var i=0;i<= $table.find('tr').length - 1;i++){
       if( i%2 === 0) {
         $table.find('tr')[i].style.backgroundColor = "#e8edf1"
       }else{
@@ -59,6 +59,7 @@ $(document).ready(function () {
       }
     }
   };
+  colorInterlaced();
 
   $.ajax({
     url: '/getFocusList',
@@ -69,13 +70,13 @@ $(document).ready(function () {
       /*data: {data: data},*/
       var orders = res.orderFocusArray;
 
-      handleFocusList(orders);
-      colorInterlaced(orders);
+      /*handleFocusList(orders);
+      colorInterlaced(orders);*/
     },
     error: function () {}
   });
 
-  $('#c-r-tb').on('click', '.delete', function () {
+  $('.delete').on('click', function () {
     var $tr = $(this).parents('tr');
     var orderId = $(this).parents('tr').find('.order-id').html();
 
@@ -97,7 +98,7 @@ $(document).ready(function () {
     } else {}
   });
 
-  $('#c-r-tb').on('click', '.cart', function () {
+  $('.cart').on('click', function () {
     var $tr = $(this).parents('tr');
     var orderId = $(this).parents('tr').find('.order-id').html();
 

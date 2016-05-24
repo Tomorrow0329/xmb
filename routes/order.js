@@ -263,7 +263,8 @@ exports.orderOrderFocus = function (req, res, next) {
       db.getFocus(data, function (data) {
 
         db.disconnect();
-        res.render('orderFocus', {username: req.session.username, orders: [], data: data.focusOrder});
+          console.log(data);
+        res.render('orderFocus', {username: req.session.username, orders: data, data: []});
       });
     });
   });

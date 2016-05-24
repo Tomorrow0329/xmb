@@ -18,7 +18,9 @@
 
             <div class="h-right">
                 <div id="person_info" class="clearfix">
-                    <div class="avatar"></div>
+                    <div class="avatar">
+                        <img src="/images/icon-person.png" style="display: inline-block;width: 100%;height: 100%">
+                    </div>
                     <div class="personal-center">
                         <div class="center-nav">
                             <p class="h-r-userName">欢迎，<%= username%></p>
@@ -98,29 +100,12 @@
             </div>
     </div>
 
-    <div class="bdsharebuttonbox" style="position: fixed;bottom: 10px;right: 0;width: 20px;">
-        <a href="#" class="bds_more" data-cmd="more" style="display: block"></a>
-        <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina" style="display: block"></a>
-        <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq" style="display: block"></a>
-        <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone" style="display: block"></a>
-        <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin" style="display: block"></a>
-        <a title="分享到QQ好友" href="#" class="bds_sqq" data-cmd="sqq" style="display: block"></a>
-    </div>
-    <!--<div id="ckepop" class='feixiangjias' style="position: fixed;bottom: 10px;right: 0;width: 20px;">
-        <a href="javascript:" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">分享到：</a>
-        <a class="jiathis_button_qzone">QQ空间</a>
-        <a class="jiathis_button_tsina">新浪微博</a>
-        <a class="jiathis_button_kaixin001">开心网</a>
-        <a class="jiathis_button_renren">人人网</a>
-        <a class="jiathis_button_baidu">百度收藏</a>
-        <a class="jiathis_button_douban">豆瓣</a>
-        <a class="jiathis_button_tqq">腾讯微博</a>
-    </div>-->
 </div>
 <script src="/vendor/jquery.js"></script>
 <script src="/javascripts/index.js"></script>
 <script src="/javascripts/orderClasses.js"></script>
-<script src="/javascripts/share.js"></script>
+<!--<script src="/javascripts/share.js"></script>-->
+<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?move=0" charset="utf-8"></script>
 <!--
 <script type="text/javascript" src="http://www.139cai.com/public/share.js" charset="utf-8"></script>
 -->

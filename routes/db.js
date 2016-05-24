@@ -214,7 +214,24 @@ exports.getFocus = function (req, callback) {
 
     if (err) throw err;
     else {
-      callback(res[0]);
+        var orders = res[0].focusOrder, orderList = [], reqIndex = 0;
+        orders.forEach(function (order) {
+            Orders.find({_id: order}, function (err, res) {
+
+                if (err) throw err;
+                else {
+                    if (res[0]) {
+                        orderList.push(res[0]);
+                    }
+
+                    reqIndex += 1;
+
+                    if (reqIndex == orders.length) {
+                        callback(orderList);
+                    }
+                }
+            });
+        });
     }
   });
 };

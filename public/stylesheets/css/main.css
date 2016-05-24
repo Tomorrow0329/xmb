@@ -116,19 +116,20 @@ i, u, b, em, span, small {
   /*overflow: hidden;*/ }
 #person_info {
   position: relative;
-  top: 15px;
-  left: 40%;
+  top: 25px;
+  left: 51%;
   height: auto;
   cursor: pointer;
   width: 60px;
-  background: #f8f8f8;
 }
 .h-right .avatar {
   /*float: left;*/
+  /*
   border: 1px solid #4BC0A5;
+  */
   padding: 3px;
-  width: 54px;
-  height: 54px;
+  width: 44px;
+  height: 44px;
 }
 .h-right .personal-center {
   font-size: 14px;
@@ -143,6 +144,7 @@ i, u, b, em, span, small {
   position: absolute;
   left: 0;
   z-index: 1;
+  padding-bottom: 15px;
 }
 .center-nav p{
   position:relative;
@@ -383,7 +385,8 @@ body, html {
     height: 100%;
     position: absolute;
     top: 0;
-    left: 50px;
+    /*left: 50px;*/
+    left: 4;
     z-index: 1;
     float: left; }
   .index .c-part1-left .index-arrow {
@@ -393,13 +396,15 @@ body, html {
     right:10px;
   }
   .index .c-part1-list li {
+    display: none;
     width: 100%;
     height: 48px;
     line-height: 48px;
     /*text-align: center;*/
     position: relative;
     /*border: 1px solid white;*/
-    background: #f8f8f8;
+    background: #eee;
+    font-size: 14px;
   }
 .index .c-part1-list a {
   display: inline-block;
