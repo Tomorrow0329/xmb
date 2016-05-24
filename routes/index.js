@@ -27,10 +27,15 @@ router.get('/toCenter', function (req, res, next) {
 });
 
 router.get('/unSureOrder', function (req, res, next) {
-  res.render('unSureOrder', {username: req.session});
+  res.render('unSureOrder', {username: req.session.username});
 });
 
 router.get('/myOrders', function (req, res, next) {
   res.render('orderOfMe', {username: req.session.username});
 });
+
+router.get('/inputSearch/:searchKeyWorld', function (req, res, next) {
+  res.render('orderClasses', {username: req.session.username, orders: []});
+});
+
 module.exports = router;

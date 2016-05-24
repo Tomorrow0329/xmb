@@ -70,17 +70,17 @@
                 <form id="orderForm" action="/upload" method="post" enctype='multipart/form-data'>
                     <input class="nav hidden" id="personName" name="username" value="<%= username%>" onclick="" />
                     <p class="c-r-from-p">
-                        商品名称：<input type="text" name="goodsName" id="goodsName">&nbsp;
-                        商品数量：<input type="text" name="num" id="num" class="textRight">&nbsp;
-                        商品单价：<input type="text" name="price" id="price" class="textRight"><br/>
+                        商品名称：<input type="text" name="goodsName" id="goodsName" required="required">&nbsp;
+                        商品数量：<input type="text" name="num" id="num" class="textRight" required="required">&nbsp;
+                        商品单价：<input type="text" name="price" id="price" class="textRight" required="required"><br/>
                     </p>
                     <p class="c-r-from-p">
-                        联系方式：<input type="tel" name="tel" id="tel">&nbsp;
-                        Email：<input type="email" name="email" id="email">&nbsp;
+                        联系方式：<input type="tel" name="tel" id="tel" required="required">&nbsp;
+                        Email：<input type="email" name="email" id="email" required="required">&nbsp;
                     </p>
                     <p class="c-r-from-p">
                         商品分类：
-                        <select class="c-r-select orderClass" id="goodsCode" name="goodsCode">
+                        <select class="c-r-select orderClass" id="goodsCode" name="goodsCode" required="required">
 
                         </select>&nbsp;
 
@@ -94,10 +94,10 @@
                     </p>
                     <p class="c-r-from-p">
                         上传图片：
-                        <input id="fulAvatar" name="fulAvatar" type="file" class="form-control"/><br/>
+                        <input id="fulAvatar" name="fulAvatar" type="file" class="form-control" required="required"/><br/>
                     </p>
                     <p class="c-r-from-p">商品描述：</p>
-                    <textarea class="c-r-txt" name="describe"></textarea>
+                    <textarea class="c-r-txt" name="describe" required="required"></textarea>
                     <span id="warning"><%= errMsg%></span>
                     <input type="submit" value="发布商品" class="btn uploadOrder">
                     </p>

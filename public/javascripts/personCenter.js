@@ -78,15 +78,17 @@ $(document).ready(function () {
             }
         }
 
-        $.ajax({
-            url: '/updateReceipt',
-            data: {receipt: JSON.stringify(newReceiptList)},
-            type: 'post',
-            dataType: 'json',
-            success: function (res) {
-                $(this).parents('#gain').remove();
-            }.bind($(this)),
-            error: function () {}
-        });
+        if (confirm("删除后可在订单页新增信息，确定要删除该信息？")) {
+            $.ajax({
+                url: '/updateReceipt',
+                data: {receipt: JSON.stringify(newReceiptList)},
+                type: 'post',
+                dataType: 'json',
+                success: function (res) {
+                    $(this).parents('#gain').remove();
+                }.bind($(this)),
+                error: function () {}
+            });
+        } else {}
     });
 });

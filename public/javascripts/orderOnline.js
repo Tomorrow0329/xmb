@@ -5,21 +5,21 @@ $(document).ready(function () {
   $('.delete').on('click', function () {
     var $tr = $(this).parents('tr');
     var orderId = $(this).parents('tr').find('.order-id').html();
-
-    $.ajax({
-      url: '/deleteOrder',
-      type: 'post',
-      data: {'orderId' : orderId},
-      dataType: 'json',
-      success: function (res) {
-
-        if (res.resMsg === 'success') {
-          $tr.remove();
+    if (confirm("确定要删除该商品？")) {
+      $.ajax({
+        url: '/deleteOrder',
+        type: 'post',
+        data: {'orderId' : orderId},
+        dataType: 'json',
+        success: function (res) {
+          if (res.resMsg === 'success') {
+            $tr.remove();
+          }
         }
-      }
-      ,
-      error: function () {}
-    });
+        ,
+        error: function () {}
+       });
+    } else {}
   });
 
  /* $('.correct').on('click', function () {

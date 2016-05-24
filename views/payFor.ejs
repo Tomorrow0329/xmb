@@ -65,9 +65,9 @@
             <div class="user-inner fontSize12" id="gaininfo">
                 <!--用户首次购物，需添加收货人信息-->
                 <form class="add-receipt" action="" method="post" onsubmit="return false;" style="display: none;">
-                    收 货 人：<input type="text" name="gname" id="gname" requried><br/><br>
-                    详细地址：<input type="text" class="user-address" name="" id="user-address" requried><br/>
-                    手机号码：<input type="number" name="" id="user-phone" requried><br/>
+                    收 货 人：<input type="text" name="gname" id="gname" required="required"><br/><br>
+                    详细地址：<input type="text" class="user-address" name="" id="user-address" required="required"><br/>
+                    手机号码：<input type="number" name="" id="user-phone" required="required"><br/>
                     <input type="submit" value="保存收货人信息" id="firstsubmit" class="submit">
                 </form>
                 <!--用户已经添加过收货信息-->
@@ -114,7 +114,7 @@
         <h3 class="layer-h3">添加新的收货人信息</h3>
         <div class="user-inner fontSize12 " style="margin-top: 15px;">
             <form action="" method="post" onsubmit="return false;">
-                收 货 人：<input type="text" name="gname" id="goodesName"><br/><br>
+                收 货 人：<input type="text" name="gname" id="goodesName" required="required"><br/><br>
                 <!--所在地区：<select name="" id="provice" onchange="provices(this)">
                     <option value="">请选择省</option>
                 </select>
@@ -124,8 +124,8 @@
                 <select name="" id="country">
                     <option value="">请选择县</option>
                 </select><br/>-->
-                详细地址：<input type="text" class="user-address" name="" id="userAddress"><br/>
-                手机号码：<input type="number" name="" id="userPhone"><br/>
+                详细地址：<input type="text" class="user-address" name="" id="userAddress" required="required"><br/>
+                手机号码：<input type="number" name="" id="userPhone" required="required"><br/>
                 <input type="submit" value="保存收货人信息" id="addSubmit" style="position: absolute;left: 360px;" class="submit">
             </form>
         </div>

@@ -79,19 +79,22 @@ $(document).ready(function () {
     var $tr = $(this).parents('tr');
     var orderId = $(this).parents('tr').find('.order-id').html();
 
-    $.ajax({
-      url: '/orderCancelFocus',
-      type: 'post',
-      data: {'orderId' : orderId},
-      dataType: 'json',
-      success: function (resMsg) {
-        if (resMsg.focusStatus) {
-          $tr.remove();
+    if (confirm("确定要取消对该商品的关注？")) {
+
+      $.ajax({
+        url: '/orderCancelFocus',
+        type: 'post',
+        data: {'orderId' : orderId},
+        dataType: 'json',
+        success: function (resMsg) {
+          if (resMsg.focusStatus) {
+            $tr.remove();
+          }
         }
-      }
-      ,
-      error: function () {}
-    });
+        ,
+        error: function () {}
+      });
+    } else {}
   });
 
   $('#c-r-tb').on('click', '.cart', function () {

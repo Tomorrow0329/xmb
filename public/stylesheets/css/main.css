@@ -54,7 +54,7 @@ i, u, b, em, span, small {
   display: inline-block;
   color: #ef735f;
   position: relative;
-  top: -15px;
+  top: 0px;
 }
 
 .head {
@@ -248,7 +248,7 @@ td {
   height: 30px;
   width: 80px; }
 .my-order-table .my-order-thead .my-order-thead-th{
-  background-color: #f8f8f8;color: rgba(0,0,0,0.8);margin-bottom: 45px;
+  background-color: #eee;color: rgba(0,0,0,0.8);margin-bottom: 45px;
 }
 
 .my-order-table .toComment:hover {
@@ -1008,7 +1008,6 @@ body, html {
     height: 550px;
     position: fixed;
     top: 75px;
-    background: lightblue;
   }
   .sign .sign-bg {
     width: 100%;
@@ -1017,6 +1016,7 @@ body, html {
   }
 .sign .sign-bg img {
   width: 100%;
+  min-height: 100%;
 }
   .sign .sign-title {
     width: 20%;
@@ -1025,7 +1025,7 @@ body, html {
     text-align: center;
     position: relative;
     display: inline-block;
-    color: #00b188;
+    color: #DD2727;
     font-size: 3em;
     font-weight: 800;
   }
@@ -1068,35 +1068,40 @@ body, html {
     height: 68%;
     position: relative;
     margin: 0 auto;
-    color: #00b188; }
+    color: #6c6c6c; }
   .sign .signText-input {
     /*width: 250px;*/
     width: 200px;
     height: 30px;
     line-height: 30px;
     position: relative;
-    margin-top: 20px;
-    border: 1px solid rgba(0,0,0,0.6);
+    top: -15px;
+    border: none;
+    /* margin-top: -20px; */
+    color: #999;
+    font-size: 14px;
+    /* border: 1px solid rgba(0,0,0,0.6); */
     padding-left: 10px;
     outline: none; }
 .sign .signText-input:first-child {
   margin-top: 0;
 }
   .sign .signBtn {
-    width: 212px;
+    width: 260px;
     height: 34px;
     line-height: 34px;
     position: relative;
-    left: 48px;
+    left: 4px;
     margin-top: 40px;
-    background: #00b188;
+    background: #DD2727;
+    border-radius: 2px;
     color: white;
     font-size: 18px;
     letter-spacing: 2px;
     border: none;
     outline: none; }
   .sign .to-sign {
-    color: #00b188; }
+    color: #6c6c6c; }
   .sign .to-sign:hover {
     color: #ef735f;
     cursor: pointer; }
@@ -1337,10 +1342,12 @@ body, html {
     cursor: pointer;
     overflow: hidden; }
   .upload-order .c-r-table th {
-    background: #00b188;
-    color: white;
+    background: rgb(232, 237, 241);
+    color: rgba(0,0,0,0.8);
     height: 30px;
-    width: 80px; }
+    font-size: 14px;
+    width: 80px;
+    border: 1px solid #ccc; }
   .upload-order .c-r-td-addLength {
     width: 150px;
     padding: 5px;

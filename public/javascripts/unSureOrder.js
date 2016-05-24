@@ -33,17 +33,19 @@ $(document).ready(function () {
     $('.spC-list-ul').on('click', '.removeSureOrder', function () {
         var goodsId = $(this).parents('li').find('.goodsId').html();
 
-        $.ajax({
-            url: '/removeSureOrder',
-            data: {goodsId: goodsId},
-            type: 'get',
-            dataType: 'json',
-            success: function (res) {
-                var data = res;
-                $(this).parents('li').remove();
-            }.bind($(this)),
-            error: function () {}
-        });
+        if (confirm("确定要移除该订单？")) {
+            $.ajax({
+                url: '/removeSureOrder',
+                data: {goodsId: goodsId},
+                type: 'get',
+                dataType: 'json',
+                success: function (res) {
+                    var data = res;
+                    $(this).parents('li').remove();
+                }.bind($(this)),
+                error: function () {}
+            });
+        } else {}
     });
 
     $('.spC-list-ul').on('click', '.toSureOrder', function () {

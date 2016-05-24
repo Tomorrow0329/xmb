@@ -338,33 +338,45 @@ $(document).ready(function () {
 
         });
 
-        $('.search-btn').on('click', function () {
-            var searchKeyWorld = $('.search-input').val();
-            if (searchKeyWorld !== '') {
-                $.ajax({
-                    url: '/searchKeyWorld',
-                    data: {searchData: searchKeyWorld},
-                    type: 'get',
-                    success: function (result) {
-                        if (result.data) {
-                            var list = '';
-                            result.data.forEach(function (row) {
-                                list += "<li><span class='orderId' style='display: none'>"+ row._id +"</span><img src='/uploadData/"+ row.imagePath +"' class='c-part2-new-ul-img'>" +
-                                "<div class='c-part2-new-ul-img-price fr'>￥" + row.price +
-                                "</div><div class='c-part2-detail'> <p class='c-part2-detail-goodsName'>" + row.goodsName +
-                                "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> </li>";
-                            });
-                            $('#orderClassList').html(list);
-                            // wordLimit
-                            wordLimit();
-                            $('.search-tip').html('');
-                            $('.tips-box').html('相关<span style="color:#ef735f">  '+ searchKeyWorld +'  </span>的搜索结果如下：');
-                        }
-                    },
-                    error: function () {}
-                });
-            }
-        });
+        var pathname = window.location.pathname;
+        var encodePathname = pathname.split('/')[2];
+        var searchKeyWorld = decodeURI(encodePathname);
+        if (searchKeyWorld !== 'undefined' && searchKeyWorld !== '') {
+            $.ajax({
+                url: '/searchKeyWorld',
+                data: {searchData: searchKeyWorld},
+                type: 'get',
+                success: function (result) {
+                    if (result.data) {
+                        var list = '';
+                        orderList = result.data;
+                        result.data.forEach(function (row) {
+                            var focusStr = '', outNumStr = '';
+                            if (row.focus) {
+                                focusStr += '<p class="focus-box"> <img src="/images/icon-focus.jpg" class="icon-focus"> ' +
+                                '<span>'+row.focus+'</span> </p>'
+                            }
+
+                            if (row.outNum) {
+                                outNumStr += '<p class="outNum-box">已售出：<span class="out-num">'+
+                                row.outNum+'</span> </p>'
+                            }
+                            list += "<li><span class='orderId' style='display: none'>"+ row._id +"</span><img src='/uploadData/"+ row.imagePath +"' class='c-part2-new-ul-img'>" +
+                            "<div class='c-part2-new-ul-img-price fr'>￥" + row.price +
+                            "</div><div class='c-part2-detail'> <p class='c-part2-detail-goodsName'>" + row.goodsName +
+                            "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> "+
+                            focusStr + outNumStr +"</li>";
+                        });
+                        $('#orderClassList').html(list);
+                        // wordLimit
+                        wordLimit();
+                        $('.search-tip').html('');
+                        $('.tips-box').html('相关<span style="color:#ef735f">  '+ searchKeyWorld +'  </span>的搜索结果如下：');
+                    }
+                },
+                error: function () {}
+            });
+        }
     };
 
     init();

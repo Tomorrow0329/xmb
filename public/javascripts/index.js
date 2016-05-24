@@ -130,6 +130,13 @@ $(document).ready(function () {
       $('.center-nav').hide();
     });
 
+    $('.search-btn').on('click', function () {
+      var searchKeyWorld = $('.search-input').val();
+      if (searchKeyWorld !== '') {
+        window.location.href = 'http://localhost:10011/inputSearch/' + searchKeyWorld;
+      }
+    });
+
     switch (window.location.pathname) {
       case '':
             break;
