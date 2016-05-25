@@ -12,7 +12,8 @@
     <div class="head">
         <div class="head-inner">
             <div class="h-r-left">
-                校卖部
+                <!--校卖部-->
+                <img src="/images/logo6.png">
             </div>
 
             <p class="search-box"><input class="search-input" type="search" placeholder="请输入关键字">
@@ -73,7 +74,7 @@
                         <ul class="infos">
                             <li>昵称</li>
                             <li class="">
-                                <span id="nickname_span" style="display: inline;margin-left: 30px;"></span>
+                                <span id="nickname_span" style="display: inline;margin-left: 30px;"><%= user.username%></span>
                                 <!--<input type="text" value="石头软软软" id="nickname" style="display: none;">-->
                             </li>
                         </ul>
@@ -84,24 +85,24 @@
                         <ul class="infos">
                             <li>邮箱</li>
                             <li class="right_info">
-                                <span id="qq_span" style="display: inline;" class="user-email"></span>
-                                <input type="text" value="" id="mail" style="display: none;">
+                                <span id="qq_span" style="display: inline;" class="user-email"><%= user.email%></span>
+                                <input type="text" value="<%= user.email%>" id="mail" style="display: none;">
                             </li>
                         </ul>
 
                         <ul class="infos">
                             <li>密码</li>
                             <li class="right_info">
-                                <span id="paw_span" style="display: inline;" class="user-password"></span>
-                                <input type="text" value="" id="password" style="display: none;">
+                                <span id="paw_span" style="display: inline;" class="user-password"><%= user.password%></span>
+                                <input type="text" value="<%= user.password%>" id="password" style="display: none;">
                             </li>
                         </ul>
 
                         <ul class="infos">
                             <li>手机</li>
                             <li class="right_info">
-                                <span id="phone_span" class="tel" style="display: inline;"></span>
-                                <input type="text" value="" id="phone" style="display: none;">
+                                <span id="phone_span" class="tel" style="display: inline;"><%= user.tel%></span>
+                                <input type="text" value="<%= user.tel%>" id="phone" style="display: none;">
                             </li>
                         </ul>
 
@@ -110,7 +111,20 @@
                     <div id="base_info">
                         <h2>收货信息</h2>
                         <ul class="infos">
-                            <li class="receipt"></li>
+                            <li class="receipt">
+                                <% user.receiptAddress.forEach(function (address, index) {%>
+                                <div id="gain" style="margin-left: 25px;">
+                                    <p class="userList receipt-box">
+                                        <span class="userName "><%= address.name%></span>
+                                        <span class="userDress "><%= address.address%></span>
+                                        <span class="userTel">Tel:<%= address.tel%></span>
+                                        <span class="removeReceipt">删 除<span class="code" style="display: none;"><%= index %></span></span>
+                                    </p>
+                                    <br>
+                                </div>
+                                <% })%>
+
+                            </li>
                         </ul>
                     </div>
                 </div>

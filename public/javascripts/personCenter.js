@@ -3,7 +3,7 @@
  */
 $(document).ready(function () {
     var receiptList = [];
-    $.ajax({
+    /*$.ajax({
         url: '/getCenterMsg',
         type: 'get',
         dataType: 'json',
@@ -32,7 +32,7 @@ $(document).ready(function () {
             $('.receipt').html(str);
         },
         error: function () {}
-    });
+    });*/
 
     $('#save_info').on('click', function () {
         var email = $('#mail').val(),

@@ -10,7 +10,7 @@ $(document).ready(function () {
   var ajaxList = {
       getFocus: function () {
         $.ajax({
-          url: '/getFocus',
+          url: '/getFocusStatus',
           type: 'get',
           data: {'orderId' : orderId},
           dataType: 'json',
@@ -73,6 +73,24 @@ $(document).ready(function () {
       } else {
         ajaxList.cancelFocus();
       }
+    });
+
+    $('.toCart').on('click', function () {
+      $.ajax({
+        url: '/addCartOrder',
+        type: 'get',
+        data: {'orderId' : orderId},
+        dataType: 'json',
+        success: function (resMsg) {
+          if (resMsg) {
+            $('.warning-cart').fadeIn(500);
+            setTimeout(function () {
+              $('.warning-cart').fadeOut(500);
+            }, 2000);
+          }
+        }.bind($(this)),
+        error: function () {}
+      });
     });
 
     $('.cmt').on('click',function(){

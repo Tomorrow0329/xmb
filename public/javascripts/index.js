@@ -8,10 +8,25 @@ $(document).ready(function () {
       var list = '';
 
       rows.forEach(function (row) {
-        list += "<li><span class='orderId' style='display: none'>"+ row._id +"</span><img src='/uploadData/"+ row.imagePath +"' class='c-part2-new-ul-img'>" +
+        /*list += "<li><span class='orderId' style='display: none'>"+ row._id +"</span><img src='/uploadData/"+ row.imagePath +"' class='c-part2-new-ul-img'>" +
           "<div class='c-part2-new-ul-img-price fr'>￥" + row.price +
           "</div><div class='c-part2-detail'> <p class='c-part2-detail-goodsName'>" + row.goodsName +
-          "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> </li>";
+          "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> </li>";*/
+        var focusStr = '', outNumStr = '';
+        if (row.focus) {
+          focusStr += '<p class="focus-box"> <img src="/images/icon-focus.jpg" class="icon-focus"> ' +
+          '<span>'+row.focus+'</span> </p>'
+        }
+
+        if (row.outNum) {
+          outNumStr += '<p class="outNum-box">已售出：<span class="out-num">'+
+          row.outNum+'</span> </p>'
+        }
+        list += "<li><span class='orderId' style='display: none'>"+ row._id +"</span><img src='/uploadData/"+ row.imagePath +"' class='c-part2-new-ul-img'>" +
+        "<div class='c-part2-new-ul-img-price fr'>￥" + row.price +
+        "</div><div class='c-part2-detail'> <p class='c-part2-detail-goodsName'>" + row.goodsName +
+        "</p><p class='c-part2-detail-describe'>" + row.describe + "</p> </div> "+
+        focusStr + outNumStr +"</li>";
       });
 
       return list;
@@ -137,14 +152,14 @@ $(document).ready(function () {
       }
     });
 
-    switch (window.location.pathname) {
-      case '':
-            break;
-      case '':
-        break;
-      case '':
-        break;
-    }
+    //icon 效果
+    $('.icon-cart').hover(function (event) {
+      event.stopPropagation();
+      $('.icon-cart-txt').fadeIn(500);
+    }, function (event) {
+      event.stopPropagation();
+      $('.icon-cart-txt').fadeOut(500);
+    });
 
   };
 

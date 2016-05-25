@@ -38,8 +38,11 @@ app.post('/signIn', orders.signIn);
 app.get('/initLoad', orders.initLoad);
 app.post('/upload', orders.upload);
 app.get('/orderDetail:id', orders.orderDetail);
+app.get('/getFocusStatus', orders.getFocusStatus);
 app.post('/orderFocus', orders.orderFocus);
+/*
 app.get('/getFocus', orders.getFocus);
+*/
 app.post('/orderCancelFocus', orders.orderCancelFocus);
 app.get('/orderOrderFocus', orders.orderOrderFocus);
 app.get('/getFocusList', orders.getFocusList);
@@ -63,7 +66,7 @@ app.get('/getMyOrders', orders.getMyOrders);
 app.get('/setOrderComment', orders.setOrderComment);
 app.get('/removeSureOrder', orders.removeSureOrder);
 app.get('/toSurePayOrder', orders.toSurePayOrder);
-app.get('/getCenterMsg', orders.getCenterMsg);
+app.get('/toCenter', orders.getCenterMsg);
 app.post('/setUserMsg', orders.setUserMsg);
 app.post('/updateReceipt', orders.updateReceipt);
 

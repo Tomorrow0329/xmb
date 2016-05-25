@@ -161,23 +161,24 @@ exports.orderFocus = function (req, res, next) {
 
   d.run(function () {
     db.connect(function () {
-      var focusData = {
-        username: req.session.username,
-        orderId: req.body.orderId
-      };
-      db.setFocus(focusData, function (resMsg) {
-        db.disconnect();
-        if (resMsg === 'success') {
-          res.send({focusStatus: true});
-        } else {
-          res.send({focusStatus: false});
-        }
-      });
+        console.log(req.session);
+        var focusData = {
+            username: req.session.username,
+            orderId: req.body.orderId
+        };
+        db.setFocus(focusData, function (resMsg) {
+            db.disconnect();
+            if (resMsg === 'success') {
+                res.send({focusStatus: true});
+            } else {
+                res.send({focusStatus: false});
+            }
+        });
     })
   });
 };
 
-exports.getFocus = function (req, res, next) {
+exports.getFocusStatus = function (req, res, next) {
   var d = domain.create();
 
   d.on('err', function (err) {
@@ -190,16 +191,17 @@ exports.getFocus = function (req, res, next) {
         username: req.session.username,
         orderId: req.query.orderId
       };
-      db.getFocus(focusData, function (orderFocusArray) {
+      db.getFocusStatusDB(focusData, function (orderFocusArray) {
         db.disconnect();
         var focusStatus = false;
+
         orderFocusArray.focusOrder.forEach(function (orderId) {
           if (orderId === req.query.orderId) {
             focusStatus = true;
           }
         });
 
-        res.send({focusStatus : focusStatus});
+        res.send({username: req.session.username, focusStatus : focusStatus});
       });
     })
   });
@@ -263,7 +265,6 @@ exports.orderOrderFocus = function (req, res, next) {
       db.getFocus(data, function (data) {
 
         db.disconnect();
-          console.log(data);
         res.render('orderFocus', {username: req.session.username, orders: data, data: []});
       });
     });
@@ -688,7 +689,7 @@ exports.getCenterMsg = function (req, res, next) {
             db.getCenterMsgDB({username: req.session.username}, function (data) {
                 db.disconnect();
                 console.log(data);
-                res.send({username: req.session.username, users: data});
+                res.render('person-center',{username: req.session.username, user: data});
             });
         })
     });

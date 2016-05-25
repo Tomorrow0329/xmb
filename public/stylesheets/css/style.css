@@ -17,7 +17,8 @@
 }
 .csslider1 > ul {
 	position: relative;
-	height: 525px;
+	/*height: 525px;*/
+	height: 440px;
 	z-index: 1;
 	font-size: 0;
 	line-height: 0;
@@ -28,7 +29,7 @@
 }
 .csslider1 > ul > li.img img {
 	width: 100%;
-	height: 100%;
+	min-height: 100%;
 }
 .csslider1 > ul > li.img {
 	font-size: 0pt;
@@ -487,11 +488,11 @@
 	
 }
 /*.csslider1 > .cs_arrowprev:hover > label {
-	background-color: #00b188;
+	background-color: rgba(0,0,0,0.2);
 	width: 70px;
 }
 .csslider1 > .cs_arrownext:hover > label {
-	background-color: #00b188;
+	background-color: rgba(0,0,0,0.2);
 	width: 70px;
 }*/
 .csslider1 > .cs_bullets {
@@ -569,7 +570,7 @@
 }
 
 .csslider1 > .cs_bullets > label.num0 {
-	background-color: #00b188;
+	background-color: rgba(0,0,0,0.2);
 }
 .csslider1 > .slide:checked ~ .cs_bullets > label {
 	/* Fallback for web browsers that doesn't support RGBa */
@@ -580,32 +581,33 @@
 .csslider1 > #cs_slide1_0:checked ~ .cs_bullets > label.num0,
 .csslider1 > #cs_slide1_1:checked ~ .cs_bullets > label.num1,
 .csslider1 > #cs_slide1_2:checked ~ .cs_bullets > label.num2 {
-	background-color: #00b188;
+	/*background-color: rgba(0,0,0,0.2);*/
+	background-color: rgba(0,0,0,0.2);
 }
 
 .csslider1 > .cs_bullets > label:hover {
-	background-color: #00b188;
+	background-color: rgba(0,0,0,0.2);
 }
 
 /* calculate autoplay */
 @-webkit-keyframes bullet {
-	0%, 33.32333333333334%	{ background-color: #00b188; }
+	0%, 33.32333333333334%	{ background-color: rgba(0,0,0,0.2); }
 	33.333333333333336%, 100% { background: #000; background-color: rgba(0,0,0,0.6); }
 }
 @-moz-keyframes bullet {
-	0%, 33.32333333333334%	{ background-color: #00b188; }
+	0%, 33.32333333333334%	{ background-color: rgba(0,0,0,0.2); }
 	33.333333333333336%, 100% { background: #000; background-color: rgba(0,0,0,0.6); }
 }
 @-ms-keyframes bullet {
-	0%, 33.32333333333334%	{ background-color: #00b188; }
+	0%, 33.32333333333334%	{ background-color: rgba(0,0,0,0.2); }
 	33.333333333333336%, 100% { background: #000; background-color: rgba(0,0,0,0.6); }
 }
 @-o-keyframes bullet {
-	0%, 33.32333333333334%	{ background-color: #00b188; }
+	0%, 33.32333333333334%	{ background-color: rgba(0,0,0,0.2); }
 	33.333333333333336%, 100% { background: #000; background-color: rgba(0,0,0,0.6); }
 }
 @keyframes bullet {
-	0%, 33.32333333333334%	{ background-color: #00b188; }
+	0%, 33.32333333333334%	{ background-color: rgba(0,0,0,0.2); }
 	33.333333333333336%, 100% { background: #000; background-color: rgba(0,0,0,0.6); }
 }
 
@@ -797,7 +799,7 @@
 	visibility: hidden;
 	z-index: 1;
 
-	background-color: #00b188;
+	background-color: rgba(0,0,0,0.2);
 
 	-webkit-transform: rotateX(-90deg);
 	-moz-transform: rotateX(-90deg);

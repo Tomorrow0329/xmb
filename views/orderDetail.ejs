@@ -10,7 +10,8 @@
     <div class="head">
         <div class="head-inner">
             <div class="h-r-left">
-                校卖部
+                <!--校卖部-->
+                <img src="/images/logo6.png">
             </div>
 
             <p class="search-box"><input class="search-input" type="search" placeholder="请输入关键字">
@@ -70,8 +71,16 @@
                                 联系：&nbsp;
                                 <span><%= goods.tel %></span>&nbsp;
                                 <span><%= goods.email%></span>
+
+                                <% if (goods.num <= 5) { %>
+                                <span style="color: #dd2727;float: right;">仅剩 <%= goods.num%>件</span>
+                                <% }%>
                             </p>
                             <input type="button" value="" class="c-goods-focus fl">
+                            <input type="button" value="加入购物车" class="goods-detail-btn toCart fl">
+                            <span style="display: inline-block;margin-top: 15px;">
+                                <span class="warning-cart">已成功加入购物车！</span>
+                            </span>
                         </form>
                         <%})%>
                     </div>
@@ -105,9 +114,19 @@
             </div>
         </div>
     </div>
+
+    <div class="cart-icon-box">
+        <div class="cart-icon-box-inner">
+            <a href="/getCart"><img src="/images/cart2.png" class="icon-cart" id="end"></a>
+            <span class="icon-cart-txt">
+                <img class="icon-row" src="/images/icon-row.png">&nbsp;&nbsp;&nbsp;我的购物车
+            </span>
+        </div>
+    </div>
 </div>
 <script src="/vendor/jquery.js"></script>
 <script src="/javascripts/index.js"></script>
 <script src="/javascripts/orderDetail.js"></script>
+<script src="jquery.fly.min.js"></script>
 </body>
 </html>

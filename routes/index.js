@@ -22,9 +22,9 @@ router.get('/payFor', function (req, res, next) {
   res.render('payFor', {username: req.session.username});
 });
 
-router.get('/toCenter', function (req, res, next) {
+/*router.get('/toCenter', function (req, res, next) {
   res.render('person-center', {username:req.session.username});
-});
+});*/
 
 router.get('/unSureOrder', function (req, res, next) {
   res.render('unSureOrder', {username: req.session.username});

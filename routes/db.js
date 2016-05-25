@@ -136,34 +136,40 @@ exports.getOrder = function (req, callback) {
 };
 
 exports.setFocus = function (req, callback) {
+    console.log(req);
   Users.find({username: req.username}, function (err, res) {
-    var focusOrder = res[0].focusOrder;
-    focusOrder.push(req.orderId);
-
-    Users.update({username: req.username}, {$set:{focusOrder: focusOrder}}, function (err, res) {
       if (err) throw err;
       else {
-          Orders.find({_id: req.orderId}, function (err, res) {
+          console.log(res);
+          var focusOrder = res[0].focusOrder;
+          focusOrder.push(req.orderId);
+
+          Users.update({username: req.username}, {$set:{focusOrder: focusOrder}}, function (err, res) {
               if (err) throw err;
               else {
-                  var focusCode = 0;
-                  if (res[0].focus) {
-                      focusCode = res[0].focus;
-                      focusCode += 1;
-                  } else {
-                      focusCode = 1;
-                  }
-
-                  Orders.update({_id: req.orderId}, {$set: {focus: focusCode}}, function (err, res) {
+                  Orders.find({_id: req.orderId}, function (err, res) {
                       if (err) throw err;
                       else {
-                          callback('success');
+                          var focusCode = 0;
+                          if (res[0].focus) {
+                              focusCode = res[0].focus;
+                              focusCode += 1;
+                          } else {
+                              focusCode = 1;
+                          }
+
+                          Orders.update({_id: req.orderId}, {$set: {focus: focusCode}}, function (err, res) {
+                              if (err) throw err;
+                              else {
+                                  callback('success');
+                              }
+                          });
                       }
                   });
               }
           });
+
       }
-    });
   });
 };
 
@@ -209,11 +215,23 @@ exports.cancelFocus = function (req, callback) {
   });
 };
 
+exports.getFocusStatusDB = function (req, callback) {
+    Users.find({username: req.username}, function (err, res) {
+
+        if (err) throw err;
+        else {
+
+            callback(res[0]);
+        }
+    });
+};
+
 exports.getFocus = function (req, callback) {
   Users.find({username: req.username}, function (err, res) {
 
     if (err) throw err;
     else {
+        console.log('focusOrder:'+res[0].focusOrder);
         var orders = res[0].focusOrder, orderList = [], reqIndex = 0;
         orders.forEach(function (order) {
             Orders.find({_id: order}, function (err, res) {
@@ -227,6 +245,7 @@ exports.getFocus = function (req, callback) {
                     reqIndex += 1;
 
                     if (reqIndex == orders.length) {
+                        console.log('orderList:'+orderList);
                         callback(orderList);
                     }
                 }
